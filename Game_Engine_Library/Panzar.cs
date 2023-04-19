@@ -34,9 +34,16 @@ namespace Game_Engine_Library {
         /// </summary>
         public void Move(Keys key) { 
             switch (key) {
-                case Keys.Left:
-                case Keys.A:
-                    _partsOfPanzar.ForEach(x => x.Item1 -= 0.1);
+                case Keys.J: case Keys.A:
+                    for (int i = 0; i < _partsOfPanzar.Count; i++) {
+                        _partsOfPanzar[i] = (_partsOfPanzar[i].Item1 - 0.006, _partsOfPanzar[i].Item2);
+                    }
+                    break;
+                
+                case Keys.D: case Keys.L:
+                    for (int i = 0; i < _partsOfPanzar.Count; i++) {
+                        _partsOfPanzar[i] = (_partsOfPanzar[i].Item1 + 0.006, _partsOfPanzar[i].Item2);
+                    }
                     break;
             }
         }

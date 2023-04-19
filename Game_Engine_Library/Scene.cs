@@ -21,5 +21,15 @@ namespace Game_Engine_Library {
                 obj.Draw();
             }
         }
+
+        public Panzar GetPanzarBySide(string side) {
+            foreach (GameObject obj in _objects) {
+                if (obj is Panzar panzar && panzar.Side == side) {
+                    return panzar;
+                }
+            }
+
+            return null;
+        }
     }
 }

@@ -15,7 +15,6 @@ using Game_Engine_Library;
 namespace coursework
 {
     public partial class Form1 : Form {
-        Panzar a;
         Scene scene;
         public Form1() {
             InitializeComponent();
@@ -44,15 +43,17 @@ namespace coursework
         private void glControl1_KeyDown(object sender, KeyEventArgs e) {
             label1.Text = e.KeyCode.ToString();
 
-            //switch (e.KeyCode) {
-            //    case Keys.A: case Keys.D:
-            //        scene.GetPanzarBySide("left").Move(e.KeyCode);
-            //        break;
+            switch (e.KeyCode) {
+                case Keys.A:
+                case Keys.D:
+                    scene.GetPanzarBySide("left").Move(e.KeyCode);
+                    break;
 
-            //    case Keys.Left: case Keys.Right: 
-            //        scene.GetPanzarBySide("right").Move(e.KeyCode);
-            //        break;
-            //}
+                case Keys.J:
+                case Keys.L:
+                    scene.GetPanzarBySide("right").Move(e.KeyCode);
+                    break;
+            }
         }
     }
 }
