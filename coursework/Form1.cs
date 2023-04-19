@@ -30,11 +30,13 @@ namespace coursework
 
         private void glControl1_Paint(object sender, PaintEventArgs e) {
             // Зарисовка бэкграунда.
-            GL.Clear(ClearBufferMask.ColorBufferBit);
-
-            a.Draw();
 
             glControl1.SwapBuffers();
+        }
+
+        private void timer1_Tick(object sender, EventArgs e) {
+            a.Draw();
+            glControl1.Refresh();
         }
     }
 }

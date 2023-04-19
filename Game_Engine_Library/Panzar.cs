@@ -11,19 +11,25 @@ namespace Game_Engine_Library {
         /// Список, который будет хранить координаты вершин частей танка.
         /// </summary>
         private List<(double, double)> _partsOfPanzar; 
+        private Random _random;
 
         public Panzar(double x, double y, double w, double h) : base(x, y, w, h) {
             _partsOfPanzar = new List<(double, double)> { (0.0, 0.0),
                                                           (0.1, 0.0),
                                                           (0.1, 0.1),
-                                                          (0.0, 0.1)};
+                                                          (0.0, 0.1) };
+            _random = new Random();
         }
 
         public void Draw() {
+            GL.Clear(ClearBufferMask.ColorBufferBit);
+
             GL.PointSize(10);
             GL.Begin(PrimitiveType.Quads);
-            
-            foreach (var point in _partsOfPanzar) {
+
+            GL.Color3(_random.NextDouble(), _random.NextDouble(), _random.NextDouble());
+
+            foreach ((double, double) point in _partsOfPanzar) {
                 GL.Vertex2(point.Item1, point.Item2);
             }
 

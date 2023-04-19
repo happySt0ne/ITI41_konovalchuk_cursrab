@@ -49,7 +49,7 @@
   <ItemGroup>
     <Compile Include="GameObject.cs" />
     <Compile Include="IMovable.cs" />
-    <Compile Include="Player.cs" />
+    <Compile Include="Panzar.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scene.cs" />
   </ItemGroup>

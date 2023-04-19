@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Game_Engine_Library {
-    internal interface IMovable {
+    public interface IMovable {
+        
     }
 }
