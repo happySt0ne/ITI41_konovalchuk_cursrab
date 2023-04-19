@@ -93,6 +93,10 @@
       <Project>{4259289a-b43d-4b6a-856a-cea6ba05c32c}</Project>
       <Name>gameEngine_Library</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Game_Engine_Library\Game_Engine_Library.csproj">
+      <Project>{70d79349-81e0-45ec-9a28-32b1dab828ef}</Project>
+      <Name>Game_Engine_Library</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

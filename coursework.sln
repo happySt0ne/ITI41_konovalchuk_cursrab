@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "coursework", "coursework\co
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gameEngine_Library", "gameEngine_Library\gameEngine_Library.csproj", "{4259289A-B43D-4B6A-856A-CEA6BA05C32C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Game_Engine_Library", "Game_Engine_Library\Game_Engine_Library.csproj", "{70D79349-81E0-45EC-9A28-32B1DAB828EF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{4259289A-B43D-4B6A-856A-CEA6BA05C32C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4259289A-B43D-4B6A-856A-CEA6BA05C32C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4259289A-B43D-4B6A-856A-CEA6BA05C32C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70D79349-81E0-45EC-9A28-32B1DAB828EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70D79349-81E0-45EC-9A28-32B1DAB828EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70D79349-81E0-45EC-9A28-32B1DAB828EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70D79349-81E0-45EC-9A28-32B1DAB828EF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
