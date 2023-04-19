@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Game_Engine_Library {
-    public class GameObject : IDisposable {
+    public abstract class GameObject : IDisposable, IDrawable {
         protected double x, y, width, height;
 
         public GameObject(double x, double y, double width, double height) {
@@ -15,8 +15,8 @@ namespace Game_Engine_Library {
             this.height = height;
         }
 
-        public void Dispose() {
+        public abstract void Draw();
 
-        }
+        public abstract void Dispose();
     }
 }

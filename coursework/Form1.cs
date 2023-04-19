@@ -16,9 +16,11 @@ namespace coursework
 {
     public partial class Form1 : Form {
         Panzar a;
+        Scene scene;
         public Form1() {
             InitializeComponent();
-            a = new Panzar(1, 2, 3, 4);
+            scene = new Scene();
+            scene.AddObject(new Panzar(1, 2, 3, 4, "left"));
         }
 
         private void Form1_Load(object sender, EventArgs e) { }
@@ -35,8 +37,22 @@ namespace coursework
         }
 
         private void timer1_Tick(object sender, EventArgs e) {
-            a.Draw();
+            scene.Draw();
             glControl1.Refresh();
+        }
+
+        private void glControl1_KeyDown(object sender, KeyEventArgs e) {
+            label1.Text = e.KeyCode.ToString();
+
+            switch (e.KeyCode) {
+                case Keys.A: case Keys.D:
+                    scene.GetPanzarBySide("left").Move(e.KeyCode);
+                    break;
+
+                case Keys.Left: case Keys.Right: 
+                    scene.GetPanzarBySide("right").Move(e.KeyCode);
+                    break;
+            }
         }
     }
 }

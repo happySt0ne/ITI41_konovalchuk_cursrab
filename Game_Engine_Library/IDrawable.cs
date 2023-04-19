@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace gameEngine_Library {
-    public class Scene {
-
+namespace Game_Engine_Library {
+    public interface IDrawable {
+        void Draw();
     }
 }
