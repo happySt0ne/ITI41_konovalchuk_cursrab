@@ -19,7 +19,8 @@ namespace coursework
         public Form1() {
             InitializeComponent();
             scene = new Scene();
-            scene.AddObject(new Panzar(0, 0, 0.1, 0.1, "left"));
+            scene.AddObject(new Panzar(-0.5, 0, 0.1, 0.1, "left"));
+            scene.AddObject(new Panzar(0.5, 0, 0.1, 0.1, "right"));
         }
 
         private void Form1_Load(object sender, EventArgs e) { }
