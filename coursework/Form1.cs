@@ -15,26 +15,26 @@ using Game_Engine_Library;
 namespace coursework
 {
     public partial class Form1 : Form {
+        Panzar a;
         public Form1() {
-            InitializeComponent();  
+            InitializeComponent();
+            a = new Panzar(1, 2, 3, 4);
         }
 
-        private void Form1_Load(object sender, EventArgs e) {
-            
+        private void Form1_Load(object sender, EventArgs e) { }
+
+        private void glControl1_Load(object sender, EventArgs e) {
+            // Цвет бэкграунда.
+            GL.ClearColor(0.564f, 0.713f, 0.572f, 1);
         }
 
         private void glControl1_Paint(object sender, PaintEventArgs e) {
-            GL.PointSize(30);
-            GL.Begin(PrimitiveType.Points);
-            GL.Vertex2(0, 0);
+            // Зарисовка бэкграунда.
+            GL.Clear(ClearBufferMask.ColorBufferBit);
 
-            GL.Vertex2(0.1, 0);
-            GL.Vertex2(0.1, 0.1);
-            GL.End();
-        }
+            a.Draw();
 
-        private void glControl1_Load(object sender, EventArgs e) {
-            
+            glControl1.SwapBuffers();
         }
     }
 }

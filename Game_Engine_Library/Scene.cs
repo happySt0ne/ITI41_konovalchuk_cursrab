@@ -5,6 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Game_Engine_Library {
-    internal class Scene {
+    public class Scene {
+        /// <summary>
+        /// Список объектов сцены.
+        /// </summary>
+        private List<GameObject> _objects= new List<GameObject>();
+
+
     }
 }
