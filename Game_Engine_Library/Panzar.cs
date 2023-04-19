@@ -14,6 +14,7 @@ namespace Game_Engine_Library {
         /// </summary>
         private List<(double, double)> _partsOfPanzar; 
         private Random _random;
+        private double _speed;
 
         /// <summary>
         /// Сторона игрока.
@@ -28,32 +29,37 @@ namespace Game_Engine_Library {
         /// <param name="width">Ширина танка</param>
         /// <param name="height">Высота танка</param>
         /// <param name="side">Сторона сил</param>
-        public Panzar(double x, double y, double width, double height, string side) : base(x, y, width, height) {
+        public Panzar(double x, double y, double width, double height, string side, double speed = 0.005)
+                                                                            : base(x, y, width, height) {
             _partsOfPanzar = new List<(double, double)> { (x, y),
                                                           (x + width, y),
                                                           (x + width, y - height),
                                                           (x, y - height) };
             _random = new Random();
             Side = side;
+            _speed = speed;
         }
 
         /// <summary>
         /// Реализация движения танка.
         /// </summary>
-        public void Move(Keys key) { 
-            switch (key) {
-                case Keys.J: case Keys.A:
-                    for (int i = 0; i < _partsOfPanzar.Count; i++) {
-                        _partsOfPanzar[i] = (_partsOfPanzar[i].Item1 - 0.006, _partsOfPanzar[i].Item2);
-                    }
-                    break;
-                
-                case Keys.D: case Keys.L:
-                    for (int i = 0; i < _partsOfPanzar.Count; i++) {
-                        _partsOfPanzar[i] = (_partsOfPanzar[i].Item1 + 0.006, _partsOfPanzar[i].Item2);
-                    }
-                    break;
+        public void Move() {
+            KeyboardState keyboard = Keyboard.GetState();
+
+            if ((keyboard.IsKeyDown(Key.A) && Side == "left") ||
+                 (keyboard.IsKeyDown(Key.J) && Side == "right")) {
+                for (int i = 0; i < _partsOfPanzar.Count; i++) {
+                    _partsOfPanzar[i] = (_partsOfPanzar[i].Item1 - _speed, _partsOfPanzar[i].Item2);
+                }
             }
+
+            if ((keyboard.IsKeyDown(Key.D) && Side == "left") ||
+                 (keyboard.IsKeyDown(Key.L) && Side == "right")) {
+                for (int i = 0; i < _partsOfPanzar.Count; i++) {
+                    _partsOfPanzar[i] = (_partsOfPanzar[i].Item1 + _speed, _partsOfPanzar[i].Item2);
+                }
+            }
+
         }
 
         /// <summary>
