@@ -20,11 +20,19 @@ namespace Game_Engine_Library {
         /// </summary>
         public String Side { get; private set; }
 
-        public Panzar(double x, double y, double w, double h, string side) : base(x, y, w, h) {
-            _partsOfPanzar = new List<(double, double)> { (0.0, 0.0),
-                                                          (0.1, 0.0),
-                                                          (0.1, 0.1),
-                                                          (0.0, 0.1) };
+        /// <summary>
+        /// Создаёт танк.
+        /// </summary>
+        /// <param name="x">Координата Х</param>
+        /// <param name="y">Координата Y</param>
+        /// <param name="width">Ширина танка</param>
+        /// <param name="height">Высота танка</param>
+        /// <param name="side">Сторона сил</param>
+        public Panzar(double x, double y, double width, double height, string side) : base(x, y, width, height) {
+            _partsOfPanzar = new List<(double, double)> { (x, y),
+                                                          (x + width, y),
+                                                          (x + width, y - height),
+                                                          (x, y - height) };
             _random = new Random();
             Side = side;
         }
