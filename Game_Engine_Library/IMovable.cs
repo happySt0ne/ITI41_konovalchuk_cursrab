@@ -9,6 +9,6 @@ using System.Windows.Forms;
 
 namespace Game_Engine_Library {
     public interface IMovable {
-        void Move();
+        void Action();
     }
 }

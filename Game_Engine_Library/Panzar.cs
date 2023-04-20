@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using OpenTK;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Input;
 
@@ -15,7 +16,7 @@ namespace Game_Engine_Library {
         /// <summary>
         /// Список, который будет хранить координаты вершин частей танка.
         /// </summary>
-        private List<(double, double)> _partsOfPanzar; 
+        public List<(double, double)> _partsOfPanzar { get;  } 
 
         /// <summary>
         /// Сторона игрока.
@@ -54,16 +55,40 @@ namespace Game_Engine_Library {
         }
 
         /// <summary>
+        /// Отлавливание и реакция на действия игрока.
+        /// </summary>
+        public void Action() {
+            KeyboardState keyboard = Keyboard.GetState();
+            
+            Move(keyboard);
+            RotateMuzzle(keyboard);
+        }
+
+        /// <summary>
+        /// Реализация поворота дула танка.
+        /// </summary>
+        /// <param name="keyboard"></param>
+        private void RotateMuzzle(KeyboardState keyboard) {
+            if (keyboard.IsKeyDown(Key.W)) {
+
+            }
+            if (keyboard.IsKeyDown(Key.S) && Side == "left") {
+                GameMath.Rotate(_partsOfPanzar, 8, 11, 45, (x + width / 2, y - height / 4));
+                
+            }
+        }
+
+        /// <summary>
         /// Реализация движения танка.
         /// </summary>
-        public void Move() {
-            KeyboardState keyboard = Keyboard.GetState();
-
+        private void Move(KeyboardState keyboard) {
             if ((keyboard.IsKeyDown(Key.A) && Side == "left") ||
                  (keyboard.IsKeyDown(Key.J) && Side == "right")) {
                 for (int i = 0; i < _partsOfPanzar.Count; i++) {
                     _partsOfPanzar[i] = (_partsOfPanzar[i].Item1 - _speed, _partsOfPanzar[i].Item2);
                 }
+
+                x -= _speed;
             }
 
             if ((keyboard.IsKeyDown(Key.D) && Side == "left") ||
@@ -71,8 +96,9 @@ namespace Game_Engine_Library {
                 for (int i = 0; i < _partsOfPanzar.Count; i++) {
                     _partsOfPanzar[i] = (_partsOfPanzar[i].Item1 + _speed, _partsOfPanzar[i].Item2);
                 }
-            }
 
+                x += _speed;
+            }
         }
 
         /// <summary>
@@ -80,6 +106,10 @@ namespace Game_Engine_Library {
         /// </summary>
         public override void Draw() {
             GL.PointSize(10);
+
+            GL.Begin(PrimitiveType.Points);
+            GL.Vertex2(x + width / 2, y - height / 4);
+            GL.End();
 
             GL.Begin(PrimitiveType.Quads);
 
@@ -96,12 +126,8 @@ namespace Game_Engine_Library {
         /// Обновление логики и перересовка танка.
         /// </summary>
         public override void Update() {
-            Move();
+            Action();
             Draw();
-        }
-
-        public override void Dispose() {
-            throw new NotImplementedException();
         }
     }
 }
