@@ -10,7 +10,6 @@ using OpenTK.Input;
 
 namespace Game_Engine_Library {
     public class Panzar : GameObject, IMovable {
-        private Random _random;
         private double _speed;
         
         /// <summary>
@@ -49,7 +48,6 @@ namespace Game_Engine_Library {
                                                           (x + width, y - height/6),
                                                           (x + width, y - height/3),
                                                           (x + width/3*2, y - height/3) };
-            _random = new Random();
             Side = side;
             _speed = speed;
         }
@@ -105,21 +103,24 @@ namespace Game_Engine_Library {
         /// Отрисовка конкретного танка.
         /// </summary>
         public override void Draw() {
-            GL.PointSize(10);
-
-            GL.Begin(PrimitiveType.Points);
-            GL.Vertex2(x + width / 2, y - height / 4);
-            GL.End();
-
+            GL.PointSize(5);
+            
             GL.Begin(PrimitiveType.Quads);
 
-            GL.Color3(_random.NextDouble(), _random.NextDouble(), _random.NextDouble());
+            GL.Color3(0.255, 0, 0);
 
             foreach ((double, double) point in _partsOfPanzar) {
                 GL.Vertex2(point.Item1, point.Item2);
             }
 
             GL.End();
+
+
+            GL.Color3(0, 0.94, 0.255);
+            GL.Begin(PrimitiveType.Points);
+            GL.Vertex2(x + width / 2, y - height / 4);
+            GL.End();
+
         }
 
         /// <summary>

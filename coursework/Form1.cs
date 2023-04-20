@@ -35,8 +35,6 @@ namespace coursework
         }
 
         private void timer1_Tick(object sender, EventArgs e) {
-            label1.Text = scene.GetPanzarBySide("left")._partsOfPanzar[0].Item1.ToString() + " " +
-                                    scene.GetPanzarBySide("left")._partsOfPanzar[0].Item2.ToString();
             scene.Update();
             glControl1.Refresh();
         }
