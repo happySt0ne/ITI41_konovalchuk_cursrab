@@ -31,11 +31,23 @@ namespace Game_Engine_Library {
         /// <param name="height">Высота танка</param>
         /// <param name="side">Сторона сил</param>
         public Panzar(double x, double y, double width, double height, string side, double speed = 0.005)
-                                                                            : base(x, y, width, height) {
-            _partsOfPanzar = new List<(double, double)> { (x, y),
-                                                          (x + width, y),
+                                                          /* Координаты кузова. */  : base(x, y, width, height) {
+            _partsOfPanzar = new List<(double, double)> { (x, y - height/2),
+                                                          (x + width, y - height/2),
                                                           (x + width, y - height),
-                                                          (x, y - height) };
+                                                          (x, y - height),
+
+                                                          // Координаты точек башни.
+                                                          (x + width/3, y),
+                                                          (x + width/3*2, y),
+                                                          (x + width/3*2, y - height/2),
+                                                          (x + width/3, y - height/2),
+
+                                                          // Координаты точек дула.
+                                                          (x + width/3*2, y - height/6),
+                                                          (x + width, y - height/6),
+                                                          (x + width, y - height/3),
+                                                          (x + width/3*2, y - height/3) };
             _random = new Random();
             Side = side;
             _speed = speed;
