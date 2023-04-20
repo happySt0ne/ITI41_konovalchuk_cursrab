@@ -1,17 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Input;
 
 namespace Game_Engine_Library {
     public class Panzar : GameObject, IMovable {
-        private Random _random;
-        private double _speed;
-        
         /// <summary>
         /// Список, который будет хранить координаты вершин частей танка.
         /// </summary>
         private List<(double, double)> _partsOfPanzar; 
+        private Random _random;
+        private double _speed;
 
         /// <summary>
         /// Сторона игрока.
@@ -74,14 +77,6 @@ namespace Game_Engine_Library {
             }
 
             GL.End();
-        }
-
-        /// <summary>
-        /// Обновляем всю логику объекта + перерисовывем.
-        /// </summary>
-        public override void Update() {
-            Move();
-            Draw();
         }
 
         public override void Dispose() {

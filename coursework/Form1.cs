@@ -37,8 +37,26 @@ namespace coursework
         }
 
         private void timer1_Tick(object sender, EventArgs e) {
-            scene.Update();
+            scene.Draw();
+            scene.GetPanzarBySide("left").Move();
+            scene.GetPanzarBySide("right").Move();
             glControl1.Refresh();
         }
+
+        //private void glControl1_KeyDown(object sender, KeyEventArgs e) {
+        //    label1.Text = e.KeyCode.ToString();
+
+        //    switch (e.KeyCode) {
+        //        case Keys.A:
+        //        case Keys.D:
+        //            scene.GetPanzarBySide("left").Move(e.KeyCode);
+        //            break;
+
+        //        case Keys.J:
+        //        case Keys.L:
+        //            scene.GetPanzarBySide("right").Move(e.KeyCode);
+        //            break;
+        //    }
+        //}
     }
 }
