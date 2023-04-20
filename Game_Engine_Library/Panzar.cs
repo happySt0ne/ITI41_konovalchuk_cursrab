@@ -9,12 +9,13 @@ using OpenTK.Input;
 
 namespace Game_Engine_Library {
     public class Panzar : GameObject, IMovable {
+        private Random _random;
+        private double _speed;
+        
         /// <summary>
         /// Список, который будет хранить координаты вершин частей танка.
         /// </summary>
         private List<(double, double)> _partsOfPanzar; 
-        private Random _random;
-        private double _speed;
 
         /// <summary>
         /// Сторона игрока.
@@ -77,6 +78,14 @@ namespace Game_Engine_Library {
             }
 
             GL.End();
+        }
+
+        /// <summary>
+        /// Обновление логики и перересовка танка.
+        /// </summary>
+        public override void Update() {
+            Move();
+            Draw();
         }
 
         public override void Dispose() {

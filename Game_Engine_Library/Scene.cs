@@ -14,6 +14,9 @@ namespace Game_Engine_Library {
 
         public void AddObject(GameObject gameObject) =>_objects.Add(gameObject);
         
+        /// <summary>
+        /// Перересовка всех объектов.
+        /// </summary>
         public void Draw () {
             GL.Clear(ClearBufferMask.ColorBufferBit);
 
@@ -26,9 +29,6 @@ namespace Game_Engine_Library {
         /// Обновление логики и перересовка всех объектов сцены.
         /// </summary>
         public void Update() {
-            //GetPanzarBySide("left").Move();
-            //GetPanzarBySide("right").Move();
-
             foreach (GameObject obj in _objects) {
                 obj.Update();
             }
