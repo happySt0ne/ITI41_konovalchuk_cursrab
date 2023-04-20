@@ -17,6 +17,8 @@ namespace Game_Engine_Library {
 
         public abstract void Draw();
 
+        public abstract void Update();
+
         public abstract void Dispose();
     }
 }
