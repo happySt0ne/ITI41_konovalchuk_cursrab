@@ -16,11 +16,10 @@ namespace coursework
 {
     public partial class Form1 : Form {
         Scene scene;
+
         public Form1() {
             InitializeComponent();
             scene = new Scene();
-            scene.AddObject(new Panzar(-0.5, 0, 0.1, 0.1, "left"));
-            scene.AddObject(new Panzar(0.5, 0, 0.1, 0.1, "right"));
         }
 
         private void Form1_Load(object sender, EventArgs e) { }
@@ -32,7 +31,6 @@ namespace coursework
 
         private void glControl1_Paint(object sender, PaintEventArgs e) {
             // Зарисовка бэкграунда.
-
             glControl1.SwapBuffers();
         }
 
