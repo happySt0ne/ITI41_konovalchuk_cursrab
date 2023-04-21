@@ -69,12 +69,12 @@ namespace Game_Engine_Library {
         private void RotateMuzzle(KeyboardState keyboard) {
             if (keyboard.IsKeyDown(Key.W) && Side == "left" ||
                 keyboard.IsKeyDown(Key.Up) && Side == "right") {
-                GameMath.Rotate(_partsOfPanzar, 8, 11, 20, (x + width / 2, y - height / 4));
+                GameMath.Rotate(_partsOfPanzar, 8, 11, 5, (x + width / 2, y - height / 4));
             }
 
             if (keyboard.IsKeyDown(Key.S) && Side == "left" ||
                 keyboard.IsKeyDown(Key.Down) && Side == "right") {
-                GameMath.Rotate(_partsOfPanzar, 8, 11, -20, (x + width / 2, y - height / 4));
+                GameMath.Rotate(_partsOfPanzar, 8, 11, -5, (x + width / 2, y - height / 4));
             }
         }
 
