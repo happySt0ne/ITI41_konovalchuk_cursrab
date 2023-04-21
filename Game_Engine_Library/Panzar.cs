@@ -11,11 +11,11 @@ using OpenTK.Input;
 namespace Game_Engine_Library {
     public class Panzar : GameObject, IMovable {
         private double _speed;
-        
+
         /// <summary>
         /// Список, который будет хранить координаты вершин частей танка.
         /// </summary>
-        public List<(double, double)> _partsOfPanzar { get;  } 
+        private List<(double, double)> _partsOfPanzar;
 
         /// <summary>
         /// Сторона игрока.
@@ -67,12 +67,14 @@ namespace Game_Engine_Library {
         /// </summary>
         /// <param name="keyboard"></param>
         private void RotateMuzzle(KeyboardState keyboard) {
-            if (keyboard.IsKeyDown(Key.W)) {
-
+            if (keyboard.IsKeyDown(Key.W) && Side == "left" ||
+                keyboard.IsKeyDown(Key.Up) && Side == "right") {
+                GameMath.Rotate(_partsOfPanzar, 8, 11, 20, (x + width / 2, y - height / 4));
             }
-            if (keyboard.IsKeyDown(Key.S) && Side == "left") {
-                GameMath.Rotate(_partsOfPanzar, 8, 11, 45, (x + width / 2, y - height / 4));
-                
+
+            if (keyboard.IsKeyDown(Key.S) && Side == "left" ||
+                keyboard.IsKeyDown(Key.Down) && Side == "right") {
+                GameMath.Rotate(_partsOfPanzar, 8, 11, -20, (x + width / 2, y - height / 4));
             }
         }
 
@@ -81,7 +83,7 @@ namespace Game_Engine_Library {
         /// </summary>
         private void Move(KeyboardState keyboard) {
             if ((keyboard.IsKeyDown(Key.A) && Side == "left") ||
-                 (keyboard.IsKeyDown(Key.J) && Side == "right")) {
+                 (keyboard.IsKeyDown(Key.Left) && Side == "right")) {
                 for (int i = 0; i < _partsOfPanzar.Count; i++) {
                     _partsOfPanzar[i] = (_partsOfPanzar[i].Item1 - _speed, _partsOfPanzar[i].Item2);
                 }
@@ -90,7 +92,7 @@ namespace Game_Engine_Library {
             }
 
             if ((keyboard.IsKeyDown(Key.D) && Side == "left") ||
-                 (keyboard.IsKeyDown(Key.L) && Side == "right")) {
+                 (keyboard.IsKeyDown(Key.Right) && Side == "right")) {
                 for (int i = 0; i < _partsOfPanzar.Count; i++) {
                     _partsOfPanzar[i] = (_partsOfPanzar[i].Item1 + _speed, _partsOfPanzar[i].Item2);
                 }
@@ -115,7 +117,7 @@ namespace Game_Engine_Library {
 
             GL.End();
 
-
+            // Точка, вокруг которой должно вращатся дуло танка.
             GL.Color3(0, 0.94, 0.255);
             GL.Begin(PrimitiveType.Points);
             GL.Vertex2(x + width / 2, y - height / 4);

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OpenTK.Graphics.OpenGL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -24,18 +25,17 @@ namespace Game_Engine_Library {
                                                                         (double, double) bazePoint) {
             //Перевод из градусов в радианы.
             angle = angle * Math.PI / 180;
-            
             double delta_x, delta_y;
             double new_x, new_y;
-
+            // Функция работает неправильно. Помни что (0, 0) в центре канваса. Можешь попробовать способ Аксдэна. 
             for (int i = startIndex; i <= endIndex; i++) {
-                delta_x = bazePoint.Item1 - array[i].Item1;
-                delta_y = bazePoint.Item2 - array[i].Item2;
+                delta_x = array[i].Item1 - bazePoint.Item1;
+                delta_y = array[i].Item2 - bazePoint.Item2;
 
                 new_x = delta_x * Math.Cos(angle) - delta_y * Math.Sin(angle);
                 new_y = delta_y * Math.Cos(angle) + delta_x * Math.Sin(angle);
 
-                array[i] = (new_x, new_y);
+                array[i] = (new_x + bazePoint.Item1, new_y + bazePoint.Item2);
             }
         }
     }
