@@ -27,7 +27,7 @@ namespace Game_Engine_Library {
             angle = angle * Math.PI / 180;
             double delta_x, delta_y;
             double new_x, new_y;
-            // Функция работает неправильно. Помни что (0, 0) в центре канваса. Можешь попробовать способ Аксдэна. 
+            
             for (int i = startIndex; i <= endIndex; i++) {
                 delta_x = array[i].Item1 - bazePoint.Item1;
                 delta_y = array[i].Item2 - bazePoint.Item2;
