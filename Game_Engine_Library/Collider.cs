@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -34,5 +35,15 @@ namespace Game_Engine_Library {
         /// <returns>true, если объекты столкнулись</returns>
         public bool IsIntersected(Collision compareObject) =>
             _collisionBox.IntersectsWith(compareObject._collisionBox);
+
+        /// <summary>
+        /// Передвигает левый верхний угол Collision box в точку (x, y).
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        public void MoveCollisionBox(double x, double y) {
+            _collisionBox.X = Convert.ToSingle(x);
+            _collisionBox.Y = Convert.ToSingle(y);
+        }
     }
 }

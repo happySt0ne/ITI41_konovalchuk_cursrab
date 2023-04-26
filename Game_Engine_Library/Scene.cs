@@ -38,6 +38,10 @@ namespace Game_Engine_Library {
                 obj.Update();
             }
 
+            foreach (Panzar panzar in _objects.Where(x => x is Panzar)) {
+
+            }
+
             Draw();
         }
 
