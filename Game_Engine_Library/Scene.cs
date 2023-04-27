@@ -38,8 +38,9 @@ namespace Game_Engine_Library {
                 obj.Update();
 
                 foreach (GameObject obj2 in _objects.Where(x => x != obj)) {
-                    if (obj.Collision.IsIntersected(obj2.Collision) && obj is Panzar panzar1 
-                        && obj2 is Panzar panzar2) {
+                    if (obj.Collision.IsIntersected(obj2.Collision) && 
+                                              obj is Panzar panzar1 && 
+                                              obj2 is Panzar panzar2) {
                         panzar1.touched = true;
                         panzar2.touched = true;
                     }
