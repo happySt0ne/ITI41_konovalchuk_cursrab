@@ -14,6 +14,8 @@ namespace Game_Engine_Library {
             this.y = y;
             this.width = width;
             this.height = height;
+
+            Collision = new Collision(x, y, width, height);
         }
 
         public abstract void Draw();

@@ -55,7 +55,6 @@ namespace Game_Engine_Library {
                                                           (x + width / 3 * 2, y - height / 3) };
             Side = side;
             _speed = speed;
-            Collision = new Collision(x, y, width, height);
             touched = false;
         }
 
