@@ -11,7 +11,7 @@ namespace Game_Engine_Library {
         /// Список объектов сцены.
         /// </summary>
         private List<GameObject> _objects = new List<GameObject>();
-
+        private List<Panzar> panzars = new List<Panzar>();
         public Scene() {
             AddObject(new Panzar(-0.5, 0, 0.1, 0.1, "left"));
             AddObject(new Panzar(0.5, 0, 0.1, 0.1, "right"));
@@ -36,10 +36,14 @@ namespace Game_Engine_Library {
         public void Update() {
             foreach (GameObject obj in _objects) {
                 obj.Update();
-            }
 
-            foreach (Panzar panzar in _objects.Where(x => x is Panzar)) {
-
+                foreach (GameObject obj2 in _objects.Where(x => x != obj)) {
+                    if (obj.Collision.IsIntersected(obj2.Collision) && obj is Panzar panzar1 
+                        && obj2 is Panzar panzar2) {
+                        panzar1.touched = true;
+                        panzar2.touched = true;
+                    }
+                }
             }
 
             Draw();

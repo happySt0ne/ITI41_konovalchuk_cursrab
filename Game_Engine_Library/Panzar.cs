@@ -11,13 +11,17 @@ using OpenTK.Input;
 namespace Game_Engine_Library {
     public class Panzar : GameObject, IMovable {
         private double _speed;
-        public Collision Collision { get; private set; }
-
+        
+        /// <summary>
+        /// Направление, куда двигается танк. false - влево, true - вправо.
+        /// </summary>
+        private sbyte _direction;
+        public bool touched;
         /// <summary>
         /// Список, который будет хранить координаты вершин частей танка.
         /// </summary>
         private List<(double, double)> _partsOfPanzar;
-
+       
         /// <summary>
         /// Сторона игрока.
         /// </summary>
@@ -52,6 +56,7 @@ namespace Game_Engine_Library {
             Side = side;
             _speed = speed;
             Collision = new Collision(x, y, width, height);
+            touched = false;
         }
 
         /// <summary>
@@ -84,26 +89,33 @@ namespace Game_Engine_Library {
         /// Реализация движения танка.
         /// </summary>
         private void Move(KeyboardState keyboard) {
-            if ((keyboard.IsKeyDown(Key.A) && Side == "left") ||
-                 (keyboard.IsKeyDown(Key.Left) && Side == "right")) {
+            
+            if (((keyboard.IsKeyDown(Key.A) && Side == "left") ||
+                (keyboard.IsKeyDown(Key.Left) && Side == "right")) && 
+                !(_direction == -1 && touched)) {
                 for (int i = 0; i < _partsOfPanzar.Count; i++) {
                     _partsOfPanzar[i] = (_partsOfPanzar[i].Item1 - _speed, _partsOfPanzar[i].Item2);
                 }
 
+                touched = false;
+                _direction = -1;
                 x -= _speed;
             }
 
-            if ((keyboard.IsKeyDown(Key.D) && Side == "left") ||
-                 (keyboard.IsKeyDown(Key.Right) && Side == "right")) {
+            if (((keyboard.IsKeyDown(Key.D) && Side == "left") ||
+                 (keyboard.IsKeyDown(Key.Right) && Side == "right")) &&
+                 !(_direction == 1 && touched)) {
                 for (int i = 0; i < _partsOfPanzar.Count; i++) {
                     _partsOfPanzar[i] = (_partsOfPanzar[i].Item1 + _speed, _partsOfPanzar[i].Item2);
                 }
 
+                touched = false;
+                _direction = 1;
                 x += _speed;
             }
 
             // После того, как танк подвинулся, следует подвинуть и его collision box.
-            Collision.MoveCollisionBox(x, y);
+            Collision.MoveCollisionBoxTo(x, y);
         }
 
         /// <summary>

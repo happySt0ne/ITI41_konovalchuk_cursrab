@@ -26,6 +26,7 @@ namespace Game_Engine_Library {
                                            Convert.ToSingle(y),
                                            Convert.ToSingle(width),
                                            Convert.ToSingle(height));
+            new RectangleF();
         }
 
         /// <summary>
@@ -41,7 +42,7 @@ namespace Game_Engine_Library {
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        public void MoveCollisionBox(double x, double y) {
+        public void MoveCollisionBoxTo(double x, double y) {
             _collisionBox.X = Convert.ToSingle(x);
             _collisionBox.Y = Convert.ToSingle(y);
         }
