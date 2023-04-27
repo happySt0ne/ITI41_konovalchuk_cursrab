@@ -133,13 +133,6 @@ namespace Game_Engine_Library {
             }
 
             GL.End();
-
-            // Точка, вокруг которой должно вращатся дуло танка.
-            GL.Color3(0, 0.94, 0.255);
-            GL.Begin(PrimitiveType.Points);
-            GL.Vertex2(x + width / 2, y - height / 4);
-            GL.End();
-
         }
 
         /// <summary>
