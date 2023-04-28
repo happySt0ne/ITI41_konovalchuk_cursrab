@@ -37,7 +37,7 @@ namespace coursework
 
         private void timer1_Tick(object sender, EventArgs e) {
             label1.Text = text;
-            scene.Update();
+            scene.Update(ref text);
             glControl1.Refresh();
         }
     }

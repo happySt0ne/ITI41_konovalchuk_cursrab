@@ -14,6 +14,8 @@ namespace Game_Engine_Library {
         private int _muzzleDirection;
         public bool touched;
 
+        public bool Shooted { get; private set; }
+
         /// <summary>
         /// Направление, куда двигается танк. false - влево, true - вправо.
         /// </summary>
@@ -58,6 +60,7 @@ namespace Game_Engine_Library {
             Side = side;
             _speed = speed;
             touched = false;
+            Shooted = false;
             _muzzleDirection = 0;
 
             if (Side == "right") {
@@ -79,8 +82,8 @@ namespace Game_Engine_Library {
 
         public void Shoot(KeyboardState keyboard) {
             if (keyboard.IsKeyDown(Key.Space) && Side == "left") {
-
-            }
+                Shooted = true;
+            } else Shooted = false;
         }
 
         /// <summary>

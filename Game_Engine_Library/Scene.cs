@@ -24,11 +24,12 @@ namespace Game_Engine_Library {
         /// <summary>
         /// Обновление логики и перересовка всех объектов сцены.
         /// </summary>
-        public void Update() {
+        public void Update(ref string text) {
             GL.Clear(ClearBufferMask.ColorBufferBit);
 
             foreach (GameObject obj in _objects) {
                 obj.Update();
+                if (obj is Panzar panzar1 && panzar1.Shooted) text = "shooted";
 
                 foreach (GameObject obj2 in _objects.Where(x => x != obj)) {
                     if (obj.Collision.IntersectsWith(obj2.Collision) && obj is Panzar panzar) {
