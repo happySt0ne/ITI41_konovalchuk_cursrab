@@ -15,8 +15,8 @@ namespace Game_Engine_Library {
             AddObject(new Panzar(-0.5, 0, 0.2, 0.2, "left"));
             AddObject(new Panzar(0.5, 0, 0.2, 0.2, "right"));
             AddObject(new Wall(-0.1, 0.2, 0.2, 0.7));
-            AddObject(new Wall(-0.99, 1, 0.0001, 2));
-            AddObject(new Wall(0.99, 1, 0.0001, 2));
+            AddObject(new Wall(-0.999, 1, 0.0001, 2));
+            AddObject(new Wall(0.999, 1, 0.0001, 2));
         }
 
         public void AddObject(GameObject gameObject) =>_objects.Add(gameObject);

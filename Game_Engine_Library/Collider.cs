@@ -12,7 +12,6 @@ namespace Game_Engine_Library {
     /// Класс для проверки столкновения объектов.
     /// </summary>
     public class Collision {
-        public RectangleF _collisionBox;
         private double x, y, width, height;
 
         /// <summary>
@@ -23,10 +22,6 @@ namespace Game_Engine_Library {
         /// <param name="width">Ширина прямоугольника.</param>
         /// <param name="height">Высота прямоугольника.</param>
         public Collision(double x, double y, double width, double height) { 
-            _collisionBox = new RectangleF(Convert.ToSingle(x),
-                                           Convert.ToSingle(y),
-                                           Convert.ToSingle(width),
-                                           -Convert.ToSingle(height));
             this.x = x;
             this.y = y;
             this.width = width;
@@ -36,11 +31,8 @@ namespace Game_Engine_Library {
         /// <summary>
         /// Проверка столкновения двух объектов.
         /// </summary>
-        /// <param name="compareObject">Объект, с которым проверяется столкновение.</param>
+        /// <param name="rect">Объект, с которым проверяется столкновение.</param>
         /// <returns>true, если объекты столкнулись</returns>
-        public bool IsIntersected(Collision compareObject) =>
-            _collisionBox.IntersectsWith(compareObject._collisionBox);
-
         public bool IntersectsWith(Collision rect) {
             if (rect.x < x + width && x < rect.x + rect.width && rect.y > y - height) {
                 return y > rect.y - rect.height;
@@ -49,23 +41,12 @@ namespace Game_Engine_Library {
             return false;
         }
 
-        // Базовая реализация.
-        //public bool IntersectsWith(RectangleF rect) {
-        //    if (rect.X < X + Width && X < rect.X + rect.Width && rect.Y < Y + Height) {
-        //        return Y < rect.Y + rect.Height;
-        //    }
-
-        //    return false;
-        //}
-
         /// <summary>
         /// Передвигает левый верхний угол Collision box в точку (x, y).
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
         public void MoveCollisionBoxTo(double x, double y) {
-            _collisionBox.X = Convert.ToSingle(x);
-            _collisionBox.Y = Convert.ToSingle(y);
             this.x = x;
             this.y = y;
         }
