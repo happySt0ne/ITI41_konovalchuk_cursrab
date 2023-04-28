@@ -12,9 +12,11 @@ namespace Game_Engine_Library {
         /// </summary>
         private List<GameObject> _objects = new List<GameObject>();
         public Scene() {
-            AddObject(new Panzar(-0.5, 0, 0.1, 0.1, "left"));
-            AddObject(new Panzar(0.5, 0, 0.1, 0.1, "right"));
-            AddObject(new Wall(0, 0.2, 0.2, 0.21));
+            AddObject(new Panzar(-0.5, 0, 0.2, 0.2, "left"));
+            AddObject(new Panzar(0.5, 0, 0.2, 0.2, "right"));
+            AddObject(new Wall(-0.1, 0.2, 0.2, 0.7));
+            AddObject(new Wall(-0.99, 1, 0.0001, 2));
+            AddObject(new Wall(0.99, 1, 0.0001, 2));
         }
 
         public void AddObject(GameObject gameObject) =>_objects.Add(gameObject);
@@ -22,19 +24,15 @@ namespace Game_Engine_Library {
         /// <summary>
         /// Обновление логики и перересовка всех объектов сцены.
         /// </summary>
-        public void Update(ref string text) {
+        public void Update() {
             GL.Clear(ClearBufferMask.ColorBufferBit);
 
             foreach (GameObject obj in _objects) {
                 obj.Update();
 
                 foreach (GameObject obj2 in _objects.Where(x => x != obj)) {
-                    if (obj.Collision.IntersectsWith(obj2.Collision) &&
-                                              obj is Panzar panzar
-                                              ) {
-
+                    if (obj.Collision.IntersectsWith(obj2.Collision) && obj is Panzar panzar) {
                         panzar.touched = true;
-                        text = "touched";
                     } 
                 }
             }
