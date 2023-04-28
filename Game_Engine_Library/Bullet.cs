@@ -7,10 +7,11 @@ using System.Threading.Tasks;
 
 namespace Game_Engine_Library {
     public class Bullet : GameObject {
-        public Bullet(double x, double y, double width = 0.05, double height = 0.05) : base(x, y, width, height) {}
+        public Bullet(double x, double y, double width = 0.02, double height = 0.02) : base(x, y, width, height) {}
 
         public override void Draw() {
             GL.PointSize(1);
+            GL.Color3(0.2, 0.2, 0.2);
             GL.Begin(PrimitiveType.Quads);
             GL.Vertex2(x, y);
             GL.Vertex2(x + width, y);

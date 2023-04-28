@@ -11,15 +11,25 @@ namespace Game_Engine_Library {
         /// Список объектов сцены.
         /// </summary>
         private List<GameObject> _objects = new List<GameObject>();
+        private List<Panzar> panzars = new List<Panzar>();
         public Scene() {
             AddObject(new Panzar(-0.5, 0, "left"));
             AddObject(new Panzar(0.5, 0, "right"));
             AddObject(new Wall(-0.1, 0.2, 0.2, 0.7));
             AddObject(new Wall(-0.999, 1, 0.0001, 2));
             AddObject(new Wall(0.999, 1, 0.0001, 2));
+            GetPanzarsList();
         }
 
         public void AddObject(GameObject gameObject) =>_objects.Add(gameObject);
+
+        private void GetPanzarsList() {
+            foreach (GameObject obj in _objects) { 
+                if (obj is Panzar panzar) {
+                    panzars.Add(panzar);
+                }
+            }
+        }
 
         /// <summary>
         /// Обновление логики и перересовка всех объектов сцены.
@@ -29,12 +39,20 @@ namespace Game_Engine_Library {
 
             foreach (GameObject obj in _objects) {
                 obj.Update();
-                if (obj is Panzar panzar1 && panzar1.Shooted) text = "shooted";
+                
 
                 foreach (GameObject obj2 in _objects.Where(x => x != obj)) {
                     if (obj.Collision.IntersectsWith(obj2.Collision) && obj is Panzar panzar) {
                         panzar.touched = true;
                     } 
+                }
+                
+            }
+
+            foreach (Panzar panzar in panzars) {
+                if (panzar.Shooted) {
+                    AddObject(new Bullet(panzar.bulletPosition.Item1, panzar.bulletPosition.Item2));
+                    text = panzar.bulletPosition.Item1.ToString() + " " + panzar.bulletPosition.Item2.ToString();
                 }
             }
         }

@@ -38,5 +38,17 @@ namespace Game_Engine_Library {
                 array[i] = (new_x + bazePoint.Item1, new_y + bazePoint.Item2);
             }
         }
+
+        public static (double, double) Rotate((double, double) bazePoint, (double, double) rotatePoint, double angle) {
+            angle = angle * Math.PI / 180;
+
+            var delta_x = rotatePoint.Item1 - bazePoint.Item1;
+            var delta_y = rotatePoint.Item2 - bazePoint.Item2;
+
+            var new_x = delta_x * Math.Cos(angle) - delta_y * Math.Sin(angle);
+            var new_y = delta_y * Math.Cos(angle) + delta_x * Math.Sin(angle);
+
+            return (new_x + bazePoint.Item1, new_y + bazePoint.Item2);
+        }
     }
 }

@@ -14,6 +14,16 @@ namespace Game_Engine_Library {
         private int _muzzleDirection;
         public bool touched;
 
+        public (double, double) bulletPosition {
+            get {
+                var muzzleStartPoint = (x + width, y - height / 6);
+                var bazePoint = (x + width / 2, y - height / 4);
+                var pointToReturn = GameMath.Rotate(bazePoint, muzzleStartPoint, _muzzleDirection);
+
+                return (pointToReturn.Item1 + 0.01, pointToReturn.Item2 + 0.01);
+            }
+        }
+
         public bool Shooted { get; private set; }
 
         /// <summary>
@@ -83,6 +93,7 @@ namespace Game_Engine_Library {
         public void Shoot(KeyboardState keyboard) {
             if (keyboard.IsKeyDown(Key.Space) && Side == "left") {
                 Shooted = true;
+                // Сюда ещё докинешь проверку перезарядки, отнятие патрона.
             } else Shooted = false;
         }
 
