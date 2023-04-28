@@ -12,8 +12,8 @@ namespace Game_Engine_Library {
         /// </summary>
         private List<GameObject> _objects = new List<GameObject>();
         public Scene() {
-            AddObject(new Panzar(-0.5, 0, 0.2, 0.2, "left"));
-            AddObject(new Panzar(0.5, 0, 0.2, 0.2, "right"));
+            AddObject(new Panzar(-0.5, 0, "left"));
+            AddObject(new Panzar(0.5, 0, "right"));
             AddObject(new Wall(-0.1, 0.2, 0.2, 0.7));
             AddObject(new Wall(-0.999, 1, 0.0001, 2));
             AddObject(new Wall(0.999, 1, 0.0001, 2));

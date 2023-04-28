@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bullet.cs" />
     <Compile Include="Collider.cs" />
     <Compile Include="GameMath.cs" />
     <Compile Include="GameObject.cs" />

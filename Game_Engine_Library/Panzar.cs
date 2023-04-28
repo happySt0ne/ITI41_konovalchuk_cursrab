@@ -37,8 +37,8 @@ namespace Game_Engine_Library {
         /// <param name="width">Ширина танка</param>
         /// <param name="height">Высота танка</param>
         /// <param name="side">Сторона сил</param>
-        public Panzar(double x, double y, double width, double height, string side, double speed = 0.005)
-                                                          /* Координаты кузова. */  : base(x, y, width, height) {
+        public Panzar(double x, double y, string side, double width = 0.2, double height = 0.2, double speed = 0.005)
+                                                          /* Координаты кузова. */      : base(x, y, width, height) {
             _partsOfPanzar = new List<(double, double)> { (x, y - height / 2),
                                                           (x + width, y - height / 2),
                                                           (x + width, y - height),
@@ -74,6 +74,13 @@ namespace Game_Engine_Library {
             
             Move(keyboard);
             RotateMuzzle(keyboard);
+            Shoot(keyboard);
+        }
+
+        public void Shoot(KeyboardState keyboard) {
+            if (keyboard.IsKeyDown(Key.Space) && Side == "left") {
+
+            }
         }
 
         /// <summary>
