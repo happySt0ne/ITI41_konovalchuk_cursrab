@@ -11,8 +11,9 @@ using OpenTK.Input;
 namespace Game_Engine_Library {
     public class Panzar : GameObject, IMovable {
         private double _speed;
+        private int _muzzleDirection;
         public bool touched;
-        
+
         /// <summary>
         /// Направление, куда двигается танк. false - влево, true - вправо.
         /// </summary>
@@ -57,6 +58,12 @@ namespace Game_Engine_Library {
             Side = side;
             _speed = speed;
             touched = false;
+            _muzzleDirection = 0;
+
+            if (Side == "right") {
+                GameMath.Rotate(_partsOfPanzar, 8, 11, 180, (x + width / 2, y - height / 4));
+                _muzzleDirection = 180;
+            }
         }
 
         /// <summary>
@@ -74,14 +81,16 @@ namespace Game_Engine_Library {
         /// </summary>
         /// <param name="keyboard"></param>
         private void RotateMuzzle(KeyboardState keyboard) {
-            if (keyboard.IsKeyDown(Key.W) && Side == "left" ||
-                keyboard.IsKeyDown(Key.Up) && Side == "right") {
+            if (keyboard.IsKeyDown(Key.W) && Side == "left" && _muzzleDirection < 90 ||
+                keyboard.IsKeyDown(Key.Down) && Side == "right" && _muzzleDirection > 180) {
                 GameMath.Rotate(_partsOfPanzar, 8, 11, 5, (x + width / 2, y - height / 4));
+                _muzzleDirection += Side == "left" ? 5 : -5;
             }
 
-            if (keyboard.IsKeyDown(Key.S) && Side == "left" ||
-                keyboard.IsKeyDown(Key.Down) && Side == "right") {
+            if (keyboard.IsKeyDown(Key.S) && Side == "left" && _muzzleDirection > 0 ||
+                keyboard.IsKeyDown(Key.Up) && Side == "right" && _muzzleDirection < 270) {
                 GameMath.Rotate(_partsOfPanzar, 8, 11, -5, (x + width / 2, y - height / 4));
+                _muzzleDirection += Side == "left" ? -5 : 5;
             }
         }
 
