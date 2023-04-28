@@ -14,7 +14,7 @@ namespace Game_Engine_Library {
         public Scene() {
             AddObject(new Panzar(-0.5, 0, 0.1, 0.1, "left"));
             AddObject(new Panzar(0.5, 0, 0.1, 0.1, "right"));
-            AddObject(new Wall(-0.01, 0.2, 0.2, 0.5));
+            AddObject(new Wall(0, 0.2, 0.2, 0.21));
         }
 
         public void AddObject(GameObject gameObject) =>_objects.Add(gameObject);
@@ -22,19 +22,20 @@ namespace Game_Engine_Library {
         /// <summary>
         /// Обновление логики и перересовка всех объектов сцены.
         /// </summary>
-        public void Update() {
+        public void Update(ref string text) {
             GL.Clear(ClearBufferMask.ColorBufferBit);
 
             foreach (GameObject obj in _objects) {
                 obj.Update();
 
                 foreach (GameObject obj2 in _objects.Where(x => x != obj)) {
-                    if (obj.Collision.IsIntersected(obj2.Collision) &&
-                                              obj is Panzar panzar1 &&
-                                              obj2 is Panzar panzar2) {
-                        panzar1.touched = true;
-                        panzar2.touched = true;
-                    }
+                    if (obj.Collision.IntersectsWith(obj2.Collision) &&
+                                              obj is Panzar panzar
+                                              ) {
+
+                        panzar.touched = true;
+                        text = "touched";
+                    } 
                 }
             }
         }

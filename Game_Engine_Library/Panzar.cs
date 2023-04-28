@@ -11,12 +11,13 @@ using OpenTK.Input;
 namespace Game_Engine_Library {
     public class Panzar : GameObject, IMovable {
         private double _speed;
+        public bool touched;
         
         /// <summary>
         /// Направление, куда двигается танк. false - влево, true - вправо.
         /// </summary>
         private sbyte _direction;
-        public bool touched;
+        
         /// <summary>
         /// Список, который будет хранить координаты вершин частей танка.
         /// </summary>
@@ -88,7 +89,6 @@ namespace Game_Engine_Library {
         /// Реализация движения танка.
         /// </summary>
         private void Move(KeyboardState keyboard) {
-            
             if (((keyboard.IsKeyDown(Key.A) && Side == "left") ||
                 (keyboard.IsKeyDown(Key.Left) && Side == "right")) && 
                 !(_direction == -1 && touched)) {

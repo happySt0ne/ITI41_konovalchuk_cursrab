@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Game_Engine_Library {
     public class Wall : GameObject {
         public Wall(double x, double y, double width, double height) : base(x, y, width, height) { }
-
+        
         public override void Draw() {
             GL.PointSize(5);
             GL.Begin(PrimitiveType.Quads);

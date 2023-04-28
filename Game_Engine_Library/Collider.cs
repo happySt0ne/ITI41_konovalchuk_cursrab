@@ -12,7 +12,8 @@ namespace Game_Engine_Library {
     /// Класс для проверки столкновения объектов.
     /// </summary>
     public class Collision {
-        private RectangleF _collisionBox;
+        public RectangleF _collisionBox;
+        private double x, y, width, height;
 
         /// <summary>
         /// Инициализация прямоугольного collision box.
@@ -25,8 +26,11 @@ namespace Game_Engine_Library {
             _collisionBox = new RectangleF(Convert.ToSingle(x),
                                            Convert.ToSingle(y),
                                            Convert.ToSingle(width),
-                                           Convert.ToSingle(height));
-            new RectangleF();
+                                           -Convert.ToSingle(height));
+            this.x = x;
+            this.y = y;
+            this.width = width;
+            this.height = height;
         }
 
         /// <summary>
@@ -37,6 +41,23 @@ namespace Game_Engine_Library {
         public bool IsIntersected(Collision compareObject) =>
             _collisionBox.IntersectsWith(compareObject._collisionBox);
 
+        public bool IntersectsWith(Collision rect) {
+            if (rect.x < x + width && x < rect.x + rect.width && rect.y > y - height) {
+                return y > rect.y - rect.height;
+            }
+
+            return false;
+        }
+
+        // Базовая реализация.
+        //public bool IntersectsWith(RectangleF rect) {
+        //    if (rect.X < X + Width && X < rect.X + rect.Width && rect.Y < Y + Height) {
+        //        return Y < rect.Y + rect.Height;
+        //    }
+
+        //    return false;
+        //}
+
         /// <summary>
         /// Передвигает левый верхний угол Collision box в точку (x, y).
         /// </summary>
@@ -45,6 +66,8 @@ namespace Game_Engine_Library {
         public void MoveCollisionBoxTo(double x, double y) {
             _collisionBox.X = Convert.ToSingle(x);
             _collisionBox.Y = Convert.ToSingle(y);
+            this.x = x;
+            this.y = y;
         }
     }
 }
