@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Game_Engine_Library {
     public class Scene {
@@ -49,9 +50,13 @@ namespace Game_Engine_Library {
                 
             }
 
+            AddBullet(ref text);
+        }
+
+        private void AddBullet(ref string text) {
             foreach (Panzar panzar in panzars) {
                 if (panzar.Shooted) {
-                    AddObject(new Bullet(panzar.bulletPosition.Item1, panzar.bulletPosition.Item2));
+                    AddObject(new Bullet(panzar.bulletPosition.Item1, panzar.bulletPosition.Item2, panzar._muzzleDirection));
                     text = panzar.bulletPosition.Item1.ToString() + " " + panzar.bulletPosition.Item2.ToString();
                 }
             }

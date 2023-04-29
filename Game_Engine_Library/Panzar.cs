@@ -7,20 +7,30 @@ using System.Windows.Forms;
 using OpenTK;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Input;
+using static OpenTK.Graphics.OpenGL.GL;
 
 namespace Game_Engine_Library {
     public class Panzar : GameObject, IMovable {
         private double _speed;
-        private int _muzzleDirection;
         public bool touched;
+        public int _muzzleDirection { get; private set; }
 
         public (double, double) bulletPosition {
             get {
                 var muzzleStartPoint = (x + width, y - height / 6);
                 var bazePoint = (x + width / 2, y - height / 4);
-                var pointToReturn = GameMath.Rotate(bazePoint, muzzleStartPoint, _muzzleDirection);
+                (double, double) pointToReturn;
 
-                return (pointToReturn.Item1 + 0.01, pointToReturn.Item2 + 0.01);
+                switch (Side) {
+                    case "left":
+                        pointToReturn = GameMath.Rotate(bazePoint, muzzleStartPoint, _muzzleDirection);
+                        return (pointToReturn.Item1 + 0.02, pointToReturn.Item2 + 0.01);
+                    case "right":
+                        pointToReturn = GameMath.Rotate(bazePoint, muzzleStartPoint, -_muzzleDirection);
+                        return (pointToReturn.Item1 - 0.03, pointToReturn.Item2 + 0.02);
+                    default:
+                        return (0, 0);
+                }
             }
         }
 
@@ -91,7 +101,8 @@ namespace Game_Engine_Library {
         }
 
         public void Shoot(KeyboardState keyboard) {
-            if (keyboard.IsKeyDown(Key.Space) && Side == "left") {
+            if (keyboard.IsKeyDown(Key.Space) && Side == "left" || 
+                keyboard.IsKeyDown(Key.Enter) && Side == "right") {
                 Shooted = true;
                 // Сюда ещё докинешь проверку перезарядки, отнятие патрона.
             } else Shooted = false;
