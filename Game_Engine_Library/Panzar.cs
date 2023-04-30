@@ -23,11 +23,6 @@ namespace Game_Engine_Library {
         public double Health { get; set; } = 100;
 
         /// <summary>
-        /// Здоровье танка.
-        /// </summary>
-        public double cooldown { get; private set; } = 0;
-        
-        /// <summary>
         /// Угол между дулом и осью Ох.
         /// </summary>
         public int MuzzleDirection { get; private set; } = 0;
