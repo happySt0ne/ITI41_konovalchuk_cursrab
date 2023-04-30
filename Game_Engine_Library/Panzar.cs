@@ -10,12 +10,16 @@ namespace Game_Engine_Library {
         private sbyte _moveDirection;
         private List<(double, double)> _partsOfPanzar;
         const int MAX_COOLDOWN = 4;
-        private double cooldown = 0;
+
+        /// <summary>
+        /// Перезарядка танка.
+        /// </summary>
+        public double Cooldown { get; private set; } = 0;
 
         /// <summary>
         /// Боезапас танка.
         /// </summary>
-        public int Ammo { get; private set; } = 2;
+        public int Ammo { get; private set; } = 10;
 
         /// <summary>
         /// Здоровье танка.
@@ -111,9 +115,9 @@ namespace Game_Engine_Library {
         /// <param name="keyboard"></param>
         private void Shoot(KeyboardState keyboard) {
             if ((keyboard.IsKeyDown(Key.Space) && Side == "left" || keyboard.IsKeyDown(Key.Enter) && Side == "right") 
-                                                                                        && cooldown <= 0 && Ammo > 0) {
+                                                                                        && Cooldown <= 0 && Ammo > 0) {
                 Shooted = true;
-                cooldown = MAX_COOLDOWN;
+                Cooldown = MAX_COOLDOWN;
                 Ammo--;
             } else Shooted = false;
         }
@@ -189,10 +193,10 @@ namespace Game_Engine_Library {
         /// Осуществление тика таймера кулдауна стрельбы.
         /// </summary>
         private void ReduceCooldown() {
-            cooldown = Math.Round(cooldown, 3);
+            Cooldown = Math.Round(Cooldown, 3);
 
-            if (cooldown >= 0.025) {
-                cooldown -= 0.025;
+            if (Cooldown >= 0.025) {
+                Cooldown -= 0.025;
             }
         }
 

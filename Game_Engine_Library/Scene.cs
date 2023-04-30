@@ -21,6 +21,15 @@ namespace Game_Engine_Library {
             GetPanzarsList();
         }
 
+        public void GetPanzarsInfo(out double health1, out double health2, out int ammo1, out int ammo2, out double cooldown1, out double cooldown2) {
+            health1 = _panzars[0].Health;
+            health2 = _panzars[1].Health;
+            ammo1 = _panzars[0].Ammo;
+            ammo2 = _panzars[1].Ammo;
+            cooldown1 = Math.Round(_panzars[0].Cooldown, 1);
+            cooldown2 = Math.Round(_panzars[1].Cooldown, 1);
+        }
+
         /// <summary>
         /// Добавляет все танки в список танков.
         /// </summary>
@@ -45,14 +54,13 @@ namespace Game_Engine_Library {
         /// <summary>
         /// Обновление логики и перересовка всех объектов сцены.
         /// </summary>
-        public void Update(ref string text, out int endGame) {
+        public void Update(out int endGame) {
             endGame = CheckEndGame();
             GL.Clear(ClearBufferMask.ColorBufferBit);
             _listToRemove.ForEach(x => _objects.Remove(x));
             _listToRemove.Clear();
             AddBullet();
-            text = _panzars[0].Health.ToString();
-
+            
             foreach (GameObject obj in _objects) {
                 obj.Update();
                 CheckSceneCollision(obj);

@@ -17,11 +17,10 @@ namespace coursework
 {
     public partial class Form1 : Form {
         Scene scene;
-        string text;
+
         public Form1() {
             InitializeComponent();
             scene = new Scene();
-            text = "";
         }
 
         private void Form1_Load(object sender, EventArgs e) { }
@@ -37,8 +36,8 @@ namespace coursework
         }
 
         private void timer1_Tick(object sender, EventArgs e) {
-            label1.Text = text;
-            scene.Update(ref text, out int endGame);
+            scene.Update(out int endGame);
+            ShowPanzarsInfo();
             glControl1.Refresh();
 
             if (endGame == 0) return;
@@ -47,5 +46,18 @@ namespace coursework
             MessageBox.Show(endGame == -1 ? "Победил правый игрок" : "Победил левый игрок");
             Application.Exit();
         }
+
+        private void ShowPanzarsInfo() {
+            scene.GetPanzarsInfo(out double health1, out double health2, out int ammo1, out int ammo2, out double cooldown1, out double cooldown2);
+            Cooldown1.Text = String.Format("Перезарядка: {0:0.0}", cooldown1);
+            Cooldown2.Text = String.Format("Перезарядка: {0:0.0}", cooldown2);
+
+            Ammo1.Text = $"Боезапас: {ammo1}";
+            Ammo2.Text = $"Боезапас: {ammo2}";
+            
+            HealthBar1.Value = (int)health1;
+            HealthBar2.Value = (int)health2;
+        }
+
     }
 }
