@@ -21,7 +21,7 @@ namespace Game_Engine_Library {
         /// <param name="id">Идентификатор текстуры.</param>
         /// <param name="width">Ширина текстуры.</param>
         /// <param name="height">Высота текстуры.</param>
-        public Texture(int id, int width, int height) {
+        private Texture(int id, int width, int height) {
             ID = id;
         }
 

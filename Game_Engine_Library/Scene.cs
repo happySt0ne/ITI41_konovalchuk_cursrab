@@ -13,6 +13,7 @@ namespace Game_Engine_Library {
         private List<Panzar> _panzars = new List<Panzar>();
 
         public Scene() {
+            _objects.Add(new Background(-1, 1, 2, 2));
             _objects.Add(new Panzar(-0.5, 0, "left"));
             _objects.Add(new Panzar(0.5, 0, "right"));
             _objects.Add(new Wall(-0.1, 0.2, 0.2, 0.7));
@@ -60,16 +61,6 @@ namespace Game_Engine_Library {
             _listToRemove.ForEach(x => _objects.Remove(x));
             _listToRemove.Clear();
             AddBullet();
-
-            Texture texture = Texture.LoadTexture("C:/labs/4sem/konovalchuk_cursrab/photo_2022-05-31_21-54-02.bmp");
-
-            GL.BindTexture(TextureTarget.Texture2D, texture.ID);
-            GL.Begin(PrimitiveType.Quads);
-            GL.TexCoord2(0.0f, 1.0f); GL.Vertex2(-1.0f, -1.0f);
-            GL.TexCoord2(1.0f, 1.0f); GL.Vertex2(1.0f, -1.0f);
-            GL.TexCoord2(1.0f, 0.0f); GL.Vertex2(1.0f, 1.0f);
-            GL.TexCoord2(0.0f, 0.0f); GL.Vertex2(-1.0f, 1.0f);
-            GL.End();
 
             foreach (GameObject obj in _objects) {
                 obj.Update();

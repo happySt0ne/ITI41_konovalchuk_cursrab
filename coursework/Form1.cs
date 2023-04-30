@@ -26,8 +26,6 @@ namespace coursework
         private void Form1_Load(object sender, EventArgs e) { }
 
         private void glControl1_Load(object sender, EventArgs e) {
-            // Цвет бэкграунда.
-
             GL.Enable(EnableCap.Texture2D);
             scene = new Scene();
         }
