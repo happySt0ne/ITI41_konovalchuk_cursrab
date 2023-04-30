@@ -1,33 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using OpenTK;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Input;
-using static OpenTK.Graphics.OpenGL.GL;
 
 namespace Game_Engine_Library {
-    public class Panzar : GameObject, IMovable {
+    public class Panzar : GameObject {
         private double _speed;
-        public bool touched;
-
-        /// <summary>
-        /// Направление, куда двигается танк. false - влево, true - вправо.
-        /// </summary>
+        public bool touched = false;
         private sbyte _moveDirection;
-
-        /// <summary>
-        /// Список, который будет хранить координаты вершин частей танка.
-        /// </summary>
         private List<(double, double)> _partsOfPanzar;
 
+        const int MAX_COOLDOWN = 4;
+
+        public double Health { get; set; } = 100;
+
+        /// <summary>
+        /// Перезарядка до следующего выстрела танка.
+        /// </summary>
+        public double cooldown { get; private set; } = 0;
+
+        
         /// <summary>
         /// Угол между дулом и осью Ох.
         /// </summary>
-        public int _muzzleDirection { get; private set; }
+        public int _muzzleDirection { get; private set; } = 0;
 
         /// <summary>
         /// Начальная позиция полёта пули.
@@ -41,10 +37,10 @@ namespace Game_Engine_Library {
                 switch (Side) {
                     case "left":
                         pointToReturn = GameMath.Rotate(bazePoint, muzzleStartPoint, _muzzleDirection);
-                        return (pointToReturn.Item1 + 0.02, pointToReturn.Item2 + 0.01);
+                        return (pointToReturn.Item1 + 0.04, pointToReturn.Item2 + 0.04);
                     case "right":
                         pointToReturn = GameMath.Rotate(bazePoint, muzzleStartPoint, -_muzzleDirection);
-                        return (pointToReturn.Item1 - 0.03, pointToReturn.Item2 + 0.02);
+                        return (pointToReturn.Item1 - 0.045, pointToReturn.Item2 + 0.04);
                     default:
                         return (0, 0);
                 }
@@ -54,7 +50,7 @@ namespace Game_Engine_Library {
         /// <summary>
         /// Сделан ли выстрел танком.
         /// </summary>
-        public bool Shooted { get; private set; }
+        public bool Shooted { get; private set; } = false;
 
         /// <summary>
         /// Сторона игрока.
@@ -89,9 +85,6 @@ namespace Game_Engine_Library {
                                                           (x + width / 3 * 2, y - height / 3) };
             Side = side;
             _speed = speed;
-            touched = false;
-            Shooted = false;
-            _muzzleDirection = 0;
 
             if (Side == "right") {
                 GameMath.Rotate(_partsOfPanzar, 8, 11, 180, (x + width / 2, y - height / 4));
@@ -102,7 +95,7 @@ namespace Game_Engine_Library {
         /// <summary>
         /// Отлавливание и реакция на действия игрока.
         /// </summary>
-        public void Action() {
+        private void Action() {
             KeyboardState keyboard = Keyboard.GetState();
             
             Move(keyboard);
@@ -114,11 +107,10 @@ namespace Game_Engine_Library {
         /// Реализация логики выстрела.
         /// </summary>
         /// <param name="keyboard"></param>
-        public void Shoot(KeyboardState keyboard) {
-            if (keyboard.IsKeyDown(Key.Space) && Side == "left" || 
-                keyboard.IsKeyDown(Key.Enter) && Side == "right") {
+        private void Shoot(KeyboardState keyboard) {
+            if ((keyboard.IsKeyDown(Key.Space) && Side == "left" || keyboard.IsKeyDown(Key.Enter) && Side == "right") && cooldown <= 0) {
                 Shooted = true;
-                // Сюда ещё докинешь проверку перезарядки, отнятие патрона.
+                cooldown = MAX_COOLDOWN;
             } else Shooted = false;
         }
 
@@ -141,8 +133,8 @@ namespace Game_Engine_Library {
         }
 
         /// <summary>
-        /// Реализация движения танка.
-        /// </summary>
+    /// Реализация движения танка.
+    /// </summary>
         private void Move(KeyboardState keyboard) {
             if (((keyboard.IsKeyDown(Key.A) && Side == "left") ||
                 (keyboard.IsKeyDown(Key.Left) && Side == "right")) &&
@@ -190,11 +182,23 @@ namespace Game_Engine_Library {
         }
 
         /// <summary>
+        /// Осуществление тика таймера кулдауна стрельбы.
+        /// </summary>
+        private void ReduceCooldown() {
+            cooldown = Math.Round(cooldown, 3);
+
+            if (cooldown >= 0.025) {
+                cooldown -= 0.025;
+            }
+        }
+
+        /// <summary>
         /// Обновление логики и перересовка танка.
         /// </summary>
         public override void Update() {
             Action();
             Draw();
+            ReduceCooldown();
         }
     }
 }

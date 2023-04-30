@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,7 +13,9 @@ namespace Game_Engine_Library {
         double flightAngle;
         double g = 0.0001;
 
-        public Bullet(double x, double y, int angle, string side,double width = 0.02, double height = 0.02, double speed = 0.07) 
+        public int Damage { get; private set; }
+
+        public Bullet(double x, double y, int angle, string side, int damage, double width = 0.04, double height = 0.04, double speed = 0.07) 
                                                                                                    : base(x, y, width, height) {
             bulletPoints.Add((x, y));
             bulletPoints.Add((x + width, y));
@@ -21,6 +24,7 @@ namespace Game_Engine_Library {
 
             this.speed = speed;
             flightAngle = side == "left" ? angle * Math.PI / 180 : -angle * Math.PI / 180;
+            Damage = damage;
         }
 
         /// <summary>
@@ -40,6 +44,10 @@ namespace Game_Engine_Library {
         public override void Update() {
             MoveBullet();
             Draw();
+        }
+
+        public void Explode() {
+
         }
 
         /// <summary>
