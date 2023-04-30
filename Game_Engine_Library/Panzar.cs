@@ -10,6 +10,7 @@ namespace Game_Engine_Library {
         private sbyte _moveDirection;
         private List<(double, double)> _partsOfPanzar;
         const int MAX_COOLDOWN = 4;
+        private double cooldown = 0;
 
         /// <summary>
         /// Боезапас танка.
@@ -22,19 +23,19 @@ namespace Game_Engine_Library {
         public double Health { get; set; } = 100;
 
         /// <summary>
-        /// Перезарядка до следующего выстрела танка.
+        /// Здоровье танка.
         /// </summary>
         public double cooldown { get; private set; } = 0;
         
         /// <summary>
         /// Угол между дулом и осью Ох.
         /// </summary>
-        public int _muzzleDirection { get; private set; } = 0;
+        public int MuzzleDirection { get; private set; } = 0;
 
         /// <summary>
         /// Начальная позиция полёта пули.
         /// </summary>
-        public (double, double) bulletPosition {
+        public (double, double) BulletPosition {
             get {
                 var muzzleStartPoint = (x + width, y - height / 6);
                 var bazePoint = (x + width / 2, y - height / 4);
@@ -42,10 +43,10 @@ namespace Game_Engine_Library {
 
                 switch (Side) {
                     case "left":
-                        pointToReturn = GameMath.Rotate(bazePoint, muzzleStartPoint, _muzzleDirection);
+                        pointToReturn = GameMath.Rotate(bazePoint, muzzleStartPoint, MuzzleDirection);
                         return (pointToReturn.Item1 + 0.04, pointToReturn.Item2 + 0.04);
                     case "right":
-                        pointToReturn = GameMath.Rotate(bazePoint, muzzleStartPoint, -_muzzleDirection);
+                        pointToReturn = GameMath.Rotate(bazePoint, muzzleStartPoint, -MuzzleDirection);
                         return (pointToReturn.Item1 - 0.045, pointToReturn.Item2 + 0.04);
                     default:
                         return (0, 0);
@@ -94,7 +95,7 @@ namespace Game_Engine_Library {
 
             if (Side == "right") {
                 GameMath.Rotate(_partsOfPanzar, 8, 11, 180, (x + width / 2, y - height / 4));
-                _muzzleDirection = 180;
+                MuzzleDirection = 180;
             }
         }
 
@@ -127,16 +128,16 @@ namespace Game_Engine_Library {
         /// </summary>
         /// <param name="keyboard"></param>
         private void RotateMuzzle(KeyboardState keyboard) {
-            if (keyboard.IsKeyDown(Key.W) && Side == "left" && _muzzleDirection < 90 ||
-                keyboard.IsKeyDown(Key.Down) && Side == "right" && _muzzleDirection > 180) {
+            if (keyboard.IsKeyDown(Key.W) && Side == "left" && MuzzleDirection < 90 ||
+                keyboard.IsKeyDown(Key.Down) && Side == "right" && MuzzleDirection > 180) {
                 GameMath.Rotate(_partsOfPanzar, 8, 11, 5, (x + width / 2, y - height / 4));
-                _muzzleDirection += Side == "left" ? 5 : -5;
+                MuzzleDirection += Side == "left" ? 5 : -5;
             }
 
-            if (keyboard.IsKeyDown(Key.S) && Side == "left" && _muzzleDirection > 0 ||
-                keyboard.IsKeyDown(Key.Up) && Side == "right" && _muzzleDirection < 270) {
+            if (keyboard.IsKeyDown(Key.S) && Side == "left" && MuzzleDirection > 0 ||
+                keyboard.IsKeyDown(Key.Up) && Side == "right" && MuzzleDirection < 270) {
                 GameMath.Rotate(_partsOfPanzar, 8, 11, -5, (x + width / 2, y - height / 4));
-                _muzzleDirection += Side == "left" ? -5 : 5;
+                MuzzleDirection += Side == "left" ? -5 : 5;
             }
         }
 

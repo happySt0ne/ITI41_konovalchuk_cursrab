@@ -134,9 +134,9 @@ namespace Game_Engine_Library {
         private void AddBullet() {
             foreach (Panzar panzar in _panzars) {
                 if (panzar.Shooted) {
-                    _objects.Add(new Bullet(panzar.bulletPosition.Item1, 
-                                            panzar.bulletPosition.Item2, 
-                                            panzar._muzzleDirection, 
+                    _objects.Add(new Bullet(panzar.BulletPosition.Item1, 
+                                            panzar.BulletPosition.Item2, 
+                                            panzar.MuzzleDirection, 
                                             panzar.Side,
                                             BULLET_DAMAGE));
                 }
