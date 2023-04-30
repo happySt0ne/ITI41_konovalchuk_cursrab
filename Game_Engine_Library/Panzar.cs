@@ -9,16 +9,22 @@ namespace Game_Engine_Library {
         public bool touched = false;
         private sbyte _moveDirection;
         private List<(double, double)> _partsOfPanzar;
-
         const int MAX_COOLDOWN = 4;
 
+        /// <summary>
+        /// Боезапас танка.
+        /// </summary>
+        public int Ammo { get; private set; } = 2;
+
+        /// <summary>
+        /// Здоровье танка.
+        /// </summary>
         public double Health { get; set; } = 100;
 
         /// <summary>
         /// Перезарядка до следующего выстрела танка.
         /// </summary>
         public double cooldown { get; private set; } = 0;
-
         
         /// <summary>
         /// Угол между дулом и осью Ох.
@@ -108,9 +114,11 @@ namespace Game_Engine_Library {
         /// </summary>
         /// <param name="keyboard"></param>
         private void Shoot(KeyboardState keyboard) {
-            if ((keyboard.IsKeyDown(Key.Space) && Side == "left" || keyboard.IsKeyDown(Key.Enter) && Side == "right") && cooldown <= 0) {
+            if ((keyboard.IsKeyDown(Key.Space) && Side == "left" || keyboard.IsKeyDown(Key.Enter) && Side == "right") 
+                                                                                        && cooldown <= 0 && Ammo > 0) {
                 Shooted = true;
                 cooldown = MAX_COOLDOWN;
+                Ammo--;
             } else Shooted = false;
         }
 
