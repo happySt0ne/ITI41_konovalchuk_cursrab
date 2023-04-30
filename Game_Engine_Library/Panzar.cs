@@ -13,6 +13,17 @@ namespace Game_Engine_Library {
     public class Panzar : GameObject, IMovable {
         private double _speed;
         public bool touched;
+
+        /// <summary>
+        /// Направление, куда двигается танк. false - влево, true - вправо.
+        /// </summary>
+        private sbyte _direction;
+
+        /// <summary>
+        /// Список, который будет хранить координаты вершин частей танка.
+        /// </summary>
+        private List<(double, double)> _partsOfPanzar;
+
         public int _muzzleDirection { get; private set; }
 
         public (double, double) bulletPosition {
@@ -36,16 +47,6 @@ namespace Game_Engine_Library {
 
         public bool Shooted { get; private set; }
 
-        /// <summary>
-        /// Направление, куда двигается танк. false - влево, true - вправо.
-        /// </summary>
-        private sbyte _direction;
-        
-        /// <summary>
-        /// Список, который будет хранить координаты вершин частей танка.
-        /// </summary>
-        private List<(double, double)> _partsOfPanzar;
-       
         /// <summary>
         /// Сторона игрока.
         /// </summary>

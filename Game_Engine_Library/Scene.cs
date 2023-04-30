@@ -56,7 +56,7 @@ namespace Game_Engine_Library {
         private void AddBullet(ref string text) {
             foreach (Panzar panzar in panzars) {
                 if (panzar.Shooted) {
-                    AddObject(new Bullet(panzar.bulletPosition.Item1, panzar.bulletPosition.Item2, panzar._muzzleDirection));
+                    AddObject(new Bullet(panzar.bulletPosition.Item1, panzar.bulletPosition.Item2, panzar._muzzleDirection, panzar.Side));
                     text = panzar.bulletPosition.Item1.ToString() + " " + panzar.bulletPosition.Item2.ToString();
                 }
             }
