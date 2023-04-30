@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Input;
 
@@ -19,7 +20,7 @@ namespace Game_Engine_Library {
         /// <summary>
         /// Боезапас танка.
         /// </summary>
-        public int Ammo { get; private set; } = 10;
+        public int Ammo { get; private set; } = 20;
 
         /// <summary>
         /// Здоровье танка.
@@ -176,11 +177,8 @@ namespace Game_Engine_Library {
         /// Отрисовка конкретного танка.
         /// </summary>
         public override void Draw() {
-            GL.PointSize(5);
             
             GL.Begin(PrimitiveType.Quads);
-
-            GL.Color3(0.255, 0, 0);
 
             foreach ((double, double) point in _partsOfPanzar) {
                 GL.Vertex2(point.Item1, point.Item2);

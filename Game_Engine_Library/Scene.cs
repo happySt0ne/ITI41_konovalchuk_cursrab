@@ -60,11 +60,22 @@ namespace Game_Engine_Library {
             _listToRemove.ForEach(x => _objects.Remove(x));
             _listToRemove.Clear();
             AddBullet();
-            
+
+            Texture texture = Texture.LoadTexture("C:/labs/4sem/konovalchuk_cursrab/photo_2022-05-31_21-54-02.bmp");
+
+            GL.BindTexture(TextureTarget.Texture2D, texture.ID);
+            GL.Begin(PrimitiveType.Quads);
+            GL.TexCoord2(0.0f, 1.0f); GL.Vertex2(-1.0f, -1.0f);
+            GL.TexCoord2(1.0f, 1.0f); GL.Vertex2(1.0f, -1.0f);
+            GL.TexCoord2(1.0f, 0.0f); GL.Vertex2(1.0f, 1.0f);
+            GL.TexCoord2(0.0f, 0.0f); GL.Vertex2(-1.0f, 1.0f);
+            GL.End();
+
             foreach (GameObject obj in _objects) {
                 obj.Update();
                 CheckSceneCollision(obj);
             }
+            
         }
 
         /// <summary>

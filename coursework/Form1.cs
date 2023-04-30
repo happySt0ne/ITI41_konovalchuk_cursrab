@@ -20,18 +20,19 @@ namespace coursework
 
         public Form1() {
             InitializeComponent();
-            scene = new Scene();
+            
         }
 
         private void Form1_Load(object sender, EventArgs e) { }
 
         private void glControl1_Load(object sender, EventArgs e) {
             // Цвет бэкграунда.
-            GL.ClearColor(0.564f, 0.713f, 0.572f, 1);
+
+            GL.Enable(EnableCap.Texture2D);
+            scene = new Scene();
         }
 
         private void glControl1_Paint(object sender, PaintEventArgs e) {
-            // Зарисовка бэкграунда.
             glControl1.SwapBuffers();
         }
 

@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 namespace Game_Engine_Library {
     public abstract class GameObject : IDrawable {
         protected double x, y, width, height;
+
+        protected Texture texture;
+
         public Collision Collision { get; protected set; }
 
         public GameObject(double x, double y, double width, double height) {

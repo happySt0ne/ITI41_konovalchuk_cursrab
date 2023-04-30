@@ -31,8 +31,6 @@ namespace Game_Engine_Library {
         /// Отрисовка пули.
         /// </summary>
         public override void Draw() {
-            GL.PointSize(1);
-            GL.Color3(0.2, 0.2, 0.2);
             GL.Begin(PrimitiveType.Quads);
             bulletPoints.ForEach(x => GL.Vertex2(x.Item1, x.Item2));
             GL.End();
