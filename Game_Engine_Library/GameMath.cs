@@ -21,8 +21,7 @@ namespace Game_Engine_Library {
         /// <param name="endIndex">Индекс массива, которым нужно закончить поворот.</param>
         /// <param name="angle">Угол поворота объекта в градусах.</param>
         /// <param name="bazePoint">Точка, относительно которой производитяс поворот.</param>>
-        public static void Rotate (List<(double, double)> array, int startIndex, int endIndex, double angle, 
-                                                                        (double, double) bazePoint) {
+        public static void Rotate (List<(double, double)> array, int startIndex, int endIndex, double angle, (double, double) bazePoint) {
             //Перевод из градусов в радианы.
             angle = angle * Math.PI / 180;
             double delta_x, delta_y;
@@ -39,6 +38,13 @@ namespace Game_Engine_Library {
             }
         }
 
+        /// <summary>
+        /// Перенос точки на angle градусов вокруг bazePoint.
+        /// </summary>
+        /// <param name="bazePoint">Точка, вокруг которой поворачивается rotatePoint.</param>
+        /// <param name="rotatePoint">Точка, которую нужно повернуть.</param>
+        /// <param name="angle">Угол, на который нужно повернуть точку.</param>
+        /// <returns>Новые координаты поворачиваемой точки.</returns>
         public static (double, double) Rotate((double, double) bazePoint, (double, double) rotatePoint, double angle) {
             angle = angle * Math.PI / 180;
 

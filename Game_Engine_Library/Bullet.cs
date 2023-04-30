@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Game_Engine_Library {
-    public class Bullet : GameObject, IDisposable {
+    public class Bullet : GameObject {
         List<(double, double)> bulletPoints = new List<(double, double)>();
         double speed;
         double flightAngle;
@@ -23,6 +23,9 @@ namespace Game_Engine_Library {
             flightAngle = side == "left" ? angle * Math.PI / 180 : -angle * Math.PI / 180;
         }
 
+        /// <summary>
+        /// Отрисовка пули.
+        /// </summary>
         public override void Draw() {
             GL.PointSize(1);
             GL.Color3(0.2, 0.2, 0.2);
@@ -31,31 +34,32 @@ namespace Game_Engine_Library {
             GL.End();
         }
 
+        /// <summary>
+        /// Обновление логики и перерисовка пули.
+        /// </summary>
         public override void Update() {
             MoveBullet();
             Draw();
         }
 
+        /// <summary>
+        /// Передвижение пули.
+        /// </summary>
         public void MoveBullet () {
             double x;
             double y;
-            double delta_x;
-            double delta_y;
+
             for (int i = 0; i < bulletPoints.Count; i++) {
                 x = bulletPoints[i].Item1;
                 y = bulletPoints[i].Item2;
 
                 y += (speed + g) * Math.Sin(flightAngle);
-                x += delta_x = speed * Math.Cos(flightAngle);
+                x += speed * Math.Cos(flightAngle);
                 bulletPoints[i] = (x, y);
             }
 
             g -= 0.006;
             Collision.MoveCollisionBoxTo(bulletPoints[0].Item1, bulletPoints[0].Item2);
-        }
-
-        public void Dispose() {
-            throw new Exception();
         }
     }
 }

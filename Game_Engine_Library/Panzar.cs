@@ -17,15 +17,21 @@ namespace Game_Engine_Library {
         /// <summary>
         /// Направление, куда двигается танк. false - влево, true - вправо.
         /// </summary>
-        private sbyte _direction;
+        private sbyte _moveDirection;
 
         /// <summary>
         /// Список, который будет хранить координаты вершин частей танка.
         /// </summary>
         private List<(double, double)> _partsOfPanzar;
 
+        /// <summary>
+        /// Угол между дулом и осью Ох.
+        /// </summary>
         public int _muzzleDirection { get; private set; }
 
+        /// <summary>
+        /// Начальная позиция полёта пули.
+        /// </summary>
         public (double, double) bulletPosition {
             get {
                 var muzzleStartPoint = (x + width, y - height / 6);
@@ -45,6 +51,9 @@ namespace Game_Engine_Library {
             }
         }
 
+        /// <summary>
+        /// Сделан ли выстрел танком.
+        /// </summary>
         public bool Shooted { get; private set; }
 
         /// <summary>
@@ -101,6 +110,10 @@ namespace Game_Engine_Library {
             Shoot(keyboard);
         }
 
+        /// <summary>
+        /// Реализация логики выстрела.
+        /// </summary>
+        /// <param name="keyboard"></param>
         public void Shoot(KeyboardState keyboard) {
             if (keyboard.IsKeyDown(Key.Space) && Side == "left" || 
                 keyboard.IsKeyDown(Key.Enter) && Side == "right") {
@@ -132,28 +145,28 @@ namespace Game_Engine_Library {
         /// </summary>
         private void Move(KeyboardState keyboard) {
             if (((keyboard.IsKeyDown(Key.A) && Side == "left") ||
-                (keyboard.IsKeyDown(Key.Left) && Side == "right")) && 
-                !(_direction == -1 && touched)) {
+                (keyboard.IsKeyDown(Key.Left) && Side == "right")) &&
+                !(_moveDirection == -1 && touched)) {
                 for (int i = 0; i < _partsOfPanzar.Count; i++) {
                     _partsOfPanzar[i] = (_partsOfPanzar[i].Item1 - _speed, _partsOfPanzar[i].Item2);
                 }
 
                 touched = false;
-                _direction = -1;
+                _moveDirection = -1;
                 x -= _speed;
-            }
+            } 
 
             if (((keyboard.IsKeyDown(Key.D) && Side == "left") ||
                  (keyboard.IsKeyDown(Key.Right) && Side == "right")) &&
-                 !(_direction == 1 && touched)) {
+                 !(_moveDirection == 1 && touched)) {
                 for (int i = 0; i < _partsOfPanzar.Count; i++) {
                     _partsOfPanzar[i] = (_partsOfPanzar[i].Item1 + _speed, _partsOfPanzar[i].Item2);
                 }
 
                 touched = false;
-                _direction = 1;
+                _moveDirection = 1;
                 x += _speed;
-            }
+            } 
 
             // После того, как танк подвинулся, следует подвинуть и его collision box.
             Collision.MoveCollisionBoxTo(x, y);

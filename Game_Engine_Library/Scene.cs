@@ -8,11 +8,9 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace Game_Engine_Library {
     public class Scene {
-        /// <summary>
-        /// Список объектов сцены.
-        /// </summary>
         private List<GameObject> _objects = new List<GameObject>();
         private List<Panzar> panzars = new List<Panzar>();
+
         public Scene() {
             AddObject(new Panzar(-0.5, 0, "left"));
             AddObject(new Panzar(0.5, 0, "right"));
@@ -24,6 +22,9 @@ namespace Game_Engine_Library {
 
         public void AddObject(GameObject gameObject) =>_objects.Add(gameObject);
 
+        /// <summary>
+        /// Добавляет все танки в список танков.
+        /// </summary>
         private void GetPanzarsList() {
             foreach (GameObject obj in _objects) { 
                 if (obj is Panzar panzar) {
@@ -41,18 +42,20 @@ namespace Game_Engine_Library {
             foreach (GameObject obj in _objects) {
                 obj.Update();
                 
-
                 foreach (GameObject obj2 in _objects.Where(x => x != obj)) {
                     if (obj.Collision.IntersectsWith(obj2.Collision) && obj is Panzar panzar) {
                         panzar.touched = true;
                     } 
                 }
-                
             }
 
             AddBullet(ref text);
         }
 
+        /// <summary>
+        /// Добавляет пули на сцену при выстреле.
+        /// </summary>
+        /// <param name="text"></param>
         private void AddBullet(ref string text) {
             foreach (Panzar panzar in panzars) {
                 if (panzar.Shooted) {
