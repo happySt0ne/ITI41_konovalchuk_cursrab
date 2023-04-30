@@ -11,6 +11,7 @@ using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
 using Game_Engine_Library;
+using System.Runtime.Remoting.Messaging;
 
 namespace coursework
 {
@@ -37,12 +38,14 @@ namespace coursework
 
         private void timer1_Tick(object sender, EventArgs e) {
             label1.Text = text;
-            scene.Update(ref text, out bool endGame);
-            if (endGame) {
-                timer1.Stop();
-                MessageBox.Show("Игра окончена");
-            }
+            scene.Update(ref text, out int endGame);
             glControl1.Refresh();
+
+            if (endGame == 0) return;
+
+            timer1.Stop();
+            MessageBox.Show(endGame == -1 ? "Победил правый игрок" : "Победил левый игрок");
+            Application.Exit();
         }
     }
 }

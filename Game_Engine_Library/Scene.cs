@@ -32,19 +32,23 @@ namespace Game_Engine_Library {
             }
         }
 
+        private int CheckEndGame() {
+            if (_panzars[0].Health <= 0) return -1;
+            if (_panzars[1].Health <= 0) return 1;
+            return 0;
+        }
+
         /// <summary>
         /// Обновление логики и перересовка всех объектов сцены.
         /// </summary>
-        public void Update(ref string text, out bool endGame) {
-            if (_panzars.Any(x => x.Health <= 0)) {
-                endGame = true;
-                return;
-            } else endGame = false;
+        public void Update(ref string text, out int endGame) {
+            endGame = CheckEndGame();
 
             GL.Clear(ClearBufferMask.ColorBufferBit);
             _listToRemove.ForEach(x => _objects.Remove(x));
             _listToRemove.Clear();
-            
+            text = _panzars[0].Health.ToString();
+            AddBullet();
 
             foreach (GameObject obj in _objects) {
                 obj.Update();
@@ -64,9 +68,6 @@ namespace Game_Engine_Library {
                     } 
                 }
             }
-
-            text = _panzars[0].Health.ToString();
-            AddBullet();
         }
 
         private void PanzarCollisionActions(Panzar panzar, GameObject collisionedObject) {
