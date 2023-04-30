@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using static System.Net.Mime.MediaTypeNames;
 namespace Game_Engine_Library {
     public class Scene {
-        const int BULLET_DAMAGE = 100;
+        const int BULLET_DAMAGE = 10;
         private List<GameObject> _listToRemove = new List<GameObject>();
         private List<GameObject> _objects = new List<GameObject>();
         private List<Panzar> _panzars = new List<Panzar>();
@@ -32,6 +32,10 @@ namespace Game_Engine_Library {
             }
         }
 
+        /// <summary>
+        /// Проверяет, не следует ли закончить игру.
+        /// </summary>
+        /// <returns>-1 если победил правый, 1 если победил левый, 0 если иргра продолжается.</returns>
         private int CheckEndGame() {
             if (_panzars[0].Health <= 0) return -1;
             if (_panzars[1].Health <= 0) return 1;
@@ -43,33 +47,44 @@ namespace Game_Engine_Library {
         /// </summary>
         public void Update(ref string text, out int endGame) {
             endGame = CheckEndGame();
-
             GL.Clear(ClearBufferMask.ColorBufferBit);
             _listToRemove.ForEach(x => _objects.Remove(x));
             _listToRemove.Clear();
-            text = _panzars[0].Health.ToString();
             AddBullet();
+            text = _panzars[0].Health.ToString();
 
             foreach (GameObject obj in _objects) {
                 obj.Update();
-                
-                foreach (GameObject obj2 in _objects.Where(x => x != obj)) {
-                    if (obj.Collision.IntersectsWith(obj2.Collision)) {
-                        switch (obj.GetType().ToString()) {
-                            case "Game_Engine_Library.Panzar":
-                                PanzarCollisionActions(obj as Panzar, obj2);
-                                break;
-                            case "Game_Engine_Library.Bullet":
-                                BulletCollisionActions(obj as Bullet, obj2);
-                                break;
-                            default:
-                                break;
-                        }
-                    } 
+                CheckSceneCollision(obj);
+            }
+        }
+
+        /// <summary>
+        /// Проверяет коллизию всех объектов сцены с объектом obj.
+        /// </summary>
+        /// <param name="obj">Объект, с которым проверяется столкновение остальных объектов сцены.</param>
+        private void CheckSceneCollision(GameObject obj) {
+            foreach (GameObject obj2 in _objects.Where(x => x != obj)) {
+                if (obj.Collision.IntersectsWith(obj2.Collision)) {
+                    switch (obj.GetType().ToString()) {
+                        case "Game_Engine_Library.Panzar":
+                            PanzarCollisionActions(obj as Panzar, obj2);
+                            break;
+                        case "Game_Engine_Library.Bullet":
+                            BulletCollisionActions(obj as Bullet, obj2);
+                            break;
+                        default:
+                            break;
+                    }
                 }
             }
         }
 
+        /// <summary>
+        /// Обработка столкновения танка и какого либо объекта в зависимости от типа этого объекта.
+        /// </summary>
+        /// <param name="panzar">Танк, который столкнулся с объектом.</param>
+        /// <param name="collisionedObject">Объект, который столкнулся с танком.</param>
         private void PanzarCollisionActions(Panzar panzar, GameObject collisionedObject) {
             switch (collisionedObject.GetType().ToString()) {
                 case "Game_Engine_Library.Bullet":
@@ -88,6 +103,11 @@ namespace Game_Engine_Library {
             }
         }
         
+        /// <summary>
+        /// Обработка столкновения ракеты и какого либо объекта в зависимости от типа этого объекта.
+        /// </summary>
+        /// <param name="bullet">Ракета, которая столкнулась с объектом.</param>
+        /// <param name="collisionedObject">Объект, который столкеулся с ракетой.</param>
         private void BulletCollisionActions(Bullet bullet, GameObject collisionedObject) {
             switch (collisionedObject.GetType().ToString()) {
                 case "Game_Engine_Library.Bullet":
