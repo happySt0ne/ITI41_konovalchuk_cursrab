@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Windows.Forms;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Input;
 
@@ -36,7 +37,7 @@ namespace Game_Engine_Library {
         /// <param name="side">Сторона сил</param>
         public Panzar(double x, double y, string side, double width = 0.2, double height = 0.2, double speed = 0.005)
                                                                                              : base(x, y, width, height) {
-            _panzarMuzzle = new PanzarMuzzle(x, y, width, height, side);
+            _panzarMuzzle = new PanzarMuzzle(x + width / 3 * 2, y - height / 6, width/3, height/6, side);
             _panzarTrack = new PanzarTrack(x, y - height / 2, width, height / 2, speed, side);
             _panzarTurret = new PanzarTurret(x, y, width, height);
             Side = side;
@@ -48,11 +49,16 @@ namespace Game_Engine_Library {
         private void Action() {
             KeyboardState keyboard = Keyboard.GetState();
             
-            _panzarTrack.Move(keyboard);
+            Move(keyboard);
             _panzarMuzzle.RotateMuzzle(keyboard);
             _panzarMuzzle.Shoot(keyboard);
         }
 
+        private void Move(KeyboardState keyboard) {
+            _panzarTrack.Move(keyboard, _panzarTrack.TrackPoints);
+            _panzarTrack.Move(keyboard, _panzarMuzzle.MuzzlePoints);
+            _panzarTrack.Move(keyboard, _panzarTurret.TurretPoints);
+        }
         
         /// <summary>
         /// Отрисовка конкретного танка.

@@ -10,8 +10,10 @@ using System.Threading.Tasks;
 namespace Game_Engine_Library {
     internal class PanzarMuzzle : GameObject {
         const int MAX_COOLDOWN = 3;
-        private List<(double, double)> _muzzlePoints;
         private string _side;
+        private (double, double) _rotateBazePoint;
+
+        public List<(double, double)> MuzzlePoints { get; private set; }
 
         /// <summary>
         /// Перезарядка танка.
@@ -56,13 +58,16 @@ namespace Game_Engine_Library {
         public bool Shooted { get; private set; } = false;
 
         public PanzarMuzzle(double x, double y, double width, double height, string side) : base(x, y, width, height) {
-            _muzzlePoints = new List<(double, double)> { (x + width / 3 * 2, y - height / 6),
-                                                         (x + width, y - height / 6),
-                                                         (x + width, y - height / 3),
-                                                         (x + width / 3 * 2, y - height / 3) };
+            MuzzlePoints = new List<(double, double)> { (x, y),
+                                                        (x + width, y),
+                                                        (x + width, y - height),
+                                                        (x , y - height) };
+
             _side = side;
+            _rotateBazePoint = (x + width / 2, y - height / 4);
+
             if (_side == "right") {
-                GameMath.Rotate(_muzzlePoints, 0, 4, 180, (x + width / 2, y - height / 4));
+                GameMath.Rotate(MuzzlePoints, 0, 4, 180, _rotateBazePoint);
                 MuzzleDirection = 180;
             }
         }
@@ -87,13 +92,13 @@ namespace Game_Engine_Library {
         public void RotateMuzzle(KeyboardState keyboard) {
             if (keyboard.IsKeyDown(Key.W) && _side == "left" && MuzzleDirection < 90 ||
                 keyboard.IsKeyDown(Key.Down) && _side == "right" && MuzzleDirection > 180) {
-                GameMath.Rotate(_muzzlePoints, 0, 4, 5, (x + width / 2, y - height / 4));
+                GameMath.Rotate(MuzzlePoints, 0, 4, 5, _rotateBazePoint);
                 MuzzleDirection += _side == "left" ? 5 : -5;
             }
 
             if (keyboard.IsKeyDown(Key.S) && _side == "left" && MuzzleDirection > 0 ||
                 keyboard.IsKeyDown(Key.Up) && _side == "right" && MuzzleDirection < 270) {
-                GameMath.Rotate(_muzzlePoints, 0, 4, -5, (x + width / 2, y - height / 4));
+                GameMath.Rotate(MuzzlePoints, 0, 4, -5, _rotateBazePoint);
                 MuzzleDirection += _side == "left" ? -5 : 5;
             }
         }
@@ -111,7 +116,7 @@ namespace Game_Engine_Library {
 
         public override void Draw() {
             GL.Begin(PrimitiveType.Quads);
-            _muzzlePoints.ForEach(x => GL.Vertex2(x.Item1, x.Item2));
+            MuzzlePoints.ForEach(x => GL.Vertex2(x.Item1, x.Item2));
             GL.End();
         }
 
