@@ -11,6 +11,7 @@ namespace Game_Engine_Library {
         private PanzarMuzzle _panzarMuzzle;
         private PanzarTurret _panzarTurret;
 
+        #region Properties
         /// <summary>
         /// Здоровье танка.
         /// </summary>
@@ -20,12 +21,37 @@ namespace Game_Engine_Library {
         /// Сторона игрока.
         /// </summary>
         public String Side { get; private set; }
+
+        /// <summary>
+        /// Боезапас танка.
+        /// </summary>
         public int Ammo { get => _panzarMuzzle.Ammo; }
+
+        /// <summary>
+        /// Текущая перезарядка до следующего выстрела.
+        /// </summary>
         public double Cooldown { get => _panzarMuzzle.Cooldown; }
+        
+        /// <summary>
+        /// Нужно ли запретить танку движение в том же направлении.
+        /// </summary>
         public bool Touched { get => _panzarTrack.touched; set => _panzarTrack.touched = value; }
+
+        /// <summary>
+        /// Сделал ли танк выстрел.
+        /// </summary>
         public bool Shooted { get => _panzarMuzzle.Shooted; }
+
+        /// <summary>
+        /// Точка для создания пули при выстреле.
+        /// </summary>
         public (double, double) BulletPosition { get => _panzarMuzzle.BulletPosition; }
+
+        /// <summary>
+        /// Угол наклона дула танка.
+        /// </summary>
         public int MuzzleDirection { get => _panzarMuzzle.MuzzleDirection; }
+        #endregion
 
         /// <summary>
         /// Создаёт танк.
@@ -54,6 +80,10 @@ namespace Game_Engine_Library {
             _panzarMuzzle.Shoot(keyboard);
         }
 
+        /// <summary>
+        /// Передвижение всех частей танка.
+        /// </summary>
+        /// <param name="keyboard"></param>
         private void Move(KeyboardState keyboard) {
             _panzarTrack.Move(keyboard, _panzarTrack.TrackPoints);
             _panzarTrack.Move(keyboard, _panzarMuzzle.MuzzlePoints);

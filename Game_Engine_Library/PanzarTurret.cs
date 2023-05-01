@@ -19,6 +19,9 @@ namespace Game_Engine_Library {
             TurretPoints = new List<(double, double)> { (x, y), (x + width, y), (x + width, y - height), (x, y - height) };
         }
 
+        /// <summary>
+        /// Отрисовка башни танка.
+        /// </summary>
         public override void Draw() {
             GL.BindTexture(TextureTarget.Texture2D, texture.ID);
             GL.Begin(PrimitiveType.Quads);

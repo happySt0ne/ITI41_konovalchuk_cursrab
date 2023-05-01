@@ -116,6 +116,9 @@ namespace Game_Engine_Library {
             }
         }
 
+        /// <summary>
+        /// Отрисовка дула танка.
+        /// </summary>
         public override void Draw() {
             GL.BindTexture(TextureTarget.Texture2D, texture.ID);
             GL.Begin(PrimitiveType.Quads);
@@ -128,6 +131,9 @@ namespace Game_Engine_Library {
             GL.End();
         }
 
+        /// <summary>
+        /// Обновление логики дула танка.
+        /// </summary>
         public override void Update() {
             _rotateBazePoint = MuzzlePoints[4];
             ReduceCooldown();

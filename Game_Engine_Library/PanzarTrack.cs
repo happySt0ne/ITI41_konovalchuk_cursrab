@@ -53,6 +53,9 @@ namespace Game_Engine_Library {
             }
         }
 
+        /// <summary>
+        /// Отрисовка гусениц танка.
+        /// </summary>
         public override void Draw() {
             GL.BindTexture(TextureTarget.Texture2D, texture.ID);
             GL.Begin(PrimitiveType.Quads);
