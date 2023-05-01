@@ -22,8 +22,6 @@ namespace Game_Engine_Library {
             GL.End();
         }
 
-        public override void Update() {
-            Draw();
-        }
+        public override void Update() { }
     }
 }

@@ -64,7 +64,7 @@ namespace Game_Engine_Library {
         }
 
         public override void Update() {
-            Draw();
+            
         }
     }
 }

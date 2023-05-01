@@ -36,15 +36,14 @@ namespace Game_Engine_Library {
         public (double, double) BulletPosition {
             get {
                 var muzzleStartPoint = (x + width, y - height / 6);
-                var bazePoint = (x + width / 2, y - height / 4);
                 (double, double) pointToReturn;
 
                 switch (_side) {
                     case "left":
-                        pointToReturn = GameMath.Rotate(bazePoint, muzzleStartPoint, MuzzleDirection);
+                        pointToReturn = GameMath.Rotate(_rotateBazePoint, muzzleStartPoint, MuzzleDirection);
                         return (pointToReturn.Item1 + 0.04, pointToReturn.Item2 + 0.04);
                     case "right":
-                        pointToReturn = GameMath.Rotate(bazePoint, muzzleStartPoint, -MuzzleDirection);
+                        pointToReturn = GameMath.Rotate(_rotateBazePoint, muzzleStartPoint, -MuzzleDirection);
                         return (pointToReturn.Item1 - 0.045, pointToReturn.Item2 + 0.04);
                     default:
                         return (0, 0);
@@ -58,13 +57,15 @@ namespace Game_Engine_Library {
         public bool Shooted { get; private set; } = false;
 
         public PanzarMuzzle(double x, double y, double width, double height, string side) : base(x, y, width, height) {
+            _rotateBazePoint = (x - width / 2 , y - height / 4);
+
             MuzzlePoints = new List<(double, double)> { (x, y),
                                                         (x + width, y),
                                                         (x + width, y - height),
-                                                        (x , y - height) };
+                                                        (x , y - height), 
+                                                        _rotateBazePoint };
 
             _side = side;
-            _rotateBazePoint = (x + width / 2, y - height / 4);
 
             if (_side == "right") {
                 GameMath.Rotate(MuzzlePoints, 0, 4, 180, _rotateBazePoint);
@@ -106,7 +107,7 @@ namespace Game_Engine_Library {
         /// <summary>
         /// Осуществление тика таймера кулдауна стрельбы.
         /// </summary>
-        public void ReduceCooldown() {
+        private void ReduceCooldown() {
             Cooldown = Math.Round(Cooldown, 3);
 
             if (Cooldown >= 0.025) {
@@ -121,7 +122,8 @@ namespace Game_Engine_Library {
         }
 
         public override void Update() {
-            Draw();
+            _rotateBazePoint = MuzzlePoints[4];
+            ReduceCooldown();
         }
     }
 }
