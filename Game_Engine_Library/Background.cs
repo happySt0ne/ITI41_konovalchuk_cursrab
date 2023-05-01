@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Game_Engine_Library {
     internal class Background : GameObject {
         public Background(double x, double y, double width, double height) : base(x, y, width, height) {
-            texture = Texture.LoadTexture(@"../../../Game_Engine_Library/Resources/photo_2022-05-31_21-54-02.bmp");
+            texture = Texture.LoadTexture(@"../../../Game_Engine_Library/Resources/Background2.bmp");
         }
 
         public override void Draw() {

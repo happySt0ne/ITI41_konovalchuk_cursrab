@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace Game_Engine_Library {
     public class Bullet : GameObject {
-        List<(double, double)> bulletPoints = new List<(double, double)>();
-        double speed;
-        double flightAngle;
-        double g = 0.0001;
+        private List<(double, double)> bulletPoints = new List<(double, double)>();
+        private double speed;
+        private double flightAngle;
+        private double g = 0.0001;
 
         public int Damage { get; private set; }
 
@@ -25,14 +25,21 @@ namespace Game_Engine_Library {
             this.speed = speed;
             flightAngle = side == "left" ? angle * Math.PI / 180 : -angle * Math.PI / 180;
             Damage = damage;
+            texture = Texture.LoadTexture("../../../Game_Engine_Library/Resources/Bullet.bmp");
         }
 
         /// <summary>
         /// Отрисовка пули.
         /// </summary>
         public override void Draw() {
+            GL.BindTexture(TextureTarget.Texture2D, texture.ID);
             GL.Begin(PrimitiveType.Quads);
-            bulletPoints.ForEach(x => GL.Vertex2(x.Item1, x.Item2));
+
+            GL.TexCoord2(0, 0); GL.Vertex2(bulletPoints[0].Item1, bulletPoints[0].Item2);
+            GL.TexCoord2(1, 0); GL.Vertex2(bulletPoints[1].Item1, bulletPoints[1].Item2);
+            GL.TexCoord2(1, 1); GL.Vertex2(bulletPoints[2].Item1, bulletPoints[2].Item2);
+            GL.TexCoord2(0, 1); GL.Vertex2(bulletPoints[3].Item1, bulletPoints[3].Item2);
+
             GL.End();
         }
 

@@ -27,6 +27,8 @@ namespace coursework
 
         private void glControl1_Load(object sender, EventArgs e) {
             GL.Enable(EnableCap.Texture2D);
+            GL.Enable(EnableCap.Blend);
+            GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
             scene = new Scene();
         }
 
@@ -38,7 +40,10 @@ namespace coursework
             scene.Update(out int endGame);
             ShowPanzarsInfo();
             glControl1.Refresh();
+            ParseEndGame(endGame);
+        }
 
+        private void ParseEndGame(int endGame) {
             if (endGame == 0) return;
 
             timer1.Stop();
@@ -57,6 +62,5 @@ namespace coursework
             HealthBar1.Value = (int)health1;
             HealthBar2.Value = (int)health2;
         }
-
     }
 }

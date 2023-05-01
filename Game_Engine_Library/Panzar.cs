@@ -10,7 +10,7 @@ namespace Game_Engine_Library {
         public bool touched = false;
         private sbyte _moveDirection;
         private List<(double, double)> _partsOfPanzar;
-        const int MAX_COOLDOWN = 4;
+        const int MAX_COOLDOWN = 3;
 
         /// <summary>
         /// Перезарядка танка.

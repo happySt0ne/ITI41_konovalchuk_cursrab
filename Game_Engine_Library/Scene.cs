@@ -57,7 +57,6 @@ namespace Game_Engine_Library {
         /// </summary>
         public void Update(out int endGame) {
             endGame = CheckEndGame();
-            GL.Clear(ClearBufferMask.ColorBufferBit);
             _listToRemove.ForEach(x => _objects.Remove(x));
             _listToRemove.Clear();
             AddBullet();
