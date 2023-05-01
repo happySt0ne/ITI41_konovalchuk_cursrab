@@ -9,8 +9,8 @@ using System.Threading.Tasks;
 namespace Game_Engine_Library {
     public class Bullet : GameObject {
         private List<(double, double)> bulletPoints = new List<(double, double)>();
-        private double xSpeed = Constants.BULLETS_X_SPEED;
-        private double ySpeed = Constants.BULLETS_Y_SPEED;
+        private double xSpeed = Constants.BULLETS_X_START_SPEED;
+        private double ySpeed = Constants.BULLETS_Y_START_SPEED;
         private double flightAngle;
 
         public int Damage { get; private set; }
@@ -21,7 +21,7 @@ namespace Game_Engine_Library {
             bulletPoints.Add((x + width, y - height));
             bulletPoints.Add((x, y - height));
             
-            xSpeed = Constants.BULLETS_X_SPEED;
+            xSpeed = Constants.BULLETS_X_START_SPEED;
             flightAngle = side == "left" ? angle * Math.PI / 180 : -angle * Math.PI / 180;
             Damage = Constants.BULLET_DAMAGE;
             texture = Texture.LoadTexture(Constants.BULLET_TEXTURE_PATH);

@@ -12,14 +12,14 @@ namespace Game_Engine_Library {
         public const double PANZARS_SPEED = 0.005;
 
         public const int MUZZLE_ROTATION_SPEED = 5;
-        public const double MAX_COOLDOWN = 1;
+        public const double MAX_COOLDOWN = 3;
         public const int START_AMMO = 40;
 
         public const int BULLET_DAMAGE = 10;
         public const double BULLETS_WIDTH = 0.07;
         public const double BULLETS_HEIGHT = 0.07;
-        public const double BULLETS_X_SPEED = 0.07;
-        public const double BULLETS_Y_SPEED = 0.07;
+        public const double BULLETS_X_START_SPEED = 0.07;
+        public const double BULLETS_Y_START_SPEED = 0.07;
         public const double GRAVITY_SCALE = -0.006;
         
         public const string PANZAR_MUZZLE_TEXTURE_PATH = @"../../../Game_Engine_Library/Resources/PanzarMuzzle.bmp";
