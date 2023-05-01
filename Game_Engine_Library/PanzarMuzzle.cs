@@ -38,23 +38,8 @@ namespace Game_Engine_Library {
         /// </summary>
         public (double, double) BulletPosition {
             get {
-                (double, double) muzzleStartPoint;
-                (double, double) pointToReturn;
-
-                switch (_side) {
-                    case "left":
-                        muzzleStartPoint = (MuzzlePoints[2].Item1, MuzzlePoints[2].Item2);
-                        pointToReturn = GameMath.Rotate(_rotateBazePoint, muzzleStartPoint, MuzzleDirection);
-                        return (pointToReturn.Item1 + 0.057, pointToReturn.Item2 + 0.057);
-
-                    case "right":
-                        muzzleStartPoint = (MuzzlePoints[3].Item1, MuzzlePoints[3].Item2);
-                        pointToReturn = GameMath.Rotate(_rotateBazePoint, muzzleStartPoint, -(MuzzleDirection - 180));
-                        return (pointToReturn.Item1 - 0.057, pointToReturn.Item2 + 0.057);
-
-                    default:
-                        return (0, 0);
-                }
+                return _side == "left" ? (MuzzlePoints[2].Item1 + 0.015, MuzzlePoints[2].Item2 + 0.04)
+                                       : (MuzzlePoints[3].Item1 - 0.056, MuzzlePoints[3].Item2 + 0.056);
             }
         }
 
@@ -78,11 +63,11 @@ namespace Game_Engine_Library {
                                                             (x - width, y - height),
                                                             (x - 2 * width, y - height) };
 
-                MuzzleDirection = 180;
-            } else { 
-                MuzzlePoints = new List<(double, double)> { (x, y), 
-                                                            (x + width, y), 
-                                                            (x + width, y - height), 
+                MuzzleDirection = -180;
+            } else {
+                MuzzlePoints = new List<(double, double)> { (x, y),
+                                                            (x + width, y),
+                                                            (x + width, y - height),
                                                             (x, y - height) };
             }
 
@@ -108,13 +93,13 @@ namespace Game_Engine_Library {
         /// <param name="keyboard"></param>
         public void RotateMuzzle(KeyboardState keyboard) {
             if (keyboard.IsKeyDown(Key.W) && _side == "left" && MuzzleDirection < 90 ||
-                keyboard.IsKeyDown(Key.Down) && _side == "right" && MuzzleDirection > 180) {
+                keyboard.IsKeyDown(Key.Down) && _side == "right" && MuzzleDirection > -180) {
                 GameMath.Rotate(MuzzlePoints, 0, 4, MUZZLE_ROTATION_SPEED, _rotateBazePoint);
                 MuzzleDirection += _side == "left" ? MUZZLE_ROTATION_SPEED : -MUZZLE_ROTATION_SPEED;
             }
 
             if (keyboard.IsKeyDown(Key.S) && _side == "left" && MuzzleDirection > 0 ||
-                keyboard.IsKeyDown(Key.Up) && _side == "right" && MuzzleDirection < 270) {
+                keyboard.IsKeyDown(Key.Up) && _side == "right" && MuzzleDirection < -90) {
                 GameMath.Rotate(MuzzlePoints, 0, 4, -MUZZLE_ROTATION_SPEED, _rotateBazePoint);
                 MuzzleDirection += _side == "left" ? -MUZZLE_ROTATION_SPEED : MUZZLE_ROTATION_SPEED;
             }
