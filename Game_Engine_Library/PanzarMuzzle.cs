@@ -14,6 +14,7 @@ namespace Game_Engine_Library {
         const int MUZZLE_ROTATION_SPEED = 5;
         private string _side;
         private (double, double) _rotateBazePoint;
+        private (byte, byte)[] _texCoords;
 
         public List<(double, double)> MuzzlePoints { get; private set; }
 
@@ -62,19 +63,19 @@ namespace Game_Engine_Library {
 
         public PanzarMuzzle(double x, double y, double width, double height, string side) : base(x, y, width, height) {
             _rotateBazePoint = (x - width / 2 , y - height / 4);
+            texture = Texture.LoadTexture(@"../../../Game_Engine_Library/Resources/PanzarMuzzle.bmp");
 
-            MuzzlePoints = new List<(double, double)> { (x, y),
-                                                        (x + width, y),
-                                                        (x + width, y - height),
-                                                        (x , y - height), 
-                                                        _rotateBazePoint };
+            _texCoords = side == "left" ? new (byte, byte)[4] { (0, 0), (1, 0), (1, 1), (0, 1) }
+                                        : new (byte, byte)[4] { (1, 0), (0, 0), (0, 1), (1, 1) };
 
             _side = side;
 
             if (_side == "right") {
-                GameMath.Rotate(MuzzlePoints, 0, 4, 180, _rotateBazePoint);
+                MuzzlePoints = new List<(double, double)> { (x - 2 * width, y), (x - width, y), (x - width, y - height), (x - 2 * width, y - height)};
                 MuzzleDirection = 180;
-            }
+            } else MuzzlePoints = new List<(double, double)> { (x, y), (x + width, y), (x + width, y - height), (x, y - height) };
+
+            MuzzlePoints.Add(_rotateBazePoint);
         }
 
         /// <summary>
@@ -120,8 +121,14 @@ namespace Game_Engine_Library {
         }
 
         public override void Draw() {
+            GL.BindTexture(TextureTarget.Texture2D, texture.ID);
             GL.Begin(PrimitiveType.Quads);
-            MuzzlePoints.ForEach(x => GL.Vertex2(x.Item1, x.Item2));
+
+            for (int i = 0; i < _texCoords.Length; i++) {
+                GL.TexCoord2(_texCoords[i].Item1, _texCoords[i].Item2);
+                GL.Vertex2(MuzzlePoints[i].Item1, MuzzlePoints[i].Item2);
+            }
+
             GL.End();
         }
 

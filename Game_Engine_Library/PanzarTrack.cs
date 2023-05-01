@@ -12,16 +12,18 @@ namespace Game_Engine_Library {
         private double _speed;
         private sbyte _moveDirection;
         private string _side;
+        private (byte, byte)[] _texCoords;
+
         public List<(double, double)> TrackPoints { get; private set; }
 
         public PanzarTrack(double x, double y, double width, double height, double speed, string side) : base(x, y, width, height) {
             _speed = speed;
             _side = side;
+            texture = Texture.LoadTexture(@"../../../Game_Engine_Library/Resources/PanzarTrack.bmp");
+            TrackPoints = new List<(double, double)> { (x, y), (x + width, y), (x + width, y - height), (x, y - height) };
 
-            TrackPoints = new List<(double, double)> { (x, y),
-                                                       (x + width, y),
-                                                       (x + width, y - height),
-                                                       (x, y - height) };
+            _texCoords = side == "left" ? new (byte, byte)[4] { (0, 0), (1, 0), (1, 1), (0, 1) }
+                                        : new (byte, byte)[4] { (1, 0), (0, 0), (0, 1), (1, 1) };
         }
 
         /// <summary>
@@ -52,8 +54,14 @@ namespace Game_Engine_Library {
         }
 
         public override void Draw() {
+            GL.BindTexture(TextureTarget.Texture2D, texture.ID);
             GL.Begin(PrimitiveType.Quads);
-            TrackPoints.ForEach(x => GL.Vertex2(x.Item1, x.Item2));
+
+            for (int i = 0; i < _texCoords.Length; i++) {
+                GL.TexCoord2(_texCoords[i].Item1, _texCoords[i].Item2);
+                GL.Vertex2(TrackPoints[i].Item1, TrackPoints[i].Item2);
+            }
+
             GL.End();
         }
 
