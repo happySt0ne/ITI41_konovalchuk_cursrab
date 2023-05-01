@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace Game_Engine_Library {
     internal class PanzarTrack : GameObject{
-        public double _speed;
         public bool touched = false;
-        public sbyte _moveDirection;
+        private double _speed;
+        private sbyte _moveDirection;
         private string _side;
         public List<(double, double)> TrackPoints { get; private set; }
 
@@ -51,20 +51,12 @@ namespace Game_Engine_Library {
             }
         }
 
-        public void Move(Panzar panzar) {
-
-            panzar.Collision.MoveCollisionBoxTo(x, y);
-        }
-
-
         public override void Draw() {
             GL.Begin(PrimitiveType.Quads);
             TrackPoints.ForEach(x => GL.Vertex2(x.Item1, x.Item2));
             GL.End();
         }
 
-        public override void Update() {
-            
-        }
+        public override void Update() { }
     }
 }
