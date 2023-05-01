@@ -10,7 +10,7 @@ namespace Game_Engine_Library {
     internal class PanzarTrack : GameObject{
         public double _speed;
         public bool touched = false;
-        private sbyte _moveDirection;
+        public sbyte _moveDirection;
         private string _side;
         public List<(double, double)> TrackPoints { get; private set; }
 
@@ -37,7 +37,6 @@ namespace Game_Engine_Library {
 
                 touched = false;
                 _moveDirection = -1;
-                x -= _speed;
             }
 
             if (((keyboard.IsKeyDown(Key.D) && _side == "left") ||
@@ -49,11 +48,12 @@ namespace Game_Engine_Library {
 
                 touched = false;
                 _moveDirection = 1;
-                x += _speed;
             }
+        }
 
-            // После того, как танк подвинулся, следует подвинуть и его collision box.
-            Collision.MoveCollisionBoxTo(x, y);
+        public void Move(Panzar panzar) {
+
+            panzar.Collision.MoveCollisionBoxTo(x, y);
         }
 
 

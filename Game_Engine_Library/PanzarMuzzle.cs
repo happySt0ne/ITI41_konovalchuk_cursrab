@@ -9,7 +9,8 @@ using System.Threading.Tasks;
 
 namespace Game_Engine_Library {
     internal class PanzarMuzzle : GameObject {
-        const int MAX_COOLDOWN = 3;
+        const int MAX_COOLDOWN = 1;
+        const int START_AMMO = 40;
         private string _side;
         private (double, double) _rotateBazePoint;
 
@@ -23,7 +24,7 @@ namespace Game_Engine_Library {
         /// <summary>
         /// Боезапас танка.
         /// </summary>
-        public int Ammo { get; private set; } = 20;
+        public int Ammo { get; private set; } = START_AMMO;
 
         /// <summary>
         /// Угол между дулом и осью Ох.
@@ -35,16 +36,16 @@ namespace Game_Engine_Library {
         /// </summary>
         public (double, double) BulletPosition {
             get {
-                var muzzleStartPoint = (x + width, y - height / 6);
+                var muzzleStartPoint = (x + width, y - height);
                 (double, double) pointToReturn;
 
                 switch (_side) {
                     case "left":
                         pointToReturn = GameMath.Rotate(_rotateBazePoint, muzzleStartPoint, MuzzleDirection);
-                        return (pointToReturn.Item1 + 0.04, pointToReturn.Item2 + 0.04);
+                        return (pointToReturn.Item1 + 0.01, pointToReturn.Item2 + 0.01);
                     case "right":
                         pointToReturn = GameMath.Rotate(_rotateBazePoint, muzzleStartPoint, -MuzzleDirection);
-                        return (pointToReturn.Item1 - 0.045, pointToReturn.Item2 + 0.04);
+                        return (pointToReturn.Item1 - 0.06, pointToReturn.Item2 + 0.041);
                     default:
                         return (0, 0);
                 }

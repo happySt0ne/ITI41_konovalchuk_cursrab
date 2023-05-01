@@ -58,6 +58,8 @@ namespace Game_Engine_Library {
             _panzarTrack.Move(keyboard, _panzarTrack.TrackPoints);
             _panzarTrack.Move(keyboard, _panzarMuzzle.MuzzlePoints);
             _panzarTrack.Move(keyboard, _panzarTurret.TurretPoints);
+
+            Collision.MoveCollisionBoxTo(_panzarTrack.TrackPoints[0].Item1, y);
         }
         
         /// <summary>
