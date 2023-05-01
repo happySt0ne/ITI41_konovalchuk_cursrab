@@ -6,21 +6,9 @@ using OpenTK.Input;
 
 namespace Game_Engine_Library {
     public class Panzar : GameObject {
-        private double _speed;
-        public bool touched = false;
-        private sbyte _moveDirection;
-        private List<(double, double)> _partsOfPanzar;
-        const int MAX_COOLDOWN = 3;
-
-        /// <summary>
-        /// Перезарядка танка.
-        /// </summary>
-        public double Cooldown { get; private set; } = 0;
-
-        /// <summary>
-        /// Боезапас танка.
-        /// </summary>
-        public int Ammo { get; private set; } = 20;
+        private PanzarTrack _panzarTrack;
+        private PanzarMuzzle _panzarMuzzle;
+        private PanzarTurret _panzarTurret;
 
         /// <summary>
         /// Здоровье танка.
@@ -28,41 +16,15 @@ namespace Game_Engine_Library {
         public double Health { get; set; } = 100;
 
         /// <summary>
-        /// Угол между дулом и осью Ох.
-        /// </summary>
-        public int MuzzleDirection { get; private set; } = 0;
-
-        /// <summary>
-        /// Начальная позиция полёта пули.
-        /// </summary>
-        public (double, double) BulletPosition {
-            get {
-                var muzzleStartPoint = (x + width, y - height / 6);
-                var bazePoint = (x + width / 2, y - height / 4);
-                (double, double) pointToReturn;
-
-                switch (Side) {
-                    case "left":
-                        pointToReturn = GameMath.Rotate(bazePoint, muzzleStartPoint, MuzzleDirection);
-                        return (pointToReturn.Item1 + 0.04, pointToReturn.Item2 + 0.04);
-                    case "right":
-                        pointToReturn = GameMath.Rotate(bazePoint, muzzleStartPoint, -MuzzleDirection);
-                        return (pointToReturn.Item1 - 0.045, pointToReturn.Item2 + 0.04);
-                    default:
-                        return (0, 0);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Сделан ли выстрел танком.
-        /// </summary>
-        public bool Shooted { get; private set; } = false;
-
-        /// <summary>
         /// Сторона игрока.
         /// </summary>
         public String Side { get; private set; }
+        public int Ammo { get => _panzarMuzzle.Ammo; }
+        public double Cooldown { get => _panzarMuzzle.Cooldown; }
+        public bool Touched { get => _panzarTrack.touched; set => _panzarTrack.touched = value; }
+        public bool Shooted { get => _panzarMuzzle.Shooted; }
+        public (double, double) BulletPosition { get => _panzarMuzzle.BulletPosition; }
+        public int MuzzleDirection { get => _panzarMuzzle.MuzzleDirection; }
 
         /// <summary>
         /// Создаёт танк.
@@ -73,30 +35,11 @@ namespace Game_Engine_Library {
         /// <param name="height">Высота танка</param>
         /// <param name="side">Сторона сил</param>
         public Panzar(double x, double y, string side, double width = 0.2, double height = 0.2, double speed = 0.005)
-                                                          /* Координаты кузова. */      : base(x, y, width, height) {
-            _partsOfPanzar = new List<(double, double)> { (x, y - height / 2),
-                                                          (x + width, y - height / 2),
-                                                          (x + width, y - height),
-                                                          (x, y - height),
-
-                                                          // Координаты точек башни.
-                                                          (x + width / 3, y),
-                                                          (x + width / 3 * 2, y),
-                                                          (x + width / 3 * 2, y - height / 2),
-                                                          (x + width / 3, y - height / 2),
-
-                                                          // Координаты точек дула.
-                                                          (x + width / 3 * 2, y - height / 6),
-                                                          (x + width, y - height / 6),
-                                                          (x + width, y - height / 3),
-                                                          (x + width / 3 * 2, y - height / 3) };
+                                                                                             : base(x, y, width, height) {
+            _panzarMuzzle = new PanzarMuzzle(x, y, width, height, side);
+            _panzarTrack = new PanzarTrack(x, y - height / 2, width, height / 2, speed, side);
+            _panzarTurret = new PanzarTurret(x, y, width, height);
             Side = side;
-            _speed = speed;
-
-            if (Side == "right") {
-                GameMath.Rotate(_partsOfPanzar, 8, 11, 180, (x + width / 2, y - height / 4));
-                MuzzleDirection = 180;
-            }
         }
 
         /// <summary>
@@ -105,97 +48,19 @@ namespace Game_Engine_Library {
         private void Action() {
             KeyboardState keyboard = Keyboard.GetState();
             
-            Move(keyboard);
-            RotateMuzzle(keyboard);
-            Shoot(keyboard);
+            _panzarTrack.Move(keyboard);
+            _panzarMuzzle.RotateMuzzle(keyboard);
+            _panzarMuzzle.Shoot(keyboard);
         }
 
-        /// <summary>
-        /// Реализация логики выстрела.
-        /// </summary>
-        /// <param name="keyboard"></param>
-        private void Shoot(KeyboardState keyboard) {
-            if ((keyboard.IsKeyDown(Key.Space) && Side == "left" || keyboard.IsKeyDown(Key.Enter) && Side == "right") 
-                                                                                        && Cooldown <= 0 && Ammo > 0) {
-                Shooted = true;
-                Cooldown = MAX_COOLDOWN;
-                Ammo--;
-            } else Shooted = false;
-        }
-
-        /// <summary>
-        /// Реализация поворота дула танка.
-        /// </summary>
-        /// <param name="keyboard"></param>
-        private void RotateMuzzle(KeyboardState keyboard) {
-            if (keyboard.IsKeyDown(Key.W) && Side == "left" && MuzzleDirection < 90 ||
-                keyboard.IsKeyDown(Key.Down) && Side == "right" && MuzzleDirection > 180) {
-                GameMath.Rotate(_partsOfPanzar, 8, 11, 5, (x + width / 2, y - height / 4));
-                MuzzleDirection += Side == "left" ? 5 : -5;
-            }
-
-            if (keyboard.IsKeyDown(Key.S) && Side == "left" && MuzzleDirection > 0 ||
-                keyboard.IsKeyDown(Key.Up) && Side == "right" && MuzzleDirection < 270) {
-                GameMath.Rotate(_partsOfPanzar, 8, 11, -5, (x + width / 2, y - height / 4));
-                MuzzleDirection += Side == "left" ? -5 : 5;
-            }
-        }
-
-        /// <summary>
-    /// Реализация движения танка.
-    /// </summary>
-        private void Move(KeyboardState keyboard) {
-            if (((keyboard.IsKeyDown(Key.A) && Side == "left") ||
-                (keyboard.IsKeyDown(Key.Left) && Side == "right")) &&
-                !(_moveDirection == -1 && touched)) {
-                for (int i = 0; i < _partsOfPanzar.Count; i++) {
-                    _partsOfPanzar[i] = (_partsOfPanzar[i].Item1 - _speed, _partsOfPanzar[i].Item2);
-                }
-
-                touched = false;
-                _moveDirection = -1;
-                x -= _speed;
-            } 
-
-            if (((keyboard.IsKeyDown(Key.D) && Side == "left") ||
-                 (keyboard.IsKeyDown(Key.Right) && Side == "right")) &&
-                 !(_moveDirection == 1 && touched)) {
-                for (int i = 0; i < _partsOfPanzar.Count; i++) {
-                    _partsOfPanzar[i] = (_partsOfPanzar[i].Item1 + _speed, _partsOfPanzar[i].Item2);
-                }
-
-                touched = false;
-                _moveDirection = 1;
-                x += _speed;
-            } 
-
-            // После того, как танк подвинулся, следует подвинуть и его collision box.
-            Collision.MoveCollisionBoxTo(x, y);
-        }
-
+        
         /// <summary>
         /// Отрисовка конкретного танка.
         /// </summary>
         public override void Draw() {
-            
-            GL.Begin(PrimitiveType.Quads);
-
-            foreach ((double, double) point in _partsOfPanzar) {
-                GL.Vertex2(point.Item1, point.Item2);
-            }
-
-            GL.End();
-        }
-
-        /// <summary>
-        /// Осуществление тика таймера кулдауна стрельбы.
-        /// </summary>
-        private void ReduceCooldown() {
-            Cooldown = Math.Round(Cooldown, 3);
-
-            if (Cooldown >= 0.025) {
-                Cooldown -= 0.025;
-            }
+            _panzarTrack.Draw();
+            _panzarTurret.Draw();
+            _panzarMuzzle.Draw();
         }
 
         /// <summary>
@@ -204,7 +69,7 @@ namespace Game_Engine_Library {
         public override void Update() {
             Action();
             Draw();
-            ReduceCooldown();
+            _panzarMuzzle.ReduceCooldown();
         }
     }
 }

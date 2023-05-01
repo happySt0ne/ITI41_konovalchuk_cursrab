@@ -104,7 +104,7 @@ namespace Game_Engine_Library {
                     break;
 
                 case "Game_Engine_Library.Wall":
-                    panzar.touched = true;
+                    panzar.Touched = true;
                     break;
 
                 default:

@@ -27,7 +27,7 @@ namespace Game_Engine_Library {
             double delta_x, delta_y;
             double new_x, new_y;
             
-            for (int i = startIndex; i <= endIndex; i++) {
+            for (int i = startIndex; i < endIndex; i++) {
                 delta_x = array[i].Item1 - bazePoint.Item1;
                 delta_y = array[i].Item2 - bazePoint.Item2;
 
