@@ -9,23 +9,22 @@ using System.Threading.Tasks;
 namespace Game_Engine_Library {
     public class Bullet : GameObject {
         private List<(double, double)> bulletPoints = new List<(double, double)>();
-        private double speed;
+        private double xSpeed = Constants.BULLETS_X_SPEED;
+        private double ySpeed = Constants.BULLETS_Y_SPEED;
         private double flightAngle;
-        private double g = 0.0001;
 
         public int Damage { get; private set; }
 
-        public Bullet(double x, double y, int angle, string side, int damage, double width = 0.04, double height = 0.04, double speed = 0.07) 
-                                                                                                   : base(x, y, width, height) {
+        public Bullet(double x, double y, int angle, string side) : base(x, y, Constants.BULLETS_WIDTH, Constants.BULLETS_HEIGHT) {
             bulletPoints.Add((x, y));
             bulletPoints.Add((x + width, y));
             bulletPoints.Add((x + width, y - height));
             bulletPoints.Add((x, y - height));
-
-            this.speed = speed;
+            
+            xSpeed = Constants.BULLETS_X_SPEED;
             flightAngle = side == "left" ? angle * Math.PI / 180 : -angle * Math.PI / 180;
-            Damage = damage;
-            texture = Texture.LoadTexture("../../../Game_Engine_Library/Resources/Bullet.bmp");
+            Damage = Constants.BULLET_DAMAGE;
+            texture = Texture.LoadTexture(Constants.BULLET_TEXTURE_PATH);
         }
 
         /// <summary>
@@ -66,12 +65,12 @@ namespace Game_Engine_Library {
                 x = bulletPoints[i].Item1;
                 y = bulletPoints[i].Item2;
 
-                y += (speed + g) * Math.Sin(flightAngle);
-                x += speed * Math.Cos(flightAngle);
+                y += ySpeed * Math.Sin(flightAngle); 
+                x += xSpeed * Math.Cos(flightAngle);
                 bulletPoints[i] = (x, y);
             }
 
-            g -= 0.006;
+            ySpeed += Constants.GRAVITY_SCALE;
             Collision.MoveCollisionBoxTo(bulletPoints[0].Item1, bulletPoints[0].Item2);
         }
     }

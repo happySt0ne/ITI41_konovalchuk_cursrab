@@ -61,10 +61,9 @@ namespace Game_Engine_Library {
         /// <param name="width">Ширина танка</param>
         /// <param name="height">Высота танка</param>
         /// <param name="side">Сторона сил</param>
-        public Panzar(double x, double y, string side, double width = 0.2, double height = 0.2, double speed = 0.005)
-                                                                                             : base(x, y, width, height) {
+        public Panzar(double x, string side) : base(x, Constants.HEIGHT_TO_CREATE_PANZARS, Constants.PANZARS_WIDTH, Constants.PANZARS_HEIGHT) {
             _panzarMuzzle = new PanzarMuzzle(x + width / 3 * 2, y - height / 4, width / 3, height / 6, side);
-            _panzarTrack = new PanzarTrack(x, y - height / 2, width, height / 2, speed, side);
+            _panzarTrack = new PanzarTrack(x, y - height / 2, width, height / 2, side);
             _panzarTurret = new PanzarTurret(x + width / 3, y, width / 3, height / 2, side);
             Side = side;
         }

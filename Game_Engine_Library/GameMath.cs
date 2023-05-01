@@ -56,5 +56,8 @@ namespace Game_Engine_Library {
 
             return (new_x + bazePoint.Item1, new_y + bazePoint.Item2);
         }
+
+        public static double FindHypotenuse (double firstCathet, double secondCathet) =>
+                                Math.Sqrt(Math.Pow(firstCathet, 2) + Math.Pow(secondCathet, 2));
     }
 }

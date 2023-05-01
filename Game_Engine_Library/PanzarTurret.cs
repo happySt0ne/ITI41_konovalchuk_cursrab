@@ -11,7 +11,7 @@ namespace Game_Engine_Library {
         private (byte, byte)[] _texCoords;
 
         public PanzarTurret(double x, double y, double width, double height, string side) : base(x, y, width, height) {
-            texture = Texture.LoadTexture(@"../../../Game_Engine_Library/Resources/PanzarTurret.bmp");
+            texture = Texture.LoadTexture(Constants.PANZAR_TURRET_TEXTURE_PATH);
             
             _texCoords = side == "left" ? new (byte, byte)[4] { (0, 0), (1, 0), (1, 1), (0, 1) }  
                                         : new (byte, byte)[4] { (1, 0), (0, 0), (0, 1), (1, 1) };

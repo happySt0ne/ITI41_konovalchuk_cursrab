@@ -9,9 +9,7 @@ using System.Threading.Tasks;
 
 namespace Game_Engine_Library {
     internal class PanzarMuzzle : GameObject {
-        const double MAX_COOLDOWN = 1;
-        const int START_AMMO = 40;
-        const int MUZZLE_ROTATION_SPEED = 5;
+        
         private string _side;
         private (double, double) _rotateBazePoint;
         private (byte, byte)[] _texCoords;
@@ -26,7 +24,7 @@ namespace Game_Engine_Library {
         /// <summary>
         /// Боезапас танка.
         /// </summary>
-        public int Ammo { get; private set; } = START_AMMO;
+        public int Ammo { get; private set; } = Constants.START_AMMO;
 
         /// <summary>
         /// Угол между дулом и осью Ох.
@@ -38,8 +36,9 @@ namespace Game_Engine_Library {
         /// </summary>
         public (double, double) BulletPosition {
             get {
-                return _side == "left" ? (MuzzlePoints[2].Item1 + 0.015, MuzzlePoints[2].Item2 + 0.04)
-                                       : (MuzzlePoints[3].Item1 - 0.056, MuzzlePoints[3].Item2 + 0.056);
+                var bulletDiagonalLength = GameMath.FindHypotenuse(Constants.BULLETS_WIDTH, Constants.BULLETS_HEIGHT);
+                return _side == "left" ? (MuzzlePoints[1].Item1 + bulletDiagonalLength, MuzzlePoints[1].Item2 + bulletDiagonalLength)
+                                       : (MuzzlePoints[3].Item1 - bulletDiagonalLength, MuzzlePoints[3].Item2 + bulletDiagonalLength); ;
             }
         }
 
@@ -50,7 +49,7 @@ namespace Game_Engine_Library {
 
         public PanzarMuzzle(double x, double y, double width, double height, string side) : base(x, y, width, height) {
             _rotateBazePoint = (x - width / 2 , y - height / 4);
-            texture = Texture.LoadTexture(@"../../../Game_Engine_Library/Resources/PanzarMuzzle.bmp");
+            texture = Texture.LoadTexture(Constants.PANZAR_MUZZLE_TEXTURE_PATH);
 
             _texCoords = side == "left" ? new (byte, byte)[4] { (0, 0), (1, 0), (1, 1), (0, 1) }
                                         : new (byte, byte)[4] { (1, 0), (0, 0), (0, 1), (1, 1) };
@@ -82,7 +81,7 @@ namespace Game_Engine_Library {
             if ((keyboard.IsKeyDown(Key.Space) && _side == "left" || keyboard.IsKeyDown(Key.Enter) && _side == "right")
                                                                                         && Cooldown <= 0 && Ammo > 0) {
                 Shooted = true;
-                Cooldown = MAX_COOLDOWN;
+                Cooldown = Constants.MAX_COOLDOWN;
                 Ammo--;
             } else Shooted = false;
         }
@@ -94,14 +93,14 @@ namespace Game_Engine_Library {
         public void RotateMuzzle(KeyboardState keyboard) {
             if (keyboard.IsKeyDown(Key.W) && _side == "left" && MuzzleDirection < 90 ||
                 keyboard.IsKeyDown(Key.Down) && _side == "right" && MuzzleDirection > -180) {
-                GameMath.Rotate(MuzzlePoints, 0, 4, MUZZLE_ROTATION_SPEED, _rotateBazePoint);
-                MuzzleDirection += _side == "left" ? MUZZLE_ROTATION_SPEED : -MUZZLE_ROTATION_SPEED;
+                GameMath.Rotate(MuzzlePoints, 0, 4, Constants.MUZZLE_ROTATION_SPEED, _rotateBazePoint);
+                MuzzleDirection += _side == "left" ? Constants.MUZZLE_ROTATION_SPEED : -Constants.MUZZLE_ROTATION_SPEED;
             }
 
             if (keyboard.IsKeyDown(Key.S) && _side == "left" && MuzzleDirection > 0 ||
                 keyboard.IsKeyDown(Key.Up) && _side == "right" && MuzzleDirection < -90) {
-                GameMath.Rotate(MuzzlePoints, 0, 4, -MUZZLE_ROTATION_SPEED, _rotateBazePoint);
-                MuzzleDirection += _side == "left" ? -MUZZLE_ROTATION_SPEED : MUZZLE_ROTATION_SPEED;
+                GameMath.Rotate(MuzzlePoints, 0, 4, -Constants.MUZZLE_ROTATION_SPEED, _rotateBazePoint);
+                MuzzleDirection += _side == "left" ? -Constants.MUZZLE_ROTATION_SPEED : Constants.MUZZLE_ROTATION_SPEED;
             }
         }
 

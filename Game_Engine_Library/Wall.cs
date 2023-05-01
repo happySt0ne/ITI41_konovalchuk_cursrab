@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Game_Engine_Library {
     public class Wall : GameObject {
         public Wall(double x, double y, double width, double height) : base(x, y, width, height) {
-            texture = Texture.LoadTexture(@"../../../Game_Engine_Library/Resources/Mountain.bmp");
+            texture = Texture.LoadTexture(Constants.WALL_TEXTURE_PATH);
         }
         
         public override void Draw() {

@@ -7,16 +7,15 @@ using System.Threading.Tasks;
 using static System.Net.Mime.MediaTypeNames;
 namespace Game_Engine_Library {
     public class Scene {
-        const int BULLET_DAMAGE = 10;
         private List<GameObject> _listToRemove = new List<GameObject>();
         private List<GameObject> _objects = new List<GameObject>();
         private List<Panzar> _panzars = new List<Panzar>();
 
         public Scene() {
             _objects.Add(new Background(-1, 1, 2, 2));
-            _objects.Add(new Panzar(-0.5, 0, "left"));
-            _objects.Add(new Panzar(0.5, 0, "right"));
-            _objects.Add(new Wall(-0.1, 0.2, 0.2, 0.7));
+            _objects.Add(new Panzar(-0.5, "left"));
+            _objects.Add(new Panzar(0.5, "right"));
+            _objects.Add(new Wall(-0.1, -0.5, 0.2, 0.5));
             _objects.Add(new Wall(-0.999, 1, 0.0001, 2));
             _objects.Add(new Wall(0.999, 1, 0.0001, 2));
             GetPanzarsList();
@@ -142,12 +141,11 @@ namespace Game_Engine_Library {
         /// <param name="text"></param>
         private void AddBullet() {
             foreach (Panzar panzar in _panzars) {
-                if (panzar.Shooted) {
+                if (panzar.Shooted) { // Я понял. Типа мне из конструктора убрать вот эти поля которые принимают в себя константы, и передавать их уже внутри самого класса буллет.
                     _objects.Add(new Bullet(panzar.BulletPosition.Item1, 
                                             panzar.BulletPosition.Item2, 
                                             panzar.MuzzleDirection, 
-                                            panzar.Side,
-                                            BULLET_DAMAGE));
+                                            panzar.Side));
                 }
             }
         }

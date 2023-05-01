@@ -16,10 +16,10 @@ namespace Game_Engine_Library {
 
         public List<(double, double)> TrackPoints { get; private set; }
 
-        public PanzarTrack(double x, double y, double width, double height, double speed, string side) : base(x, y, width, height) {
-            _speed = speed;
+        public PanzarTrack(double x, double y, double width, double height, string side) : base(x, y, width, height) {
+            _speed = Constants.PANZARS_SPEED;
             _side = side;
-            texture = Texture.LoadTexture(@"../../../Game_Engine_Library/Resources/PanzarTrack.bmp");
+            texture = Texture.LoadTexture(Constants.PANZAR_TRACK_TEXTURE_PATH);
             TrackPoints = new List<(double, double)> { (x, y), (x + width, y), (x + width, y - height), (x, y - height) };
 
             _texCoords = side == "left" ? new (byte, byte)[4] { (0, 0), (1, 0), (1, 1), (0, 1) }
