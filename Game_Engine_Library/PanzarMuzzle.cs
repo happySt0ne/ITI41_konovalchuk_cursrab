@@ -38,18 +38,20 @@ namespace Game_Engine_Library {
         /// </summary>
         public (double, double) BulletPosition {
             get {
-                (double, double) muzzleStartPoint = (MuzzlePoints[0].Item1 + width, MuzzlePoints[0].Item2 - height);
+                (double, double) muzzleStartPoint;
                 (double, double) pointToReturn;
 
                 switch (_side) {
                     case "left":
-                        //muzzleStartPoint = ;
+                        muzzleStartPoint = (MuzzlePoints[2].Item1, MuzzlePoints[2].Item2);
                         pointToReturn = GameMath.Rotate(_rotateBazePoint, muzzleStartPoint, MuzzleDirection);
-                        return (pointToReturn.Item1 + 0.04, pointToReturn.Item2 + 0.04);
+                        return (pointToReturn.Item1 + 0.057, pointToReturn.Item2 + 0.057);
+
                     case "right":
-                        //muzzleStartPoint = (x - width, y - height);
-                        pointToReturn = GameMath.Rotate(_rotateBazePoint, muzzleStartPoint, -MuzzleDirection);
-                        return (pointToReturn.Item1 - 0.06, pointToReturn.Item2 + 0.045);
+                        muzzleStartPoint = (MuzzlePoints[3].Item1, MuzzlePoints[3].Item2);
+                        pointToReturn = GameMath.Rotate(_rotateBazePoint, muzzleStartPoint, -(MuzzleDirection - 180));
+                        return (pointToReturn.Item1 - 0.057, pointToReturn.Item2 + 0.057);
+
                     default:
                         return (0, 0);
                 }
@@ -71,9 +73,18 @@ namespace Game_Engine_Library {
             _side = side;
 
             if (_side == "right") {
-                MuzzlePoints = new List<(double, double)> { (x - 2 * width, y), (x - width, y), (x - width, y - height), (x - 2 * width, y - height)};
+                MuzzlePoints = new List<(double, double)> { (x - 2 * width, y),
+                                                            (x - width, y),
+                                                            (x - width, y - height),
+                                                            (x - 2 * width, y - height) };
+
                 MuzzleDirection = 180;
-            } else MuzzlePoints = new List<(double, double)> { (x, y), (x + width, y), (x + width, y - height), (x, y - height) };
+            } else { 
+                MuzzlePoints = new List<(double, double)> { (x, y), 
+                                                            (x + width, y), 
+                                                            (x + width, y - height), 
+                                                            (x, y - height) };
+            }
 
             MuzzlePoints.Add(_rotateBazePoint);
         }
