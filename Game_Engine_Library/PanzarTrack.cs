@@ -9,20 +9,15 @@ using System.Threading.Tasks;
 namespace Game_Engine_Library {
     internal class PanzarTrack : GameObject{
         public bool touched = false;
-        private double _speed;
+        private double _speed = Constants.PANZARS_SPEED;
         private sbyte _moveDirection;
         private string _side;
-        //private (byte, byte)[] _texCoords;
-
-        //public List<(double, double)> TrackPoints { get; private set; }
-
+        
         public PanzarTrack(double x, double y, double width, double height, string side) : base(x, y, width, height) {
-            _speed = Constants.PANZARS_SPEED;
-            _side = side;
             texture = Texture.LoadTexture(Constants.PANZAR_TRACK_TEXTURE_PATH);
-            Points = new List<(double, double)> { (x, y), (x + width, y), (x + width, y - height), (x, y - height) };
-
-            if (side == "right") TextureHorizontalReflectoin();
+            _side = side;
+            
+            if (side == "right") TextureHorizontalReflection();
         }
 
         /// <summary>

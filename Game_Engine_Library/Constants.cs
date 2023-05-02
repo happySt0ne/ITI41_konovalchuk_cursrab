@@ -32,7 +32,7 @@ namespace Game_Engine_Library {
         public const double PLANE_HEIGHT = 0.3;
         public const double PLANE_WIDTH = 0.4;
         public const double PLANE_X_SPEED = 0.015;
-        public const double PLANE_SPAWN_MAX_COOLDOWN = 4;
+        public const double PLANE_SPAWN_MAX_COOLDOWN = 5;
 
         public const string PANZAR_MUZZLE_TEXTURE_PATH = @"../../../Game_Engine_Library/Resources/PanzarMuzzle.bmp";
         public const string PANZAR_TURRET_TEXTURE_PATH = @"../../../Game_Engine_Library/Resources/PanzarTurret.bmp";

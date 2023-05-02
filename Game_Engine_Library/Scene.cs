@@ -12,7 +12,7 @@ namespace Game_Engine_Library {
         private List<GameObject> _listToRemove = new List<GameObject>();
         private List<GameObject> _objects = new List<GameObject>();
         private List<Panzar> _panzars = new List<Panzar>();
-        private double _planeCooldown = Constants.PLANE_SPAWN_MAX_COOLDOWN;
+        private double _planeSpawnCooldown = Constants.PLANE_SPAWN_MAX_COOLDOWN;
 
         public Scene() {
             _objects.Add(new Background(-1, 1, 2, 2));
@@ -21,7 +21,7 @@ namespace Game_Engine_Library {
             _objects.Add(new Wall(-0.1, -0.5, 0.2, 0.5));
             _objects.Add(new Wall(-0.999, 1, 0.0001, 2));
             _objects.Add(new Wall(0.999, 1, 0.0001, 2));
-            _objects.Add(new HealBonus(0.7, 0.7));
+
             GetPanzarsList();
         }
 
@@ -59,41 +59,31 @@ namespace Game_Engine_Library {
         /// Обновление логики и перересовка всех объектов сцены.
         /// </summary>
         public void Update(out int endGame) {
+            TryCreatePlane();
+            TryDeletePlane();
             endGame = CheckEndGame();
             _listToRemove.ForEach(x => _objects.Remove(x));
             _listToRemove.Clear();
             AddBullet();
-            UpdatePlaneSpawnCooldown();
 
             foreach (GameObject obj in _objects) {
                 obj.Update();
                 CheckSceneCollision(obj);
             }
-            
         }
 
-        /// <summary>
-        /// Проверка и обновление таймера создания самолёта.
-        /// </summary>
-        private void UpdatePlaneSpawnCooldown() {
-            if (_planeCooldown <= 0) {
+        private void TryCreatePlane() {
+            if (_planeSpawnCooldown <= 0) { 
+                _planeSpawnCooldown = Constants.PLANE_SPAWN_MAX_COOLDOWN;
                 _objects.Add(new Plane());
-                _planeCooldown = Constants.PLANE_SPAWN_MAX_COOLDOWN;
                 return;
             }
 
-            _planeCooldown -= 0.025;
-            PlaneDeletion();
+            _planeSpawnCooldown -= 0.025;
         }
 
-        /// <summary>
-        /// Удаление самолёта, когда он вылетает за пределы экрана.
-        /// </summary>
-        private void PlaneDeletion() {
-            if ((Constants.PLANE_X_SPEED / 0.025 * Plane.PlaneLifetime >= 2) && 
-                _objects.Any(x => x is Plane)) {
-                _listToRemove.Add(_objects.Single(x => x is Plane));
-            }
+        private void TryDeletePlane() {
+            if (!Plane.IsAlive && _objects.Any(x => x is Plane)) _listToRemove.Add(_objects.Single(x => x is Plane));
         }
 
         /// <summary>

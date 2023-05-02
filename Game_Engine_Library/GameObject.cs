@@ -25,7 +25,9 @@ namespace Game_Engine_Library {
             Points = new List<(double, double)> { (x, y), (x + width, y), (x + width, y - height), (x, y - height) };
         }
 
-        public void TextureHorizontalReflectoin() => 
+        public GameObject() { }
+
+        public void TextureHorizontalReflection() => 
             _texCoords = new (byte, byte)[4] { (1, 0), (0, 0), (0, 1), (1, 1) };
     
         public virtual void Draw() {

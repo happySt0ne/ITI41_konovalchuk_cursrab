@@ -10,7 +10,7 @@ namespace Game_Engine_Library {
         public PanzarTurret(double x, double y, double width, double height, string side) : base(x, y, width, height) {
             texture = Texture.LoadTexture(Constants.PANZAR_TURRET_TEXTURE_PATH);
 
-            if (side == "right") TextureHorizontalReflectoin();
+            if (side == "right") TextureHorizontalReflection();
         }
 
         public override void Update() { }

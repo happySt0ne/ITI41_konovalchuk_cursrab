@@ -55,7 +55,7 @@ namespace Game_Engine_Library {
                                                             (x - width, y),
                                                             (x - width, y - height),
                                                             (x - 2 * width, y - height) };
-                TextureHorizontalReflectoin();
+                TextureHorizontalReflection();
                 MuzzleDirection = -180;
             }
 
