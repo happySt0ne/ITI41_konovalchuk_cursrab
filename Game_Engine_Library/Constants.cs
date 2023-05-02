@@ -10,7 +10,7 @@ namespace Game_Engine_Library {
         /// Интервал таймера в секундах.
         /// </summary>
         public const double TIMER_INTERVAL_SECONDS = 0.025;
-        public const int CHANCE_TO_CREATE_BONUS_PER_FRAME = 10;
+        public const int CHANCE_TO_CREATE_BONUS_PER_FRAME = 20;
 
         public const double PANZARS_WIDTH = 0.3;
         public const double PANZARS_HEIGHT = 0.3;
@@ -33,7 +33,7 @@ namespace Game_Engine_Library {
         public const double BULLETS_WIDTH = 0.07;
         public const int BULLET_DAMAGE = 10;
 
-        public const double PLANE_X_COORDINATE_SPAWN = -1.3;
+        public const double PLANE_X_COORDINATE_SPAWN = -1;
         public const double PLANE_Y_COORDINATE_SPAWN = 0.7;
         public const double PLANE_HEIGHT = 0.3;
         public const double PLANE_WIDTH = 0.4;

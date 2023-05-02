@@ -25,8 +25,8 @@ namespace Game_Engine_Library {
             }
         } 
 
-        public Plane() : base(ChooseDirection() * Constants.PLANE_X_COORDINATE_SPAWN, Constants.PLANE_Y_COORDINATE_SPAWN, 
-                                                                         Constants.PLANE_WIDTH, Constants.PLANE_HEIGHT) {
+        public Plane() : base(ChooseDirection() * Constants.PLANE_X_COORDINATE_SPAWN , 
+                            Constants.PLANE_Y_COORDINATE_SPAWN, Constants.PLANE_WIDTH, Constants.PLANE_HEIGHT) {
             if (s_moveDirection == -1) TextureHorizontalReflection();
             texture = Texture.LoadTexture(Constants.PLANE_TEXTURE_PATH);
             s_currentPlaneLifetime = 0;
