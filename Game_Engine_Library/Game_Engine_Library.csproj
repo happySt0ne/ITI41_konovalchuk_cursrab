@@ -54,7 +54,6 @@
     <Compile Include="Bonuses\Effect.cs" />
     <Compile Include="Bonuses\BonusCreator.cs" />
     <Compile Include="Bonuses\HealBonus.cs" />
-    <Compile Include="Bonuses\HealBonusCtreator.cs" />
     <Compile Include="Bonuses\HealEffect.cs" />
     <Compile Include="Bullet.cs" />
     <Compile Include="Constants.cs" />

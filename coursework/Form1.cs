@@ -20,7 +20,8 @@ namespace coursework
 
         public Form1() {
             InitializeComponent();
-            
+            timer1.Start();
+            timer1.Interval = (int)(Constants.TIMER_INTERVAL_SECONDS * 1000);
         }
 
         private void Form1_Load(object sender, EventArgs e) { }

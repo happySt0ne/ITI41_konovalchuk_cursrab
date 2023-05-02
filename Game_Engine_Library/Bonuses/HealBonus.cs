@@ -9,5 +9,6 @@ namespace Game_Engine_Library.Bonuses {
         public HealBonus(double x, double y) : base(x, y) {
             texture = Texture.LoadTexture(Constants.HEAL_BONUS_TEXTURE_PATH);
         }
+
     }
 }

@@ -59,6 +59,7 @@ namespace Game_Engine_Library {
         /// Обновление логики и перересовка всех объектов сцены.
         /// </summary>
         public void Update(out int endGame) {
+            TryCreateBonus();
             TryCreatePlane();
             TryDeletePlane();
             endGame = CheckEndGame();
@@ -72,6 +73,15 @@ namespace Game_Engine_Library {
             }
         }
 
+        private void TryCreateBonus() {
+            if (_objects.Any(x => x is Plane)) {
+                var plane = _objects.Single(x => x is Plane) as Plane;
+                var bonus = Plane.DropBonus((plane.Points[0].Item1 + plane.Points[1].Item1) / 2, plane.Points[3].Item2);
+
+                if (bonus != null) _objects.Add(bonus);
+            }
+        }
+
         private void TryCreatePlane() {
             if (_planeSpawnCooldown <= 0) { 
                 _planeSpawnCooldown = Constants.PLANE_SPAWN_MAX_COOLDOWN;
@@ -79,7 +89,7 @@ namespace Game_Engine_Library {
                 return;
             }
 
-            _planeSpawnCooldown -= 0.025;
+            _planeSpawnCooldown -= Constants.TIMER_INTERVAL_SECONDS;
         }
 
         private void TryDeletePlane() {
@@ -167,21 +177,6 @@ namespace Game_Engine_Library {
                                             panzar.Side));
                 }
             }
-        }
-
-        /// <summary>
-        /// Для взаимодействия с определённым танком исходя из его положения на экране (справа или слева)
-        /// </summary>
-        /// <param name="side">Сторона сил искомого танка. ("right" и "left")</param>
-        /// <returns>Ссылку на танк заданной стороны.</returns>
-        public Panzar GetPanzarBySide(string side) {
-            foreach (GameObject obj in _objects) {
-                if (obj is Panzar panzar && panzar.Side == side) {
-                    return panzar;
-                }
-            }
-
-            return null;
         }
     }
 }
