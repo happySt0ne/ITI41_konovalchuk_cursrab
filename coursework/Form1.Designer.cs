@@ -83,7 +83,7 @@
             // 
             this.Ammo1.AutoSize = true;
             this.Ammo1.BackColor = System.Drawing.Color.Transparent;
-            this.Ammo1.ForeColor = System.Drawing.Color.Red;
+            this.Ammo1.ForeColor = System.Drawing.Color.Black;
             this.Ammo1.Location = new System.Drawing.Point(12, 54);
             this.Ammo1.Name = "Ammo1";
             this.Ammo1.Size = new System.Drawing.Size(44, 16);
@@ -94,7 +94,7 @@
             // 
             this.Ammo2.AutoSize = true;
             this.Ammo2.BackColor = System.Drawing.Color.Transparent;
-            this.Ammo2.ForeColor = System.Drawing.Color.Red;
+            this.Ammo2.ForeColor = System.Drawing.Color.Black;
             this.Ammo2.Location = new System.Drawing.Point(679, 54);
             this.Ammo2.Name = "Ammo2";
             this.Ammo2.Size = new System.Drawing.Size(44, 16);
@@ -105,7 +105,7 @@
             // 
             this.Cooldown1.AutoSize = true;
             this.Cooldown1.BackColor = System.Drawing.Color.Transparent;
-            this.Cooldown1.ForeColor = System.Drawing.Color.Red;
+            this.Cooldown1.ForeColor = System.Drawing.Color.Black;
             this.Cooldown1.Location = new System.Drawing.Point(12, 38);
             this.Cooldown1.Name = "Cooldown1";
             this.Cooldown1.Size = new System.Drawing.Size(44, 16);
@@ -116,7 +116,7 @@
             // 
             this.Cooldown2.AutoSize = true;
             this.Cooldown2.BackColor = System.Drawing.Color.Transparent;
-            this.Cooldown2.ForeColor = System.Drawing.Color.Red;
+            this.Cooldown2.ForeColor = System.Drawing.Color.Black;
             this.Cooldown2.Location = new System.Drawing.Point(679, 38);
             this.Cooldown2.Name = "Cooldown2";
             this.Cooldown2.Size = new System.Drawing.Size(44, 16);

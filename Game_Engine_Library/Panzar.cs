@@ -10,7 +10,7 @@ namespace Game_Engine_Library {
         private PanzarTrack _panzarTrack;
         private PanzarMuzzle _panzarMuzzle;
         private PanzarTurret _panzarTurret;
-
+        
         #region Properties
         /// <summary>
         /// Здоровье танка.
@@ -61,7 +61,11 @@ namespace Game_Engine_Library {
         /// <param name="width">Ширина танка</param>
         /// <param name="height">Высота танка</param>
         /// <param name="side">Сторона сил</param>
-        public Panzar(double x, string side) : base(x, Constants.HEIGHT_TO_CREATE_PANZARS, Constants.PANZARS_WIDTH, Constants.PANZARS_HEIGHT) {
+        public Panzar(string side) : base(side == "left" ? -Constants.PANZAR_X_COORDINATE_SPAWNPOINT - Constants.PANZARS_WIDTH
+                                                         : Constants.PANZAR_X_COORDINATE_SPAWNPOINT, 
+                                                           Constants.HEIGHT_TO_CREATE_PANZARS, 
+                                                           Constants.PANZARS_WIDTH, 
+                                                           Constants.PANZARS_HEIGHT) {
             _panzarMuzzle = new PanzarMuzzle(x + width / 3 * 2, y - height / 4, width / 3, height / 6, side);
             _panzarTrack = new PanzarTrack(x, y - height / 2, width, height / 2, side);
             _panzarTurret = new PanzarTurret(x + width / 3, y, width / 3, height / 2, side);

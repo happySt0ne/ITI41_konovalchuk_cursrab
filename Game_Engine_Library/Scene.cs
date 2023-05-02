@@ -1,6 +1,8 @@
-﻿using OpenTK.Graphics.OpenGL;
+﻿using Game_Engine_Library.Bonuses;
+using OpenTK.Graphics.OpenGL;
 using System;
 using System.Collections.Generic;
+using System.Drawing.Printing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,11 +12,12 @@ namespace Game_Engine_Library {
         private List<GameObject> _listToRemove = new List<GameObject>();
         private List<GameObject> _objects = new List<GameObject>();
         private List<Panzar> _panzars = new List<Panzar>();
+        private double _planeCooldown = Constants.PLANE_SPAWN_MAX_COOLDOWN;
 
         public Scene() {
             _objects.Add(new Background(-1, 1, 2, 2));
-            _objects.Add(new Panzar(-0.5, "left"));
-            _objects.Add(new Panzar(0.5, "right"));
+            _objects.Add(new Panzar("left"));
+            _objects.Add(new Panzar("right"));
             _objects.Add(new Wall(-0.1, -0.5, 0.2, 0.5));
             _objects.Add(new Wall(-0.999, 1, 0.0001, 2));
             _objects.Add(new Wall(0.999, 1, 0.0001, 2));
@@ -59,12 +62,42 @@ namespace Game_Engine_Library {
             _listToRemove.ForEach(x => _objects.Remove(x));
             _listToRemove.Clear();
             AddBullet();
+            UpdatePlaneSpawnCooldown();
+
+            if (_planeCooldown <= Constants.PLANE_SPAWN_MAX_COOLDOWN / 2) {
+                _panzars[0] = new HealBonus(_panzars[0]);
+                _objects[1] = _panzars[0];
+            }
 
             foreach (GameObject obj in _objects) {
                 obj.Update();
                 CheckSceneCollision(obj);
             }
             
+        }
+
+        /// <summary>
+        /// Проверка и обновление таймера создания самолёта.
+        /// </summary>
+        private void UpdatePlaneSpawnCooldown() {
+            if (_planeCooldown <= 0) {
+                _objects.Add(new Plane());
+                _planeCooldown = Constants.PLANE_SPAWN_MAX_COOLDOWN;
+                return;
+            }
+
+            _planeCooldown -= 0.025;
+            PlaneDeletion();
+        }
+
+        /// <summary>
+        /// Удаление самолёта, когда он вылетает за пределы экрана.
+        /// </summary>
+        private void PlaneDeletion() {
+            if ((Constants.PLANE_X_SPEED / 0.025 * Plane.PlaneLifetime >= 2) && 
+                _objects.Any(x => x is Plane)) {
+                _listToRemove.Add(_objects.Single(x => x is Plane));
+            }
         }
 
         /// <summary>
