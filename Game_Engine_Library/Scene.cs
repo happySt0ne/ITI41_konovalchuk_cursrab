@@ -13,6 +13,8 @@ namespace Game_Engine_Library {
         private List<GameObject> _objects = new List<GameObject>();
         private List<Panzar> _panzars = new List<Panzar>();
         private double _planeSpawnCooldown = Constants.PLANE_SPAWN_MAX_COOLDOWN;
+        private Bonus _bonusTriedToCreate;
+        private Plane _plane;
 
         public Scene() {
             _objects.Add(new Background(-1, 1, 2, 2));
@@ -74,11 +76,11 @@ namespace Game_Engine_Library {
         }
 
         private void TryCreateBonus() {
-            if (_objects.Any(x => x is Plane)) {
-                var plane = _objects.Single(x => x is Plane) as Plane;
-                var bonus = Plane.DropBonus((plane.Points[0].Item1 + plane.Points[1].Item1) / 2, plane.Points[3].Item2);
+            if (Plane.IsAlive && !Plane.Dropped) {
+                _plane = _objects.Single(x => x is Plane) as Plane;
+                _bonusTriedToCreate = Plane.DropBonus((_plane.Points[0].Item1 + _plane.Points[1].Item1) / 2, _plane.Points[3].Item2);
 
-                if (bonus != null) _objects.Add(bonus);
+                if (_bonusTriedToCreate != null) _objects.Add(_bonusTriedToCreate);
             }
         }
 
@@ -107,9 +109,11 @@ namespace Game_Engine_Library {
                         case "Game_Engine_Library.Panzar":
                             PanzarCollisionActions(obj as Panzar, obj2);
                             break;
+
                         case "Game_Engine_Library.Bullet":
                             BulletCollisionActions(obj as Bullet, obj2);
                             break;
+
                         default:
                             break;
                     }
@@ -133,6 +137,12 @@ namespace Game_Engine_Library {
 
                 case "Game_Engine_Library.Wall":
                     panzar.Touched = true;
+                    break;
+
+                case "Game_Engine_Library.Bonuses.HealBonus":
+                    panzar = new HealEffect(panzar);
+
+                    _listToRemove.Add(collisionedObject);
                     break;
 
                 default:
@@ -170,7 +180,7 @@ namespace Game_Engine_Library {
         /// <param name="text"></param>
         private void AddBullet() {
             foreach (Panzar panzar in _panzars) {
-                if (panzar.Shooted) { // Я понял. Типа мне из конструктора убрать вот эти поля которые принимают в себя константы, и передавать их уже внутри самого класса буллет.
+                if (panzar.Shooted) {
                     _objects.Add(new Bullet(panzar.BulletPosition.Item1, 
                                             panzar.BulletPosition.Item2, 
                                             panzar.MuzzleDirection, 

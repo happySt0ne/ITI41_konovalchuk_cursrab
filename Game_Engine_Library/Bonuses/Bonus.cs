@@ -15,11 +15,12 @@ namespace Game_Engine_Library.Bonuses {
                 Points[i] = (Points[i].Item1, Points[i].Item2 - Constants.BONUS_Y_SPEED);
             }
 
-            Collision.MoveCollisionBoxTo(x, y);
+            Collision.MoveCollisionBoxTo(Points[0].Item1, Points[0].Item2);
         }
 
         public override void Update() {
             if (Points[3].Item2 > -0.98) Move();
+                
             Draw();
         }
     }

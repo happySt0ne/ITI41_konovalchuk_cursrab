@@ -10,28 +10,33 @@ using System.Threading.Tasks;
 namespace Game_Engine_Library {
     public class Plane : GameObject {
         private static Random s_random = new Random(Guid.NewGuid().GetHashCode());
-        private static double s_maxPlaneLifetime = (Constants.PLANE_WIDTH * 2 + 2) / (Constants.PLANE_X_SPEED / 0.025);
+        private static double s_maxPlaneLifetime;
         private static int s_moveDirection;
-        private static double s_currentPlaneLifetime;
-        private static bool s_dropped;
         private static int s_randomNumber;
+        public static double s_currentPlaneLifetime;
 
+        public static bool Dropped { get; private set; }
         /// <summary>
         /// Существует ли сейчас самолёт.
         /// </summary>
         public static bool IsAlive {
-            get {
-                return s_currentPlaneLifetime >= s_maxPlaneLifetime ? false : true;
-            }
+            get => s_currentPlaneLifetime >= s_maxPlaneLifetime ? false : true;
         } 
 
-        public Plane() : base(ChooseDirection() * Constants.PLANE_X_COORDINATE_SPAWN , 
-                            Constants.PLANE_Y_COORDINATE_SPAWN, Constants.PLANE_WIDTH, Constants.PLANE_HEIGHT) {
+        public Plane() : base(ChooseDirection() * Constants.PLANE_X_COORDINATE_SPAWN , Constants.PLANE_Y_COORDINATE_SPAWN, 
+                                                                            Constants.PLANE_WIDTH, Constants.PLANE_HEIGHT) {
             if (s_moveDirection == -1) TextureHorizontalReflection();
             texture = Texture.LoadTexture(Constants.PLANE_TEXTURE_PATH);
             s_currentPlaneLifetime = 0;
-            s_dropped = false;
+            Dropped = false;
             s_randomNumber = s_random.Next(Constants.CHANCE_TO_CREATE_BONUS_PER_FRAME);
+            s_maxPlaneLifetime = (Constants.PLANE_WIDTH * 2 + 2) / (Constants.PLANE_X_SPEED / 0.025);
+        }
+
+        static Plane() {
+            s_maxPlaneLifetime = (Constants.PLANE_WIDTH * 2 + 2) / (Constants.PLANE_X_SPEED / 0.025);
+            s_currentPlaneLifetime = s_maxPlaneLifetime;
+            Dropped = false;
         }
 
         /// <summary>
@@ -58,8 +63,8 @@ namespace Game_Engine_Library {
         }
 
         public static Bonus DropBonus(double x, double y) {
-            if (s_random.Next(Constants.CHANCE_TO_CREATE_BONUS_PER_FRAME) == s_randomNumber && !s_dropped) {
-                s_dropped = true;
+            if (s_random.Next(Constants.CHANCE_TO_CREATE_BONUS_PER_FRAME) == s_randomNumber) {
+                Dropped = true;
                 return BonusCreator.CreateRandomBonus(x, y);
             }
             return null;

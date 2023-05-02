@@ -9,17 +9,18 @@ using System.Windows.Forms;
 namespace Game_Engine_Library.Bonuses {
     public static class BonusCreator {
         delegate Bonus bonusDelegate(double x, double y);
-        private static Random random = new Random(Guid.NewGuid().GetHashCode());
-        private static List<bonusDelegate> _createBonuseDelegateList = new List<bonusDelegate>();
+        private static Random random;
+        private static List<bonusDelegate> _createBonuseDelegateList;
 
         static BonusCreator() {
-            _createBonuseDelegateList.Add(CreateHealBonus);
+            random = new Random(Guid.NewGuid().GetHashCode());
+            _createBonuseDelegateList = new List<bonusDelegate> { CreateHealBonus };
         }
 
-        private static HealBonus CreateHealBonus(double x, double y) => new HealBonus(x, y);
+        public static HealBonus CreateHealBonus(double x, double y) => new HealBonus(x, y);
 
         public static Bonus CreateRandomBonus(double x, double y) =>
             _createBonuseDelegateList[random.Next(_createBonuseDelegateList.Count)](x, y);
-        
+
     }
 }
