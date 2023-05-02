@@ -12,18 +12,17 @@ namespace Game_Engine_Library {
         private double _speed;
         private sbyte _moveDirection;
         private string _side;
-        private (byte, byte)[] _texCoords;
+        //private (byte, byte)[] _texCoords;
 
-        public List<(double, double)> TrackPoints { get; private set; }
+        //public List<(double, double)> TrackPoints { get; private set; }
 
         public PanzarTrack(double x, double y, double width, double height, string side) : base(x, y, width, height) {
             _speed = Constants.PANZARS_SPEED;
             _side = side;
             texture = Texture.LoadTexture(Constants.PANZAR_TRACK_TEXTURE_PATH);
-            TrackPoints = new List<(double, double)> { (x, y), (x + width, y), (x + width, y - height), (x, y - height) };
+            Points = new List<(double, double)> { (x, y), (x + width, y), (x + width, y - height), (x, y - height) };
 
-            _texCoords = side == "left" ? new (byte, byte)[4] { (0, 0), (1, 0), (1, 1), (0, 1) }
-                                        : new (byte, byte)[4] { (1, 0), (0, 0), (0, 1), (1, 1) };
+            if (side == "right") TextureHorizontalReflectoin();
         }
 
         /// <summary>
@@ -51,21 +50,6 @@ namespace Game_Engine_Library {
                 touched = false;
                 _moveDirection = 1;
             }
-        }
-
-        /// <summary>
-        /// Отрисовка гусениц танка.
-        /// </summary>
-        public override void Draw() {
-            GL.BindTexture(TextureTarget.Texture2D, texture.ID);
-            GL.Begin(PrimitiveType.Quads);
-
-            for (int i = 0; i < _texCoords.Length; i++) {
-                GL.TexCoord2(_texCoords[i].Item1, _texCoords[i].Item2);
-                GL.Vertex2(TrackPoints[i].Item1, TrackPoints[i].Item2);
-            }
-
-            GL.End();
         }
 
         public override void Update() { }

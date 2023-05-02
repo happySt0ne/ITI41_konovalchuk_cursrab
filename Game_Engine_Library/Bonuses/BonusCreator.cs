@@ -7,6 +7,6 @@ using System.Threading.Tasks;
 namespace Game_Engine_Library.Bonuses {
     public abstract class BonusCreator {
 
-        public abstract Bonus CreateBonus();
+        public abstract Bonus CreateBonus(double x, double y);
     }
 }

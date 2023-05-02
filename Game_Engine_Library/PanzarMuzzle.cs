@@ -12,10 +12,7 @@ namespace Game_Engine_Library {
         
         private string _side;
         private (double, double) _rotateBazePoint;
-        private (byte, byte)[] _texCoords;
-
-        public List<(double, double)> MuzzlePoints { get; private set; }
-
+        
         /// <summary>
         /// Перезарядка танка.
         /// </summary>
@@ -37,8 +34,8 @@ namespace Game_Engine_Library {
         public (double, double) BulletPosition {
             get {
                 var bulletDiagonalLength = GameMath.FindHypotenuse(Constants.BULLETS_WIDTH, Constants.BULLETS_HEIGHT);
-                return _side == "left" ? (MuzzlePoints[1].Item1 + bulletDiagonalLength, MuzzlePoints[1].Item2 + bulletDiagonalLength)
-                                       : (MuzzlePoints[3].Item1 - bulletDiagonalLength, MuzzlePoints[3].Item2 + bulletDiagonalLength); ;
+                return _side == "left" ? (Points[1].Item1 + bulletDiagonalLength, Points[1].Item2 + bulletDiagonalLength)
+                                       : (Points[3].Item1 - bulletDiagonalLength, Points[3].Item2 + bulletDiagonalLength); ;
             }
         }
 
@@ -51,26 +48,18 @@ namespace Game_Engine_Library {
             _rotateBazePoint = (x - width / 2 , y - height / 4);
             texture = Texture.LoadTexture(Constants.PANZAR_MUZZLE_TEXTURE_PATH);
 
-            _texCoords = side == "left" ? new (byte, byte)[4] { (0, 0), (1, 0), (1, 1), (0, 1) }
-                                        : new (byte, byte)[4] { (1, 0), (0, 0), (0, 1), (1, 1) };
-
             _side = side;
 
             if (_side == "right") {
-                MuzzlePoints = new List<(double, double)> { (x - 2 * width, y),
+                Points = new List<(double, double)> { (x - 2 * width, y),
                                                             (x - width, y),
                                                             (x - width, y - height),
                                                             (x - 2 * width, y - height) };
-
+                TextureHorizontalReflectoin();
                 MuzzleDirection = -180;
-            } else {
-                MuzzlePoints = new List<(double, double)> { (x, y),
-                                                            (x + width, y),
-                                                            (x + width, y - height),
-                                                            (x, y - height) };
             }
 
-            MuzzlePoints.Add(_rotateBazePoint);
+            Points.Add(_rotateBazePoint);
         }
 
         /// <summary>
@@ -93,13 +82,13 @@ namespace Game_Engine_Library {
         public void RotateMuzzle(KeyboardState keyboard) {
             if (keyboard.IsKeyDown(Key.W) && _side == "left" && MuzzleDirection < 90 ||
                 keyboard.IsKeyDown(Key.Down) && _side == "right" && MuzzleDirection > -180) {
-                GameMath.Rotate(MuzzlePoints, 0, 4, Constants.MUZZLE_ROTATION_SPEED, _rotateBazePoint);
+                GameMath.Rotate(Points, 0, 4, Constants.MUZZLE_ROTATION_SPEED, _rotateBazePoint);
                 MuzzleDirection += _side == "left" ? Constants.MUZZLE_ROTATION_SPEED : -Constants.MUZZLE_ROTATION_SPEED;
             }
 
             if (keyboard.IsKeyDown(Key.S) && _side == "left" && MuzzleDirection > 0 ||
                 keyboard.IsKeyDown(Key.Up) && _side == "right" && MuzzleDirection < -90) {
-                GameMath.Rotate(MuzzlePoints, 0, 4, -Constants.MUZZLE_ROTATION_SPEED, _rotateBazePoint);
+                GameMath.Rotate(Points, 0, 4, -Constants.MUZZLE_ROTATION_SPEED, _rotateBazePoint);
                 MuzzleDirection += _side == "left" ? -Constants.MUZZLE_ROTATION_SPEED : Constants.MUZZLE_ROTATION_SPEED;
             }
         }
@@ -116,25 +105,10 @@ namespace Game_Engine_Library {
         }
 
         /// <summary>
-        /// Отрисовка дула танка.
-        /// </summary>
-        public override void Draw() {
-            GL.BindTexture(TextureTarget.Texture2D, texture.ID);
-            GL.Begin(PrimitiveType.Quads);
-
-            for (int i = 0; i < _texCoords.Length; i++) {
-                GL.TexCoord2(_texCoords[i].Item1, _texCoords[i].Item2);
-                GL.Vertex2(MuzzlePoints[i].Item1, MuzzlePoints[i].Item2);
-            }
-
-            GL.End();
-        }
-
-        /// <summary>
         /// Обновление логики дула танка.
         /// </summary>
         public override void Update() {
-            _rotateBazePoint = MuzzlePoints[4];
+            _rotateBazePoint = Points[4];
             ReduceCooldown();
         }
     }

@@ -11,16 +11,6 @@ namespace Game_Engine_Library {
             texture = Texture.LoadTexture(Constants.BACKGROUND_TEXTURE_PATH);
         }
 
-        public override void Draw() {
-            GL.BindTexture(TextureTarget.Texture2D, texture.ID);
-            GL.Begin(PrimitiveType.Quads);
-            GL.TexCoord2(0.0f, 1.0f); GL.Vertex2(-1.0f, -1.0f);
-            GL.TexCoord2(1.0f, 1.0f); GL.Vertex2(1.0f, -1.0f);
-            GL.TexCoord2(1.0f, 0.0f); GL.Vertex2(1.0f, 1.0f);
-            GL.TexCoord2(0.0f, 0.0f); GL.Vertex2(-1.0f, 1.0f);
-            GL.End();
-        }
-
         public override void Update() {
             Draw();
         }

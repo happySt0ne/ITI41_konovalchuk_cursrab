@@ -12,6 +12,10 @@ namespace Game_Engine_Library {
         public const double HEIGHT_TO_CREATE_PANZARS = -0.7;
         public const double PANZAR_X_COORDINATE_SPAWNPOINT = 0.5;
 
+        public const double BONUS_WIDTH = 0.2;
+        public const double BONUS_HEIGHT = 0.2;
+        public const double BONUS_Y_SPEED = 0.04;
+
         public const int MUZZLE_ROTATION_SPEED = 5;
         public const double MAX_COOLDOWN = 3;
         public const int START_AMMO = 40;
@@ -37,5 +41,7 @@ namespace Game_Engine_Library {
         public const string WALL_TEXTURE_PATH = @"../../../Game_Engine_Library/Resources/Mountain.bmp";
         public const string BACKGROUND_TEXTURE_PATH = @"../../../Game_Engine_Library/Resources/Background2.bmp";
         public const string PLANE_TEXTURE_PATH = @"../../../Game_Engine_Library/Resources/Plane.bmp";
-    } 
+        public const string HEAL_BONUS_TEXTURE_PATH = @"../../../Game_Engine_Library/Resources/HealBonus.bmp";
+
+    }
 }

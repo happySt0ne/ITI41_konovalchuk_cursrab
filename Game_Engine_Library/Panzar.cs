@@ -88,11 +88,11 @@ namespace Game_Engine_Library {
         /// </summary>
         /// <param name="keyboard"></param>
         private void Move(KeyboardState keyboard) {
-            _panzarTrack.Move(keyboard, _panzarTrack.TrackPoints);
-            _panzarTrack.Move(keyboard, _panzarMuzzle.MuzzlePoints);
-            _panzarTrack.Move(keyboard, _panzarTurret.TurretPoints);
+            _panzarTrack.Move(keyboard, _panzarTrack.Points);
+            _panzarTrack.Move(keyboard, _panzarMuzzle.Points);
+            _panzarTrack.Move(keyboard, _panzarTurret.Points);
 
-            Collision.MoveCollisionBoxTo(_panzarTrack.TrackPoints[0].Item1, y);
+            Collision.MoveCollisionBoxTo(_panzarTrack.Points[0].Item1, y);
         }
         
         /// <summary>

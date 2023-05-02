@@ -21,6 +21,7 @@ namespace Game_Engine_Library {
             _objects.Add(new Wall(-0.1, -0.5, 0.2, 0.5));
             _objects.Add(new Wall(-0.999, 1, 0.0001, 2));
             _objects.Add(new Wall(0.999, 1, 0.0001, 2));
+            _objects.Add(new HealBonus(0.7, 0.7));
             GetPanzarsList();
         }
 
@@ -63,11 +64,6 @@ namespace Game_Engine_Library {
             _listToRemove.Clear();
             AddBullet();
             UpdatePlaneSpawnCooldown();
-
-            if (_planeCooldown <= Constants.PLANE_SPAWN_MAX_COOLDOWN / 2) {
-                _panzars[0] = new HealBonus(_panzars[0]);
-                _objects[1] = _panzars[0];
-            }
 
             foreach (GameObject obj in _objects) {
                 obj.Update();

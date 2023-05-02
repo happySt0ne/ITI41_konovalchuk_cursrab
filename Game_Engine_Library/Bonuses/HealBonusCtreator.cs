@@ -5,10 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Game_Engine_Library.Bonuses {
-    public abstract class Effect : Panzar {
-        private Panzar panzar;
-
-        protected Effect(Panzar panzar) : base(panzar.Side) {
-        }
+    public class HealBonusCtreator : BonusCreator {
+        public override Bonus CreateBonus(double x, double y) => new HealBonus(x, y);
     }
 }

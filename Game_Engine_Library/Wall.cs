@@ -10,17 +10,6 @@ namespace Game_Engine_Library {
         public Wall(double x, double y, double width, double height) : base(x, y, width, height) {
             texture = Texture.LoadTexture(Constants.WALL_TEXTURE_PATH);
         }
-        
-        public override void Draw() {
-            GL.BindTexture(TextureTarget.Texture2D, texture.ID);
-            GL.Begin(PrimitiveType.Quads);
-            GL.TexCoord2(0, 0); GL.Vertex2(x, y);
-            GL.TexCoord2(1, 0); GL.Vertex2(x + width, y);
-            GL.TexCoord2(1, 1); GL.Vertex2(x + width, y - height);
-            GL.TexCoord2(0, 1); GL.Vertex2(x, y - height);
-            
-            GL.End();
-        }
 
         public override void Update() {
             Draw();
