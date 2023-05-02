@@ -25,7 +25,7 @@ namespace Game_Engine_Library {
         /// <summary>
         /// Боезапас танка.
         /// </summary>
-        public int Ammo { get => _panzarMuzzle.Ammo; }
+        public int Ammo { get => _panzarMuzzle.Ammo; set => _panzarMuzzle.Ammo = value;  }
 
         /// <summary>
         /// Текущая перезарядка до следующего выстрела.

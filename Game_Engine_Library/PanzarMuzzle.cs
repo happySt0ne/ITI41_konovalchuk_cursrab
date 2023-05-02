@@ -21,7 +21,7 @@ namespace Game_Engine_Library {
         /// <summary>
         /// Боезапас танка.
         /// </summary>
-        public int Ammo { get; private set; } = Constants.START_AMMO;
+        public int Ammo { get; set; } = Constants.START_AMMO;
 
         /// <summary>
         /// Угол между дулом и осью Ох.

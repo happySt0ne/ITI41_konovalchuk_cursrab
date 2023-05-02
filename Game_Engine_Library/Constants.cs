@@ -48,6 +48,7 @@ namespace Game_Engine_Library {
         public const string BACKGROUND_TEXTURE_PATH = @"../../../Game_Engine_Library/Resources/Background2.bmp";
         public const string PLANE_TEXTURE_PATH = @"../../../Game_Engine_Library/Resources/Plane.bmp";
         public const string HEAL_BONUS_TEXTURE_PATH = @"../../../Game_Engine_Library/Resources/HealBonus.bmp";
+        public const string AMMO_BONUS_TEXTURE_PATH = @"../../../Game_Engine_Library/Resources/Ammo.bmp";
 
     }
 }

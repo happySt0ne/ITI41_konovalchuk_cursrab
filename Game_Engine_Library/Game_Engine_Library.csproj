@@ -50,6 +50,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Background.cs" />
+    <Compile Include="Bonuses\AmmoBonus.cs" />
+    <Compile Include="Bonuses\AmmoEffect.cs" />
     <Compile Include="Bonuses\Bonus.cs" />
     <Compile Include="Bonuses\Effect.cs" />
     <Compile Include="Bonuses\BonusCreator.cs" />

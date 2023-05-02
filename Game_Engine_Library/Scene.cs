@@ -141,10 +141,13 @@ namespace Game_Engine_Library {
 
                 case "Game_Engine_Library.Bonuses.HealBonus":
                     panzar = new HealEffect(panzar);
-
                     _listToRemove.Add(collisionedObject);
                     break;
 
+                case "Game_Engine_Library.Bonuses.AmmoBonus":
+                    panzar = new AmmoEffect(panzar);
+                    _listToRemove.Add(collisionedObject);
+                    break;
                 default:
                     break;
             }
