@@ -11,6 +11,14 @@ namespace Game_Engine_Library {
         protected double x, y, width, height;
         private (byte, byte)[] _texCoords = new (byte, byte)[4] { (0, 0), (1, 0), (1, 1), (0, 1) };
         protected Texture texture;
+        
+        public virtual bool OutsideTheWindow {
+            get {
+                if (Points[0].Item1 > 1 || Points[0].Item1 < -1 || Points[0].Item2 < -1) return true;
+                return false;
+            }
+        }
+
         public List<(double, double)> Points { get; protected set; }
 
         public Collision Collision { get; protected set; }

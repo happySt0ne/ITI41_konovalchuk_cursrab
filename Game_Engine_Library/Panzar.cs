@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using Game_Engine_Library.Bonuses;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Input;
 

@@ -51,6 +51,12 @@ namespace Game_Engine_Library {
             }
         }
 
+        private void DeleteStuffOutsideWindow() {
+            foreach (GameObject gameObject in _objects) {
+                if (gameObject.OutsideTheWindow) _listToRemove.Add(gameObject);
+            }
+        }
+
         /// <summary>
         /// Проверяет, не следует ли закончить игру.
         /// </summary>
@@ -66,12 +72,13 @@ namespace Game_Engine_Library {
         /// </summary>
         public void Update(out int endGame) {
             endGame = CheckEndGame();
+
+            DeleteStuffOutsideWindow();
              _listToRemove.ForEach(x => _objects.Remove(x));
             _listToRemove.Clear();
 
             TryCreateBonus();
             TryCreatePlane();
-            TryDeletePlane();
             TryAddBullet();
 
             for (int i = 0; i < _objects.Count(); i++) {
@@ -81,7 +88,7 @@ namespace Game_Engine_Library {
         }
 
         private void TryCreateBonus() {
-            if (Plane.IsAlive && !Plane.Dropped) {
+            if (!Plane.Dropped && _objects.Any(x => x is Plane)) {
                 _plane = _objects.Single(x => x is Plane) as Plane;
                 _bonusTriedToCreate = Plane.DropBonus((_plane.Points[0].Item1 + _plane.Points[1].Item1) / 2, _plane.Points[3].Item2);
 
@@ -98,10 +105,6 @@ namespace Game_Engine_Library {
 
             _planeSpawnCooldown -= Constants.TIMER_INTERVAL_SECONDS;
         }
-
-        private void TryDeletePlane() {
-            if (!Plane.IsAlive && _objects.Any(x => x is Plane)) _listToRemove.Add(_objects.Single(x => x is Plane));
-        }        
 
         /// <summary>
         /// Проверяет коллизию всех объектов сцены с объектом obj.

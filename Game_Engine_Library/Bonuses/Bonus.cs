@@ -19,7 +19,7 @@ namespace Game_Engine_Library.Bonuses {
         }
 
         public override void Update() {
-            if (Points[3].Item2 > -0.98) Move();
+            Move();
                 
             Draw();
         }

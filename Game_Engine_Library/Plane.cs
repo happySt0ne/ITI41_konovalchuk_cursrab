@@ -16,12 +16,14 @@ namespace Game_Engine_Library {
         public static double s_currentPlaneLifetime;
 
         public static bool Dropped { get; private set; }
-        /// <summary>
-        /// Существует ли сейчас самолёт.
-        /// </summary>
-        public static bool IsAlive {
-            get => s_currentPlaneLifetime >= s_maxPlaneLifetime ? false : true;
-        } 
+
+        public override bool OutsideTheWindow {
+            get {
+                if (s_moveDirection == 1 && Points[0].Item1 > 1) return true;
+                if (s_moveDirection == -1 && Points[1].Item1 < -1) return true;
+                return false;
+            }
+        }
 
         public Plane() : base(ChooseDirection() == 1 ? Constants.PLANE_X_COORDINATE_SPAWN
                                                    : -(Constants.PLANE_X_COORDINATE_SPAWN + Constants.PLANE_WIDTH), 
@@ -76,7 +78,7 @@ namespace Game_Engine_Library {
         /// Обновляет логику самолёта и перерисовывает его.
         /// </summary>
         public override void Update() {
-            s_currentPlaneLifetime += 0.025;
+            s_currentPlaneLifetime += Constants.TIMER_INTERVAL_SECONDS;
             Move();
             Draw();
         }

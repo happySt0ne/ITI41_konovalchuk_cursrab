@@ -35,7 +35,7 @@ namespace Game_Engine_Library {
         public const double BULLETS_WIDTH = 0.07;
         public const int BULLET_DAMAGE = 10;
 
-        public const double PLANE_X_COORDINATE_SPAWN = -1;
+        public const double PLANE_X_COORDINATE_SPAWN = -1.3;
         public const double PLANE_Y_COORDINATE_SPAWN = 0.7;
         public const double PLANE_HEIGHT = 0.3;
         public const double PLANE_WIDTH = 0.4;
