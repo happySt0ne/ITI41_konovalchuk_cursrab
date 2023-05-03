@@ -11,7 +11,7 @@ namespace Game_Engine_Library {
     public class PanzarMuzzle : GameObject {
         private string _side;
         private (double, double) _rotateBazePoint;
-        public double refreshCooldown = Constants.MAX_COOLDOWN;
+        public double refreshCooldown;
 
         /// <summary>
         /// Перезарядка танка.
@@ -21,12 +21,17 @@ namespace Game_Engine_Library {
         /// <summary>
         /// Боезапас танка.
         /// </summary>
-        public int Ammo { get; set; } = Constants.START_AMMO;
+        public int Ammo { get; set; } 
 
         /// <summary>
         /// Угол между дулом и осью Ох.
         /// </summary>
         public int MuzzleDirection { get; private set; } = 0;
+
+        /// <summary>
+        /// Сделан ли выстрел танком.
+        /// </summary>
+        public bool Shooted { get; private set; } = false;
 
         /// <summary>
         /// Начальная позиция полёта пули.
@@ -39,22 +44,19 @@ namespace Game_Engine_Library {
             }
         }
 
-        /// <summary>
-        /// Сделан ли выстрел танком.
-        /// </summary>
-        public bool Shooted { get; private set; } = false;
-
         public PanzarMuzzle(double x, double y, double width, double height, string side) : base(x, y, width, height) {
-            _rotateBazePoint = (x - width / 2 , y - height / 4);
             texture = Texture.LoadTexture(Constants.PANZAR_MUZZLE_TEXTURE_PATH);
+            Ammo = Constants.START_AMMO;
+            refreshCooldown = Constants.MAX_COOLDOWN;
 
+            _rotateBazePoint = (x - width / 2 , y - height / 4);
             _side = side;
 
             if (_side == "right") {
-                Points = new List<(double, double)> { (x - 2 * width, y),
-                                                            (x - width, y),
-                                                            (x - width, y - height),
-                                                            (x - 2 * width, y - height) };
+                Points = new List<(double, double)> { (x - 2 * width, y), 
+                                                      (x - width, y), 
+                                                      (x - width, y - height),
+                                                      (x - 2 * width, y - height) };
                 TextureHorizontalReflection();
                 MuzzleDirection = -180;
             }

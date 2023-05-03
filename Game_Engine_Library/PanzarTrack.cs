@@ -8,15 +8,17 @@ using System.Threading.Tasks;
 
 namespace Game_Engine_Library {
     public class PanzarTrack : GameObject{
-        public bool touched = false;
-        private double _speed = Constants.PANZARS_SPEED;
+        public bool touched;
+        private double _speed;
         private sbyte _moveDirection;
         private string _side;
         
         public PanzarTrack(double x, double y, double width, double height, string side) : base(x, y, width, height) {
             texture = Texture.LoadTexture(Constants.PANZAR_TRACK_TEXTURE_PATH);
+            _speed = Constants.PANZARS_SPEED;
             _side = side;
-            
+            touched = false;
+
             if (side == "right") TextureHorizontalReflection();
         }
 

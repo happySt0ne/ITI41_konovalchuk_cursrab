@@ -17,10 +17,12 @@ namespace Game_Engine_Library {
         public const double PANZARS_SPEED = 0.006;
         public const double HEIGHT_TO_CREATE_PANZARS = -0.7;
         public const double PANZAR_X_COORDINATE_SPAWNPOINT = 0.5;
+        public const int PANZAR_HP = 100;
 
         public const double BONUS_WIDTH = 0.08;
         public const double BONUS_HEIGHT = 0.08;
         public const double BONUS_Y_SPEED = 0.04;
+        public const double REDUCE_COOLDOWN_BONUS_DURATION = 3;
 
         public const int MUZZLE_ROTATION_SPEED = 5;
         public const double MAX_COOLDOWN = 3;

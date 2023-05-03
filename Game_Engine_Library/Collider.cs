@@ -12,7 +12,7 @@ namespace Game_Engine_Library {
     /// Класс для проверки столкновения объектов.
     /// </summary>
     public class Collision {
-        private double x, y, width, height;
+        public double x, y, width, height;
 
         /// <summary>
         /// Инициализация прямоугольного collision box.

@@ -8,7 +8,7 @@ namespace Game_Engine_Library.Bonuses {
     public abstract class Effect : Panzar {
         protected Panzar panzar;
 
-        public Effect(Panzar panzar) : base(panzar.Side) {
+        public Effect(Panzar panzar) : base(panzar) {
             this.panzar = panzar;
         }
     }

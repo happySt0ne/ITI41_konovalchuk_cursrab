@@ -11,12 +11,12 @@ namespace Game_Engine_Library {
         private double xSpeed = Constants.BULLETS_X_START_SPEED;
         private double ySpeed = Constants.BULLETS_Y_START_SPEED;
         private double flightAngle;
-
+        
         public int Damage { get; private set; } = Constants.BULLET_DAMAGE;
 
         public Bullet(double x, double y, int angle, string side) : base(x, y, Constants.BULLETS_WIDTH, Constants.BULLETS_HEIGHT) {
             texture = Texture.LoadTexture(Constants.BULLET_TEXTURE_PATH);
-            flightAngle = side == "left" ? angle * Math.PI / 180 : -angle * Math.PI / 180;
+            flightAngle = (side == "left" ? angle : -angle) * Math.PI / 180;
         }
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace Game_Engine_Library {
                 x = Points[i].Item1;
                 y = Points[i].Item2;
 
-                y += ySpeed * Math.Sin(flightAngle); 
+                y += ySpeed * Math.Sin(flightAngle);
                 x += xSpeed * Math.Cos(flightAngle);
                 Points[i] = (x, y);
             }

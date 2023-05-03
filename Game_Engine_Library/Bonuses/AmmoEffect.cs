@@ -7,7 +7,11 @@ using System.Threading.Tasks;
 namespace Game_Engine_Library.Bonuses {
     internal class AmmoEffect : Effect {
         public AmmoEffect(Panzar panzar) : base(panzar) {
-            panzar.Ammo += 5;
+            Ammo += 5;
+        }
+
+        public override void Update() {
+            base.Update();
         }
     }
 }

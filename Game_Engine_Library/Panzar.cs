@@ -8,14 +8,14 @@ using OpenTK.Input;
 namespace Game_Engine_Library {
     public class Panzar : GameObject {
         protected PanzarTrack _panzarTrack;
-        public PanzarMuzzle _panzarMuzzle;
+        protected PanzarMuzzle _panzarMuzzle;
         protected PanzarTurret _panzarTurret;
         
         #region Properties
         /// <summary>
         /// Здоровье танка.
         /// </summary>
-        public double Health { get; set; } = 100;
+        public double Health { get; set; }
 
         /// <summary>
         /// Сторона игрока.
@@ -25,7 +25,7 @@ namespace Game_Engine_Library {
         /// <summary>
         /// Боезапас танка.
         /// </summary>
-        public int Ammo { get => _panzarMuzzle.Ammo; set => _panzarMuzzle.Ammo = value;  }
+        public int Ammo { get => _panzarMuzzle.Ammo; protected set => _panzarMuzzle.Ammo = value;  }
 
         /// <summary>
         /// Текущая перезарядка до следующего выстрела.
@@ -69,7 +69,18 @@ namespace Game_Engine_Library {
             _panzarMuzzle = new PanzarMuzzle(x + width / 3 * 2, y - height / 4, width / 3, height / 6, side);
             _panzarTrack = new PanzarTrack(x, y - height / 2, width, height / 2, side);
             _panzarTurret = new PanzarTurret(x + width / 3, y, width / 3, height / 2, side);
+
+            Health = Constants.PANZAR_HP;
             Side = side;
+        }
+
+        public Panzar(Panzar panzar) : base (panzar.x, panzar.y, panzar.width, panzar.height) {
+            _panzarMuzzle = panzar._panzarMuzzle;
+            _panzarTrack = panzar._panzarTrack;
+            _panzarTurret = panzar._panzarTurret;
+
+            Health = panzar.Health;
+            Side = panzar.Side;
         }
 
         /// <summary>
@@ -96,7 +107,7 @@ namespace Game_Engine_Library {
         }
         
         /// <summary>
-        /// Отрисовка конкретного танка.
+        /// Отрисовка танка.
         /// </summary>
         public override void Draw() {
             _panzarTrack.Draw();
@@ -108,11 +119,12 @@ namespace Game_Engine_Library {
         /// Обновление логики и перересовка танка.
         /// </summary>
         public override void Update() {
-            Action();
-            Draw();
             _panzarTrack.Update();
             _panzarMuzzle.Update();
             _panzarTurret.Update();
+
+            Action();
+            Draw();
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Game_Engine_Library.Bonuses;
+using OpenTK.Graphics.ES20;
 using OpenTK.Graphics.OpenGL;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ namespace Game_Engine_Library {
         private List<GameObject> _listToRemove = new List<GameObject>();
         private List<GameObject> _objects = new List<GameObject>();
         private List<Panzar> _panzars = new List<Panzar>();
-        private List<Panzar> _addEffects = new List<Panzar>();
+        //private List<Panzar> _addEffects = new List<Panzar>();
         private double _planeSpawnCooldown = Constants.PLANE_SPAWN_MAX_COOLDOWN;
         private Bonus _bonusTriedToCreate;
         private Plane _plane;
@@ -25,7 +26,7 @@ namespace Game_Engine_Library {
             _objects.Add(new Wall(-0.999, 1, 0.0001, 2));
             _objects.Add(new Wall(0.999, 1, 0.0001, 2));
 
-            GetPanzarsList();
+            RefreshPanzarsList();
         }
 
         public void GetPanzarsInfo(out double health1, out double health2, out int ammo1, out int ammo2, out double cooldown1, out double cooldown2) {
@@ -40,10 +41,10 @@ namespace Game_Engine_Library {
         /// <summary>
         /// Добавляет все танки в список танков.
         /// </summary>
-        private void GetPanzarsList() {
+        private void RefreshPanzarsList() {
             _panzars.Clear();
 
-            foreach (GameObject obj in _objects) { 
+            foreach (GameObject obj in _objects) {
                 if (obj is Panzar panzar) {
                     _panzars.Add(panzar);
                 }
@@ -64,17 +65,18 @@ namespace Game_Engine_Library {
         /// Обновление логики и перересовка всех объектов сцены.
         /// </summary>
         public void Update(out int endGame) {
+            endGame = CheckEndGame();
+             _listToRemove.ForEach(x => _objects.Remove(x));
+            _listToRemove.Clear();
+
             TryCreateBonus();
             TryCreatePlane();
             TryDeletePlane();
-            endGame = CheckEndGame();
-            _listToRemove.ForEach(x => _objects.Remove(x));
-            _listToRemove.Clear();
-            AddBullet();
+            TryAddBullet();
 
-            foreach (GameObject obj in _objects) {
-                obj.Update();
-                CheckSceneCollision(obj);
+            for (int i = 0; i < _objects.Count(); i++) {
+                _objects[i].Update();
+                CheckSceneCollision(_objects[i]);
             }
         }
 
@@ -99,26 +101,19 @@ namespace Game_Engine_Library {
 
         private void TryDeletePlane() {
             if (!Plane.IsAlive && _objects.Any(x => x is Plane)) _listToRemove.Add(_objects.Single(x => x is Plane));
-        }
+        }        
 
         /// <summary>
         /// Проверяет коллизию всех объектов сцены с объектом obj.
         /// </summary>
         /// <param name="obj">Объект, с которым проверяется столкновение остальных объектов сцены.</param>
         private void CheckSceneCollision(GameObject obj) {
-            foreach (GameObject obj2 in _objects.Where(x => x != obj)) {
-                if (obj.Collision.IntersectsWith(obj2.Collision)) {
-                    switch (obj.GetType().ToString()) {
-                        case "Game_Engine_Library.Panzar":
-                            PanzarCollisionActions(obj as Panzar, obj2);
-                            break;
-
-                        case "Game_Engine_Library.Bullet":
-                            BulletCollisionActions(obj as Bullet, obj2);
-                            break;
-
-                        default:
-                            break;
+            for (int i = 0; i < _objects.Count; i++) {
+                if (obj.Collision.IntersectsWith(_objects[i].Collision) && _objects[i] != obj) {
+                    if (obj is Panzar panzar) {
+                        PanzarCollisionActions(panzar, _objects[i]);
+                    } else if (obj is Bullet bullet) {
+                        BulletCollisionActions(bullet, _objects[i]);
                     }
                 }
             }
@@ -130,37 +125,35 @@ namespace Game_Engine_Library {
         /// <param name="panzar">Танк, который столкнулся с объектом.</param>
         /// <param name="collisionedObject">Объект, который столкнулся с танком.</param>
         private void PanzarCollisionActions(Panzar panzar, GameObject collisionedObject) {
-            switch (collisionedObject.GetType().ToString()) { 
-                case "Game_Engine_Library.Bullet":
-                    panzar.Health -= ((Bullet)collisionedObject).Damage;
+            if (collisionedObject is Bullet bullet) {
 
-                    ((Bullet)collisionedObject).Explode();
-                    _listToRemove.Add(collisionedObject);
-                    break;
+                panzar.Health -= bullet.Damage;
+                bullet.Explode();
+                _listToRemove.Add(collisionedObject);
 
-                case "Game_Engine_Library.Wall":
-                    panzar.Touched = true;
-                    break;
+            } else if (collisionedObject is Wall wall) {
 
-                case "Game_Engine_Library.Bonuses.HealBonus":
-                    panzar = new HealEffect(panzar);
-                    _listToRemove.Add(collisionedObject);
-                    break;
+                panzar.Touched = true;
 
-                case "Game_Engine_Library.Bonuses.AmmoBonus":
-                    panzar = new AmmoEffect(panzar);
-                    _listToRemove.Add(collisionedObject);
-                    break;
+            } else if (collisionedObject is HealBonus healBonus) {
 
-                case "Game_Engine_Library.Bonuses.ReduceCooldownBonus":
-                    //_objects[_objects.IndexOf(panzar)] = new ReduceCooldownEffect(panzar);
-                    //panzar = new ReduceCooldownEffect(panzar);
-                    _listToRemove.Add(collisionedObject);
-                    break;
+                _objects[_objects.IndexOf(panzar)] = new HealEffect(panzar);
+                _listToRemove.Add(collisionedObject);
+                RefreshPanzarsList();
 
-                default:
-                    break;
-            }
+            } else if (collisionedObject is AmmoBonus ammoBonus) {
+
+                _objects[_objects.IndexOf(panzar)] = new AmmoEffect(panzar);
+                _listToRemove.Add(collisionedObject);
+                RefreshPanzarsList();
+
+            } else if (collisionedObject is ReduceCooldownBonus reduceCooldownBonus) {
+
+                _objects[_objects.IndexOf(panzar)] = new ReduceCooldownEffect(panzar);
+                _listToRemove.Add(collisionedObject);
+                RefreshPanzarsList();
+
+            } 
         }
         
         /// <summary>
@@ -169,21 +162,11 @@ namespace Game_Engine_Library {
         /// <param name="bullet">Ракета, которая столкнулась с объектом.</param>
         /// <param name="collisionedObject">Объект, который столкеулся с ракетой.</param>
         private void BulletCollisionActions(Bullet bullet, GameObject collisionedObject) {
-            switch (collisionedObject.GetType().ToString()) {
-                case "Game_Engine_Library.Bullet":
-                    bullet.Explode();
-                    ((Bullet)collisionedObject).Explode();
-                    
-                    _listToRemove.Add(bullet);
-                    _listToRemove.Add(collisionedObject);
-                    break;
-
-                case "Game_Engine_Library.Wall":
-                    _listToRemove.Add(bullet);
-                    break;
-
-                default:
-                    break;
+            if (collisionedObject is Bullet second_bullet) {
+                bullet.Explode();
+                _listToRemove.Add(bullet);
+            } else if (collisionedObject is Wall) {
+                _listToRemove.Add(bullet);
             }
         }
 
@@ -191,15 +174,13 @@ namespace Game_Engine_Library {
         /// Добавляет пули на сцену при выстреле.
         /// </summary>
         /// <param name="text"></param>
-        private void AddBullet() {
-            foreach (Panzar panzar in _panzars) {
-                if (panzar.Shooted) {
-                    _objects.Add(new Bullet(panzar.BulletPosition.Item1, 
-                                            panzar.BulletPosition.Item2, 
-                                            panzar.MuzzleDirection, 
-                                            panzar.Side));
-                }
-            }
+        private void TryAddBullet() {
+            foreach (Panzar panzar in _panzars.Where(x => x.Shooted)) {
+                _objects.Add(new Bullet( panzar.BulletPosition.Item1,
+                                         panzar.BulletPosition.Item2,
+                                         panzar.MuzzleDirection,
+                                         panzar.Side ));
+            } 
         }
     }
 }

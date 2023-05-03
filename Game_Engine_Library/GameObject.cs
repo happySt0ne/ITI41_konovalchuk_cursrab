@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Game_Engine_Library {
     public abstract class GameObject : IDrawable {
+
         protected double x, y, width, height;
         private (byte, byte)[] _texCoords = new (byte, byte)[4] { (0, 0), (1, 0), (1, 1), (0, 1) };
         protected Texture texture;

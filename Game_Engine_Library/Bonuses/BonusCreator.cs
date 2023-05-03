@@ -14,7 +14,7 @@ namespace Game_Engine_Library.Bonuses {
 
         static BonusCreator() {
             random = new Random(Guid.NewGuid().GetHashCode());
-            _createBonuseDelegateList = new List<bonusDelegate> { /*CreateHealBonus, CreateAmmoBonus, */CreateReduceCooldownBonus };
+            _createBonuseDelegateList = new List<bonusDelegate> { CreateHealBonus, CreateAmmoBonus, CreateReduceCooldownBonus };
         }
 
         private static HealBonus CreateHealBonus(double x, double y) => new HealBonus(x, y);
