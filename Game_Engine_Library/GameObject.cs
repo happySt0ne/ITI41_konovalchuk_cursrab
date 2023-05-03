@@ -7,11 +7,13 @@ using System.Threading.Tasks;
 
 namespace Game_Engine_Library {
     public abstract class GameObject : IDrawable {
-
         protected double x, y, width, height;
         private (byte, byte)[] _texCoords = new (byte, byte)[4] { (0, 0), (1, 0), (1, 1), (0, 1) };
         protected Texture texture;
-        
+
+        /// <summary>
+        /// true, если объект находится вне рамок игрового экрана.
+        /// </summary>
         public virtual bool OutsideTheWindow {
             get {
                 if (Points[0].Item1 > 1 || Points[0].Item1 < -1 || Points[0].Item2 < -1) return true;
@@ -36,9 +38,15 @@ namespace Game_Engine_Library {
 
         public GameObject() { }
 
+        /// <summary>
+        /// Отражает текстуру по горизонтали.
+        /// </summary>
         public void TextureHorizontalReflection() => 
             _texCoords = new (byte, byte)[4] { (1, 0), (0, 0), (0, 1), (1, 1) };
     
+        /// <summary>
+        /// Отрисовка объекта.
+        /// </summary>
         public virtual void Draw() {
             GL.BindTexture(TextureTarget.Texture2D, texture.ID);
             GL.Begin(PrimitiveType.Quads);
@@ -51,6 +59,9 @@ namespace Game_Engine_Library {
             GL.End();
         }
 
+        /// <summary>
+        /// Обновление логики объекта.
+        /// </summary>
         public abstract void Update();
     }
 }

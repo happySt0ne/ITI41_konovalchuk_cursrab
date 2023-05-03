@@ -57,6 +57,12 @@ namespace Game_Engine_Library {
             return (new_x + bazePoint.Item1, new_y + bazePoint.Item2);
         }
 
+        /// <summary>
+        /// Находит гипотенузу.
+        /// </summary>
+        /// <param name="firstCathet">Катет прямоугольного треугольника.</param>
+        /// <param name="secondCathet">Катет прямоугольного треугольника.</param>
+        /// <returns>Гипотенуза прямоугольного треугольника.</returns>
         public static double FindHypotenuse (double firstCathet, double secondCathet) =>
                                 Math.Sqrt(Math.Pow(firstCathet, 2) + Math.Pow(secondCathet, 2));
     }

@@ -27,6 +27,9 @@ namespace Game_Engine_Library {
             Draw();
         }
 
+        /// <summary>
+        /// Воспроизведение анимации взрыва снаряда.
+        /// </summary>
         public void Explode() {
 
         }

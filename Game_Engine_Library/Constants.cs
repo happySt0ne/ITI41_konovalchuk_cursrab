@@ -5,6 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Game_Engine_Library {
+    /// <summary>
+    /// Класс, содержащий все константы, используемые в игре.
+    /// </summary>
     public static class Constants {
         /// <summary>
         /// Интервал таймера в секундах.

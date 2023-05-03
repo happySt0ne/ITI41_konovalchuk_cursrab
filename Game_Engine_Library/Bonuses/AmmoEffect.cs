@@ -9,9 +9,5 @@ namespace Game_Engine_Library.Bonuses {
         public AmmoEffect(Panzar panzar) : base(panzar) {
             Ammo += 5;
         }
-
-        public override void Update() {
-            base.Update();
-        }
     }
 }

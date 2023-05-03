@@ -13,7 +13,6 @@ namespace Game_Engine_Library {
         private List<GameObject> _listToRemove = new List<GameObject>();
         private List<GameObject> _objects = new List<GameObject>();
         private List<Panzar> _panzars = new List<Panzar>();
-        //private List<Panzar> _addEffects = new List<Panzar>();
         private double _planeSpawnCooldown = Constants.PLANE_SPAWN_MAX_COOLDOWN;
         private Bonus _bonusTriedToCreate;
         private Plane _plane;
@@ -51,6 +50,9 @@ namespace Game_Engine_Library {
             }
         }
 
+        /// <summary>
+        /// Добавляет в список на удаление все объекты, находящиеся вне игрового экрана.
+        /// </summary>
         private void DeleteStuffOutsideWindow() {
             foreach (GameObject gameObject in _objects) {
                 if (gameObject.OutsideTheWindow) _listToRemove.Add(gameObject);

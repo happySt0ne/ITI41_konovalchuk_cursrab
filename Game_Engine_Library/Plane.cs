@@ -15,6 +15,9 @@ namespace Game_Engine_Library {
         private static int s_randomNumber;
         public static double s_currentPlaneLifetime;
 
+        /// <summary>
+        /// Создал ли самолёт бонус за текущее появление.
+        /// </summary>
         public static bool Dropped { get; private set; }
 
         public override bool OutsideTheWindow {
@@ -66,6 +69,12 @@ namespace Game_Engine_Library {
             }
         }
 
+        /// <summary>
+        /// Создаёт бонус в случайный момент времени.
+        /// </summary>
+        /// <param name="x">Координата х, в которой будет создан бонус</param>
+        /// <param name="y">Координата у, в которой будет создан бонус</param>
+        /// <returns>Случайный бонус</returns>
         public static Bonus DropBonus(double x, double y) {
             if (s_random.Next(Constants.CHANCE_TO_CREATE_BONUS_PER_FRAME) == s_randomNumber) {
                 Dropped = true;
