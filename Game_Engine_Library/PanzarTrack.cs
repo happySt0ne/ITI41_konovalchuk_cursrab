@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Game_Engine_Library {
-    internal class PanzarTrack : GameObject{
+    public class PanzarTrack : GameObject{
         public bool touched = false;
         private double _speed = Constants.PANZARS_SPEED;
         private sbyte _moveDirection;

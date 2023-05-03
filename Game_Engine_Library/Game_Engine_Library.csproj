@@ -57,6 +57,8 @@
     <Compile Include="Bonuses\BonusCreator.cs" />
     <Compile Include="Bonuses\HealBonus.cs" />
     <Compile Include="Bonuses\HealEffect.cs" />
+    <Compile Include="Bonuses\ReduceCooldownBonus.cs" />
+    <Compile Include="Bonuses\ReduceCooldownEffect.cs" />
     <Compile Include="Bullet.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Collider.cs" />

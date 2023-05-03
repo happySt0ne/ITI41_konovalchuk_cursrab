@@ -8,15 +8,15 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Game_Engine_Library {
-    internal class PanzarMuzzle : GameObject {
-        
+    public class PanzarMuzzle : GameObject {
         private string _side;
         private (double, double) _rotateBazePoint;
-        
+        public double refreshCooldown = Constants.MAX_COOLDOWN;
+
         /// <summary>
         /// Перезарядка танка.
         /// </summary>
-        public double Cooldown { get; private set; } = 0;
+        public double Cooldown { get; set; } = 0;
 
         /// <summary>
         /// Боезапас танка.
@@ -70,7 +70,7 @@ namespace Game_Engine_Library {
             if ((keyboard.IsKeyDown(Key.Space) && _side == "left" || keyboard.IsKeyDown(Key.Enter) && _side == "right")
                                                                                         && Cooldown <= 0 && Ammo > 0) {
                 Shooted = true;
-                Cooldown = Constants.MAX_COOLDOWN;
+                Cooldown = refreshCooldown;
                 Ammo--;
             } else Shooted = false;
         }
@@ -96,11 +96,11 @@ namespace Game_Engine_Library {
         /// <summary>
         /// Осуществление тика таймера кулдауна стрельбы.
         /// </summary>
-        private void ReduceCooldown() {
+        protected void ReduceCooldown() {
             Cooldown = Math.Round(Cooldown, 3);
 
-            if (Cooldown >= 0.025) {
-                Cooldown -= 0.025;
+            if (Cooldown >= Constants.TIMER_INTERVAL_SECONDS) {
+                Cooldown -= Constants.TIMER_INTERVAL_SECONDS;
             }
         }
 

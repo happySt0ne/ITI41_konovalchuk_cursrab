@@ -7,9 +7,9 @@ using OpenTK.Input;
 
 namespace Game_Engine_Library {
     public class Panzar : GameObject {
-        private PanzarTrack _panzarTrack;
-        private PanzarMuzzle _panzarMuzzle;
-        private PanzarTurret _panzarTurret;
+        protected PanzarTrack _panzarTrack;
+        public PanzarMuzzle _panzarMuzzle;
+        protected PanzarTurret _panzarTurret;
         
         #region Properties
         /// <summary>

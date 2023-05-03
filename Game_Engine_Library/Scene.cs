@@ -12,6 +12,7 @@ namespace Game_Engine_Library {
         private List<GameObject> _listToRemove = new List<GameObject>();
         private List<GameObject> _objects = new List<GameObject>();
         private List<Panzar> _panzars = new List<Panzar>();
+        private List<Panzar> _addEffects = new List<Panzar>();
         private double _planeSpawnCooldown = Constants.PLANE_SPAWN_MAX_COOLDOWN;
         private Bonus _bonusTriedToCreate;
         private Plane _plane;
@@ -40,6 +41,8 @@ namespace Game_Engine_Library {
         /// Добавляет все танки в список танков.
         /// </summary>
         private void GetPanzarsList() {
+            _panzars.Clear();
+
             foreach (GameObject obj in _objects) { 
                 if (obj is Panzar panzar) {
                     _panzars.Add(panzar);
@@ -127,7 +130,7 @@ namespace Game_Engine_Library {
         /// <param name="panzar">Танк, который столкнулся с объектом.</param>
         /// <param name="collisionedObject">Объект, который столкнулся с танком.</param>
         private void PanzarCollisionActions(Panzar panzar, GameObject collisionedObject) {
-            switch (collisionedObject.GetType().ToString()) {
+            switch (collisionedObject.GetType().ToString()) { 
                 case "Game_Engine_Library.Bullet":
                     panzar.Health -= ((Bullet)collisionedObject).Damage;
 
@@ -148,6 +151,13 @@ namespace Game_Engine_Library {
                     panzar = new AmmoEffect(panzar);
                     _listToRemove.Add(collisionedObject);
                     break;
+
+                case "Game_Engine_Library.Bonuses.ReduceCooldownBonus":
+                    //_objects[_objects.IndexOf(panzar)] = new ReduceCooldownEffect(panzar);
+                    //panzar = new ReduceCooldownEffect(panzar);
+                    _listToRemove.Add(collisionedObject);
+                    break;
+
                 default:
                     break;
             }

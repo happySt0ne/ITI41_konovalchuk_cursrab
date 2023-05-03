@@ -24,7 +24,7 @@ namespace Game_Engine_Library {
 
         public const int MUZZLE_ROTATION_SPEED = 5;
         public const double MAX_COOLDOWN = 3;
-        public const int START_AMMO = 40;
+        public const int START_AMMO = 10;
 
         public const double BULLETS_X_START_SPEED = 0.07;
         public const double BULLETS_Y_START_SPEED = 0.07;
@@ -49,6 +49,7 @@ namespace Game_Engine_Library {
         public const string PLANE_TEXTURE_PATH = @"../../../Game_Engine_Library/Resources/Plane.bmp";
         public const string HEAL_BONUS_TEXTURE_PATH = @"../../../Game_Engine_Library/Resources/HealBonus.bmp";
         public const string AMMO_BONUS_TEXTURE_PATH = @"../../../Game_Engine_Library/Resources/Ammo.bmp";
+        public const string REDUCE_COOLDOWN_BONUS_TEXTURE_PATH = @"../../../Game_Engine_Library/Resources/Mountain.bmp";
 
     }
 }

@@ -14,11 +14,13 @@ namespace Game_Engine_Library.Bonuses {
 
         static BonusCreator() {
             random = new Random(Guid.NewGuid().GetHashCode());
-            _createBonuseDelegateList = new List<bonusDelegate> { CreateHealBonus, CreateAmmoBonus};
+            _createBonuseDelegateList = new List<bonusDelegate> { /*CreateHealBonus, CreateAmmoBonus, */CreateReduceCooldownBonus };
         }
 
         private static HealBonus CreateHealBonus(double x, double y) => new HealBonus(x, y);
         private static AmmoBonus CreateAmmoBonus(double x, double y) => new AmmoBonus(x, y);
+        private static ReduceCooldownBonus CreateReduceCooldownBonus(double x, double y) => new ReduceCooldownBonus(x, y);
+
 
         public static Bonus CreateRandomBonus(double x, double y) =>
             _createBonuseDelegateList[random.Next(_createBonuseDelegateList.Count)](x, y);

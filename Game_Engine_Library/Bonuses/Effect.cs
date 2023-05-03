@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace Game_Engine_Library.Bonuses {
     public abstract class Effect : Panzar {
-        private Panzar panzar;
+        protected Panzar panzar;
 
-        protected Effect(Panzar panzar) : base(panzar.Side) {
+        public Effect(Panzar panzar) : base(panzar.Side) {
+            this.panzar = panzar;
         }
     }
 }
