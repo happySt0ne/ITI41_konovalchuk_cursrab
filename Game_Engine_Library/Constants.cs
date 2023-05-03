@@ -31,8 +31,8 @@ namespace Game_Engine_Library {
         public const double BULLETS_X_START_SPEED = 0.07;
         public const double BULLETS_Y_START_SPEED = 0.07;
         public const double GRAVITY_SCALE = -0.006;
-        public const double BULLETS_HEIGHT = 0.07;
-        public const double BULLETS_WIDTH = 0.07;
+        public const double BULLETS_HEIGHT = 0.05;
+        public const double BULLETS_WIDTH = 0.05;
         public const int BULLET_DAMAGE = 10;
 
         public const double PLANE_X_COORDINATE_SPAWN = -1.3;
@@ -51,7 +51,7 @@ namespace Game_Engine_Library {
         public const string PLANE_TEXTURE_PATH = @"../../../Game_Engine_Library/Resources/Plane.bmp";
         public const string HEAL_BONUS_TEXTURE_PATH = @"../../../Game_Engine_Library/Resources/HealBonus.bmp";
         public const string AMMO_BONUS_TEXTURE_PATH = @"../../../Game_Engine_Library/Resources/Ammo.bmp";
-        public const string REDUCE_COOLDOWN_BONUS_TEXTURE_PATH = @"../../../Game_Engine_Library/Resources/Mountain.bmp";
+        public const string REDUCE_COOLDOWN_BONUS_TEXTURE_PATH = @"../../../Game_Engine_Library/Resources/ReduceCooldownBonus.bmp";
 
     }
 }
