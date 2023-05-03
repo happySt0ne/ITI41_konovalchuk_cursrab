@@ -26,16 +26,8 @@ namespace Game_Engine_Library {
         /// Реализация движения танка.
         /// </summary>
         public void Move(KeyboardState keyboard, List<(double, double)> parts) {
-            if (((keyboard.IsKeyDown(Key.A) && _side == "left") ||
-                (keyboard.IsKeyDown(Key.Left) && _side == "right")) &&
-                !(_moveDirection == -1 && touched)) {
-                for (int i = 0; i < parts.Count; i++) {
-                    parts[i] = (parts[i].Item1 - _speed, parts[i].Item2);
-                }
-
-                touched = false;
-                _moveDirection = -1;
-            }
+            if (keyboard.IsKeyDown(Key.D) && keyboard.IsKeyDown(Key.A) && _side == "left") return;
+            if (keyboard.IsKeyDown(Key.Right) && keyboard.IsKeyDown(Key.Left) && _side == "right") return;
 
             if (((keyboard.IsKeyDown(Key.D) && _side == "left") ||
                  (keyboard.IsKeyDown(Key.Right) && _side == "right")) &&
@@ -46,6 +38,17 @@ namespace Game_Engine_Library {
 
                 touched = false;
                 _moveDirection = 1;
+            }
+
+            if (((keyboard.IsKeyDown(Key.A) && _side == "left") ||
+                (keyboard.IsKeyDown(Key.Left) && _side == "right")) &&
+                !(_moveDirection == -1 && touched)) {
+                for (int i = 0; i < parts.Count; i++) {
+                    parts[i] = (parts[i].Item1 - _speed, parts[i].Item2);
+                }
+
+                touched = false;
+                _moveDirection = -1;
             }
         }
 

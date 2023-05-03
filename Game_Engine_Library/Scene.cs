@@ -126,33 +126,23 @@ namespace Game_Engine_Library {
         /// <param name="collisionedObject">Объект, который столкнулся с танком.</param>
         private void PanzarCollisionActions(Panzar panzar, GameObject collisionedObject) {
             if (collisionedObject is Bullet bullet) {
-
                 panzar.Health -= bullet.Damage;
                 bullet.Explode();
                 _listToRemove.Add(collisionedObject);
-
-            } else if (collisionedObject is Wall wall) {
-
+            } else if (collisionedObject is Wall) {
                 panzar.Touched = true;
-
             } else if (collisionedObject is HealBonus healBonus) {
-
                 _objects[_objects.IndexOf(panzar)] = new HealEffect(panzar);
-                _listToRemove.Add(collisionedObject);
+                _listToRemove.Add(healBonus);
                 RefreshPanzarsList();
-
             } else if (collisionedObject is AmmoBonus ammoBonus) {
-
                 _objects[_objects.IndexOf(panzar)] = new AmmoEffect(panzar);
-                _listToRemove.Add(collisionedObject);
+                _listToRemove.Add(ammoBonus);
                 RefreshPanzarsList();
-
             } else if (collisionedObject is ReduceCooldownBonus reduceCooldownBonus) {
-
                 _objects[_objects.IndexOf(panzar)] = new ReduceCooldownEffect(panzar);
-                _listToRemove.Add(collisionedObject);
+                _listToRemove.Add(reduceCooldownBonus);
                 RefreshPanzarsList();
-
             } 
         }
         

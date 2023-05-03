@@ -23,18 +23,20 @@ namespace Game_Engine_Library {
             get => s_currentPlaneLifetime >= s_maxPlaneLifetime ? false : true;
         } 
 
-        public Plane() : base(ChooseDirection() * Constants.PLANE_X_COORDINATE_SPAWN , Constants.PLANE_Y_COORDINATE_SPAWN, 
-                                                                            Constants.PLANE_WIDTH, Constants.PLANE_HEIGHT) {
+        public Plane() : base(ChooseDirection() == 1 ? Constants.PLANE_X_COORDINATE_SPAWN
+                                                   : -(Constants.PLANE_X_COORDINATE_SPAWN + Constants.PLANE_WIDTH), 
+                                                       Constants.PLANE_Y_COORDINATE_SPAWN, 
+                                                       Constants.PLANE_WIDTH, Constants.PLANE_HEIGHT) {
             if (s_moveDirection == -1) TextureHorizontalReflection();
             texture = Texture.LoadTexture(Constants.PLANE_TEXTURE_PATH);
             s_currentPlaneLifetime = 0;
             Dropped = false;
             s_randomNumber = s_random.Next(Constants.CHANCE_TO_CREATE_BONUS_PER_FRAME);
-            s_maxPlaneLifetime = (Constants.PLANE_WIDTH * 2 + 2) / (Constants.PLANE_X_SPEED / 0.025);
+            s_maxPlaneLifetime = (Constants.PLANE_WIDTH * 2 + 2) / (Constants.PLANE_X_SPEED / Constants.TIMER_INTERVAL_SECONDS);
         }
 
         static Plane() {
-            s_maxPlaneLifetime = (Constants.PLANE_WIDTH * 2 + 2) / (Constants.PLANE_X_SPEED / 0.025);
+            s_maxPlaneLifetime = (Constants.PLANE_WIDTH * 2 + 2) / (Constants.PLANE_X_SPEED / Constants.TIMER_INTERVAL_SECONDS);
             s_currentPlaneLifetime = s_maxPlaneLifetime;
             Dropped = false;
         }
