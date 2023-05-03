@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 namespace Game_Engine_Library.Bonuses {
     public class HealEffect : Effect {
         public HealEffect(Panzar panzar) : base(panzar) {
-            Health += 20;
-            if (Health > 100) Health = 100; 
+            Health += Constants.HEAL_EFFECT_GIVEN_HEALTH;
+            if (Health > Constants.PANZAR_MAX_HP) Health = Constants.PANZAR_MAX_HP; 
         }
     }
 }

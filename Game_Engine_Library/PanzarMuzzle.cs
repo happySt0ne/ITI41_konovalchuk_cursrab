@@ -82,14 +82,14 @@ namespace Game_Engine_Library {
         /// </summary>
         /// <param name="keyboard"></param>
         public void RotateMuzzle(KeyboardState keyboard) {
-            if (keyboard.IsKeyDown(Key.W) && _side == "left" && MuzzleDirection < 90 ||
-                keyboard.IsKeyDown(Key.Down) && _side == "right" && MuzzleDirection > -180) {
+            if (keyboard.IsKeyDown(Key.W) && _side == "left" && MuzzleDirection < Constants.MUZZLE_MAX_ROTATE ||
+                keyboard.IsKeyDown(Key.Down) && _side == "right" && MuzzleDirection > Constants.MUZZLE_MIN_ROTATE - 180) {
                 GameMath.Rotate(Points, 0, 4, Constants.MUZZLE_ROTATION_SPEED, _rotateBazePoint);
                 MuzzleDirection += _side == "left" ? Constants.MUZZLE_ROTATION_SPEED : -Constants.MUZZLE_ROTATION_SPEED;
             }
 
-            if (keyboard.IsKeyDown(Key.S) && _side == "left" && MuzzleDirection > 0 ||
-                keyboard.IsKeyDown(Key.Up) && _side == "right" && MuzzleDirection < -90) {
+            if (keyboard.IsKeyDown(Key.S) && _side == "left" && MuzzleDirection > Constants.MUZZLE_MIN_ROTATE ||
+                keyboard.IsKeyDown(Key.Up) && _side == "right" && MuzzleDirection < Constants.MUZZLE_MAX_ROTATE - 180) {
                 GameMath.Rotate(Points, 0, 4, -Constants.MUZZLE_ROTATION_SPEED, _rotateBazePoint);
                 MuzzleDirection += _side == "left" ? -Constants.MUZZLE_ROTATION_SPEED : Constants.MUZZLE_ROTATION_SPEED;
             }

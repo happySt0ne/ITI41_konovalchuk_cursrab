@@ -21,7 +21,7 @@ namespace Game_Engine_Library {
             _objects.Add(new Background(-1, 1, 2, 2));
             _objects.Add(new Panzar("left"));
             _objects.Add(new Panzar("right"));
-            _objects.Add(new Wall(-0.1, -0.5, 0.2, 0.5));
+            _objects.Add(new Wall(-0.05, -0.5, 0.1, 0.5));
             _objects.Add(new Wall(-0.999, 1, 0.0001, 2));
             _objects.Add(new Wall(0.999, 1, 0.0001, 2));
 

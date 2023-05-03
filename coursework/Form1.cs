@@ -60,8 +60,8 @@ namespace coursework
             Ammo1.Text = $"Боезапас: {ammo1}";
             Ammo2.Text = $"Боезапас: {ammo2}";
             
-            HealthBar1.Value = (int)health1;
-            HealthBar2.Value = (int)health2;
+            HealthBar1.Value = (int)health1 * 100 / Constants.PANZAR_MAX_HP;
+            HealthBar2.Value = (int)health2 * 100 / Constants.PANZAR_MAX_HP;
         }
     }
 }

@@ -71,7 +71,7 @@ namespace Game_Engine_Library {
             _panzarTrack = new PanzarTrack(x, y - height / 2, width, height / 2, side);
             _panzarTurret = new PanzarTurret(x + width / 3, y, width / 3, height / 2, side);
 
-            Health = Constants.PANZAR_HP;
+            Health = Constants.PANZAR_MAX_HP;
             Side = side;
         }
 
