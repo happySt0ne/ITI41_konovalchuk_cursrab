@@ -16,8 +16,8 @@ namespace Game_Engine_Library {
         /// </summary>
         public virtual bool OutsideTheWindow {
             get {
-                if (Points[0].Item1 > 1 || Points[0].Item1 < -1 || Points[0].Item2 < -1) return true;
-                return false;
+                if (Points[0].Item1 >= -1 && Points[0].Item1 <= 1 && Points[0].Item2 <= 1 && Points[0].Item2 >= -1) return false;
+                return true;
             }
         }
 

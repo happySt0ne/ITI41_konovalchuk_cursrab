@@ -1,0 +1,189 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="Game_Engine_Library.Collision" Collapsed="true">
+    <Position X="0.5" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAQAAABAAAAAAQAAAAAABgAAAAAAA=</HashCode>
+      <FileName>Collision.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game_Engine_Library.Background" Collapsed="true">
+    <Position X="2.75" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Background.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game_Engine_Library.Bullet" Collapsed="true">
+    <Position X="1.25" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAQAAACAAAAAAAAAAAAAAAgBAAAAAoAAAAAAAAAAAAA=</HashCode>
+      <FileName>Bullet.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game_Engine_Library.Constants" Collapsed="true">
+    <Position X="13.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CDCAEABAKQAAQIwiAEqBCEIhAiggAQACAAQCgABAUQA=</HashCode>
+      <FileName>Constants.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game_Engine_Library.GameMath" Collapsed="true">
+    <Position X="15.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAgAAAAAA=</HashCode>
+      <FileName>GameMath.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game_Engine_Library.GameObject" Collapsed="true">
+    <Position X="0.5" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAIAChgQAQAAAAAQAAAAAAgAAAABgAAAAAAA=</HashCode>
+      <FileName>GameObject.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Game_Engine_Library.Panzar" Collapsed="true">
+    <Position X="2.75" Y="3.5" Width="1.5" />
+    <InheritanceLine Type="Game_Engine_Library.GameObject" ManuallyRouted="true">
+      <Path>
+        <Point X="1.25" Y="2.812" />
+        <Point X="1.25" Y="3.25" />
+        <Point X="3.5" Y="3.25" />
+        <Point X="3.5" Y="3.5" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>ACQACAAAAIAAogCAAAAABAECACAAAAAgAAAAAAAAAgQ=</HashCode>
+      <FileName>Panzar.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game_Engine_Library.PanzarMuzzle" Collapsed="true">
+    <Position X="3.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACUAAAQAAAAABABAEAAABAACACAAAAAgCAAAAAAAAAA=</HashCode>
+      <FileName>PanzarMuzzle.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game_Engine_Library.PanzarTrack" Collapsed="true">
+    <Position X="5.75" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAIAAAAAAAAAAAAAAAAAFAAAADAAAAAAAAAA=</HashCode>
+      <FileName>PanzarTrack.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game_Engine_Library.PanzarTurret" Collapsed="true">
+    <Position X="10.25" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>PanzarTurret.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game_Engine_Library.Plane" Collapsed="true">
+    <Position X="12.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAIABDACEAAAAAAABAAAAAAAAAAAAAAARAEA=</HashCode>
+      <FileName>Plane.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game_Engine_Library.Scene" Collapsed="true">
+    <Position X="11.75" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BEQAAAAAAQAgIAQAAAAoBAgIAAEAAAAAAEAAAAAABAg=</HashCode>
+      <FileName>Scene.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game_Engine_Library.Texture" Collapsed="true">
+    <Position X="13.5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Texture.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game_Engine_Library.Wall" Collapsed="true">
+    <Position X="8" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Wall.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game_Engine_Library.Bonuses.AmmoBonus" Collapsed="true">
+    <Position X="8.75" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Bonuses\AmmoBonus.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game_Engine_Library.Bonuses.AmmoEffect" Collapsed="true">
+    <Position X="2.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Bonuses\AmmoEffect.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game_Engine_Library.Bonuses.Bonus" Collapsed="true">
+    <Position X="8.75" Y="3.75" Width="1.5" />
+    <InheritanceLine Type="Game_Engine_Library.GameObject" ManuallyRouted="true">
+      <Path>
+        <Point X="1.25" Y="2.812" />
+        <Point X="1.25" Y="3.202" />
+        <Point X="9.5" Y="3.202" />
+        <Point X="9.5" Y="3.75" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Bonuses\Bonus.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game_Engine_Library.Bonuses.BonusCreator" Collapsed="true">
+    <Position X="11.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAQAAAgDAAAAAAAABAAAAAAAABAAAAAAAAAAAA=</HashCode>
+      <FileName>Bonuses\BonusCreator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game_Engine_Library.Bonuses.Effect" Collapsed="true">
+    <Position X="2.75" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAA=</HashCode>
+      <FileName>Bonuses\Effect.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game_Engine_Library.Bonuses.HealBonus" Collapsed="true">
+    <Position X="11" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Bonuses\HealBonus.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game_Engine_Library.Bonuses.HealEffect" Collapsed="true">
+    <Position X="5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Bonuses\HealEffect.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game_Engine_Library.Bonuses.ReduceCooldownBonus" Collapsed="true">
+    <Position X="6.5" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Bonuses\ReduceCooldownBonus.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game_Engine_Library.Bonuses.ReduceCooldownEffect" Collapsed="true">
+    <Position X="0.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Bonuses\ReduceCooldownEffect.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="Game_Engine_Library.IDrawable" Collapsed="true">
+    <Position X="11.75" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IDrawable.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

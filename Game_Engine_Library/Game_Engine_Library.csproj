@@ -61,7 +61,7 @@
     <Compile Include="Bonuses\ReduceCooldownEffect.cs" />
     <Compile Include="Bullet.cs" />
     <Compile Include="Constants.cs" />
-    <Compile Include="Collider.cs" />
+    <Compile Include="Collision.cs" />
     <Compile Include="GameMath.cs" />
     <Compile Include="GameObject.cs" />
     <Compile Include="IDrawable.cs" />
@@ -76,6 +76,7 @@
     <Compile Include="Wall.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="ClassDiagram.cd" />
     <None Include="OpenTK.dll.config" />
     <None Include="packages.config" />
   </ItemGroup>

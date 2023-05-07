@@ -22,19 +22,8 @@ namespace Game_Engine_Library {
         /// <param name="angle">Угол поворота объекта в градусах.</param>
         /// <param name="bazePoint">Точка, относительно которой производитяс поворот.</param>>
         public static void Rotate (List<(double, double)> array, int startIndex, int endIndex, double angle, (double, double) bazePoint) {
-            //Перевод из градусов в радианы.
-            angle = angle * Math.PI / 180;
-            double delta_x, delta_y;
-            double new_x, new_y;
-            
             for (int i = startIndex; i < endIndex; i++) {
-                delta_x = array[i].Item1 - bazePoint.Item1;
-                delta_y = array[i].Item2 - bazePoint.Item2;
-
-                new_x = delta_x * Math.Cos(angle) - delta_y * Math.Sin(angle);
-                new_y = delta_y * Math.Cos(angle) + delta_x * Math.Sin(angle);
-
-                array[i] = (new_x + bazePoint.Item1, new_y + bazePoint.Item2);
+                array[i] = Rotate(bazePoint, array[i], angle);
             }
         }
 
@@ -53,6 +42,9 @@ namespace Game_Engine_Library {
 
             var new_x = delta_x * Math.Cos(angle) - delta_y * Math.Sin(angle);
             var new_y = delta_y * Math.Cos(angle) + delta_x * Math.Sin(angle);
+
+            new_x = Math.Round(new_x, 5);
+            new_y = Math.Round(new_y, 5);
 
             return (new_x + bazePoint.Item1, new_y + bazePoint.Item2);
         }
