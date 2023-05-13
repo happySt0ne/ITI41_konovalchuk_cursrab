@@ -48,8 +48,8 @@
     <InheritanceLine Type="Game_Engine_Library.GameObject" ManuallyRouted="true">
       <Path>
         <Point X="1.25" Y="2.812" />
-        <Point X="1.25" Y="3.25" />
-        <Point X="3.5" Y="3.25" />
+        <Point X="1.25" Y="3.172" />
+        <Point X="3.5" Y="3.172" />
         <Point X="3.5" Y="3.5" />
       </Path>
     </InheritanceLine>
@@ -126,8 +126,8 @@
     <InheritanceLine Type="Game_Engine_Library.GameObject" ManuallyRouted="true">
       <Path>
         <Point X="1.25" Y="2.812" />
-        <Point X="1.25" Y="3.202" />
-        <Point X="9.5" Y="3.202" />
+        <Point X="1.25" Y="3.193" />
+        <Point X="9.5" Y="3.193" />
         <Point X="9.5" Y="3.75" />
       </Path>
     </InheritanceLine>

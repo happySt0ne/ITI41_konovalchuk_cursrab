@@ -31,7 +31,7 @@ namespace Game_Engine_Library {
         /// <summary>
         /// Текущая перезарядка до следующего выстрела.
         /// </summary>
-        public double Cooldown { get => _panzarMuzzle.Cooldown; }
+        public double Cooldown { get => _panzarMuzzle.Cooldown; set => _panzarMuzzle.Cooldown = value; }
         
         /// <summary>
         /// Нужно ли запретить танку движение в том же направлении.

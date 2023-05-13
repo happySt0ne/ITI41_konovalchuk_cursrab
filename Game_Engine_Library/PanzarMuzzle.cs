@@ -98,7 +98,7 @@ namespace Game_Engine_Library {
         /// <summary>
         /// Осуществление тика таймера кулдауна стрельбы.
         /// </summary>
-        protected void ReduceCooldown() {
+        protected virtual void ReduceCooldown() {
             Cooldown = Math.Round(Cooldown, 3);
 
             if (Cooldown >= Constants.TIMER_INTERVAL_SECONDS) {
