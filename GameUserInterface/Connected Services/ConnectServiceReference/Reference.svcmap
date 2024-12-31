@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="2c320a79-541d-4ec9-8864-73c20ef744be" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:4746/connect?wsdl" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="connect3.xsd" MetadataType="Schema" ID="35091bb1-4f91-4541-af84-a320ed4c30e9" SourceId="1" SourceUrl="http://localhost:4746/connect?xsd=xsd3" />
+    <MetadataFile FileName="ConnectService.wsdl" MetadataType="Wsdl" ID="ba3a73a3-1b2e-4584-a127-553060dc5ef9" SourceId="1" SourceUrl="http://localhost:4746/connect?wsdl" />
+    <MetadataFile FileName="connect.xsd" MetadataType="Schema" ID="cc4c7cb6-b8e4-4177-ab4e-99f8f52dc39c" SourceId="1" SourceUrl="http://localhost:4746/connect?xsd=xsd0" />
+    <MetadataFile FileName="connect1.xsd" MetadataType="Schema" ID="23f917ec-095e-4f01-903d-a8ce95ff7423" SourceId="1" SourceUrl="http://localhost:4746/connect?xsd=xsd1" />
+    <MetadataFile FileName="connect2.xsd" MetadataType="Schema" ID="74c77842-0c90-439f-a2d0-15e8f38bca51" SourceId="1" SourceUrl="http://localhost:4746/connect?xsd=xsd2" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

@@ -1,0 +1,121 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Deeenchiik\\Desktop\\itsTimeToRestart\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{6B1C4C0C-B164-48B2-A9EC-FC837D6351EF}|GameUserInterface\\GameUserInterface.csproj|c:\\users\\deeenchiik\\desktop\\itstimetorestart\\gameuserinterface\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6B1C4C0C-B164-48B2-A9EC-FC837D6351EF}|GameUserInterface\\GameUserInterface.csproj|solutionrelative:gameuserinterface\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1B59D313-46BD-4F9D-B5A5-591A3D91CD7E}|WcfServiceLibrary\\WcfServiceLibrary.csproj|C:\\Users\\Deeenchiik\\Desktop\\itsTimeToRestart\\wcfservicelibrary\\connectservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1B59D313-46BD-4F9D-B5A5-591A3D91CD7E}|WcfServiceLibrary\\WcfServiceLibrary.csproj|solutionrelative:wcfservicelibrary\\connectservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CD7DAF1D-5161-46CA-BD98-D439C8AB270A}|GameLibrary\\GameLibrary.csproj|C:\\Users\\Deeenchiik\\Desktop\\itsTimeToRestart\\gamelibrary\\components\\health.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CD7DAF1D-5161-46CA-BD98-D439C8AB270A}|GameLibrary\\GameLibrary.csproj|solutionrelative:gamelibrary\\components\\health.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AF8206D9-18A5-411B-964F-0C38C7F0ECA5}|GameTests\\GameTests.csproj|C:\\Users\\Deeenchiik\\Desktop\\itsTimeToRestart\\gametests\\healthtests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AF8206D9-18A5-411B-964F-0C38C7F0ECA5}|GameTests\\GameTests.csproj|solutionrelative:gametests\\healthtests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AF8206D9-18A5-411B-964F-0C38C7F0ECA5}|GameTests\\GameTests.csproj|C:\\Users\\Deeenchiik\\Desktop\\itsTimeToRestart\\gametests\\inventorytests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AF8206D9-18A5-411B-964F-0C38C7F0ECA5}|GameTests\\GameTests.csproj|solutionrelative:gametests\\inventorytests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6B1C4C0C-B164-48B2-A9EC-FC837D6351EF}|GameUserInterface\\GameUserInterface.csproj|C:\\Users\\Deeenchiik\\Desktop\\itsTimeToRestart\\gameuserinterface\\server.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6B1C4C0C-B164-48B2-A9EC-FC837D6351EF}|GameUserInterface\\GameUserInterface.csproj|solutionrelative:gameuserinterface\\server.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 6,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Health.cs",
+              "DocumentMoniker": "C:\\Users\\Deeenchiik\\Desktop\\itsTimeToRestart\\GameLibrary\\Components\\Health.cs",
+              "RelativeDocumentMoniker": "GameLibrary\\Components\\Health.cs",
+              "ToolTip": "C:\\Users\\Deeenchiik\\Desktop\\itsTimeToRestart\\GameLibrary\\Components\\Health.cs",
+              "RelativeToolTip": "GameLibrary\\Components\\Health.cs",
+              "ViewState": "AgIAABUAAAAAAAAAAAAowCYAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-29T18:21:38.207Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "HealthTests.cs",
+              "DocumentMoniker": "C:\\Users\\Deeenchiik\\Desktop\\itsTimeToRestart\\GameTests\\HealthTests.cs",
+              "RelativeDocumentMoniker": "GameTests\\HealthTests.cs",
+              "ToolTip": "C:\\Users\\Deeenchiik\\Desktop\\itsTimeToRestart\\GameTests\\HealthTests.cs",
+              "RelativeToolTip": "GameTests\\HealthTests.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-29T18:18:37.769Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "InventoryTests.cs",
+              "DocumentMoniker": "C:\\Users\\Deeenchiik\\Desktop\\itsTimeToRestart\\GameTests\\InventoryTests.cs",
+              "RelativeDocumentMoniker": "GameTests\\InventoryTests.cs",
+              "ToolTip": "C:\\Users\\Deeenchiik\\Desktop\\itsTimeToRestart\\GameTests\\InventoryTests.cs",
+              "RelativeToolTip": "GameTests\\InventoryTests.cs",
+              "ViewState": "AgIAABoAAAAAAAAAAAAswCoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-29T18:18:16.441Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Server.cs",
+              "DocumentMoniker": "C:\\Users\\Deeenchiik\\Desktop\\itsTimeToRestart\\GameUserInterface\\Server.cs",
+              "RelativeDocumentMoniker": "GameUserInterface\\Server.cs",
+              "ToolTip": "C:\\Users\\Deeenchiik\\Desktop\\itsTimeToRestart\\GameUserInterface\\Server.cs",
+              "RelativeToolTip": "GameUserInterface\\Server.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-25T10:32:07.137Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ConnectService.cs",
+              "DocumentMoniker": "C:\\Users\\Deeenchiik\\Desktop\\itsTimeToRestart\\WcfServiceLibrary\\ConnectService.cs",
+              "RelativeDocumentMoniker": "WcfServiceLibrary\\ConnectService.cs",
+              "ToolTip": "C:\\Users\\Deeenchiik\\Desktop\\itsTimeToRestart\\WcfServiceLibrary\\ConnectService.cs",
+              "RelativeToolTip": "WcfServiceLibrary\\ConnectService.cs",
+              "ViewState": "AgIAAHQAAAAAAAAAAAAmwIQAAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-25T10:53:58.718Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MainWindow.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\Deeenchiik\\Desktop\\itsTimeToRestart\\GameUserInterface\\MainWindow.xaml.cs",
+              "RelativeDocumentMoniker": "GameUserInterface\\MainWindow.xaml.cs",
+              "ToolTip": "C:\\Users\\Deeenchiik\\Desktop\\itsTimeToRestart\\GameUserInterface\\MainWindow.xaml.cs",
+              "RelativeToolTip": "GameUserInterface\\MainWindow.xaml.cs",
+              "ViewState": "AgIAAMQBAAAAAAAAAAAwwNIBAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-25T10:34:40.994Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

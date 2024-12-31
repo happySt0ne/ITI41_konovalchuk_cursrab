@@ -1,0 +1,190 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GameUserInterface</name>
+    </assembly>
+    <members>
+        <member name="T:GameUserInterface.Client">
+            <summary>
+            Игровой клиент
+            </summary>
+        </member>
+        <member name="M:GameUserInterface.Client.#ctor(System.String)">
+            <summary>
+            Создает новый клиент и подключает его к серверу по указанному адресу
+            </summary>
+            <param name="address">Адрес для подключения</param>
+        </member>
+        <member name="M:GameUserInterface.Client.ConnectToServer">
+            <summary>
+            Попытка подключиться к игровому серверу
+            </summary>
+            <returns>true - если подключиться удалось; в противно млучае - false</returns>
+        </member>
+        <member name="M:GameUserInterface.Client.DisconnectFromServer">
+            <summary>
+            Отклчение клиента от сервера
+            </summary>
+        </member>
+        <member name="M:GameUserInterface.Client.GetConnectedUsersCount">
+            <summary>
+            Получение количества подключенных устройств
+            </summary>
+            <returns>Количество подключенных устройств</returns>
+        </member>
+        <member name="M:GameUserInterface.Client.SetFirstPanzerAmounts(System.Int32[])">
+            <summary>
+            Задание инвентаря первому танку.
+            </summary>
+            <param name="amounts">Количество ракет.</param>
+        </member>
+        <member name="M:GameUserInterface.Client.SetSecondPanzerAmounts(System.Int32[])">
+            <summary>
+            Задание инвентаря второму танку.
+            </summary>
+            <param name="amounts">Количество ракет.</param>
+        </member>
+        <member name="M:GameUserInterface.Client.Close">
+            <summary>
+            Освобождает занятые клиентом ресурсы
+            </summary>
+        </member>
+        <member name="M:GameUserInterface.Client.IsSecondReady">
+            <summary>
+            Флаг, свидетельствующий о готовности второго игрока
+            </summary>
+            <returns>true - если второй игрок готов; в противном случае - false</returns>
+        </member>
+        <member name="M:GameUserInterface.Client.SetFirstPlayerKeyboardState(GameLibrary.Scripts.RemoteKeyboardControlScripts.RemoteKeyboardState)">
+            <summary>
+            Установка состояния клавиатуры для первого игрока
+            </summary>
+            <param name="keyboard">Состояние клавиатуры</param>
+        </member>
+        <member name="M:GameUserInterface.Client.SetSecondPlayerKeyboardState(GameLibrary.Scripts.RemoteKeyboardControlScripts.RemoteKeyboardState)">
+            <summary>
+            Установка состояния клавиатуры для второго игрока
+            </summary>
+            <param name="keyboard">Состояние клавиатуры</param>
+        </member>
+        <member name="M:GameUserInterface.Client.GetCurrentGameObjects">
+            <summary>
+            Получение текущих игровых объектов на сцене
+            </summary>
+            <returns>Текущин игровые объекты на сцене</returns>
+        </member>
+        <member name="M:GameUserInterface.Client.Finalize">
+            <summary>
+            Освобождает занятые клиентом ресурсы
+            </summary>
+        </member>
+        <member name="T:GameUserInterface.Server">
+            <summary>
+            Игровой сервер
+            </summary>
+        </member>
+        <member name="M:GameUserInterface.Server.#ctor">
+            <summary>
+            Создает сервер
+            </summary>
+        </member>
+        <member name="M:GameUserInterface.Server.IsClosed">
+            <summary>
+            Указывает, закрыт ли сервер
+            </summary>
+            <returns>true - если сервер закрыт; в противно случае - false</returns>
+        </member>
+        <member name="M:GameUserInterface.Server.Close">
+            <summary>
+            Освобождает занятые сервером ресурсы
+            </summary>
+        </member>
+        <member name="M:GameUserInterface.Server.Finalize">
+            <summary>
+            Освобождает занятые сервером ресурсы
+            </summary>
+        </member>
+        <member name="T:GameUserInterface.App">
+            <summary>
+            Логика взаимодействия для App.xaml
+            </summary>
+            <summary>
+            App
+            </summary>
+        </member>
+        <member name="M:GameUserInterface.App.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="M:GameUserInterface.App.Main">
+            <summary>
+            Application Entry Point.
+            </summary>
+        </member>
+        <member name="T:GameUserInterface.MainWindow">
+            <summary>
+            Логика взаимодействия для главного окна игры.
+            </summary>
+            <summary>
+            MainWindow
+            </summary>
+        </member>
+        <member name="F:GameUserInterface.MainWindow.server">
+            <summary>
+            Сервер
+            </summary>
+        </member>
+        <member name="F:GameUserInterface.MainWindow.client">
+            <summary>
+            Клиент
+            </summary>
+        </member>
+        <member name="F:GameUserInterface.MainWindow.settings">
+            <summary>
+            Настройки боевой сцены
+            </summary>
+        </member>
+        <member name="F:GameUserInterface.MainWindow.scene">
+            <summary>
+            Сцена, которая будет отрисовываться на экране.
+            </summary>
+        </member>
+        <member name="F:GameUserInterface.MainWindow.renderer">
+            <summary>
+            Отрисовщик сцены.
+            </summary>
+        </member>
+        <member name="F:GameUserInterface.MainWindow.remoteKeyboardState">
+            <summary>
+            Объект для передачи состояния клавиатуры по сети
+            </summary>
+        </member>
+        <member name="M:GameUserInterface.MainWindow.#ctor">
+            <summary>
+            Создание окна приложения.
+            </summary>
+        </member>
+        <member name="M:GameUserInterface.MainWindow.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:GameUserInterface.Properties.Resources">
+            <summary>
+              Класс ресурсов со строгим типом для поиска локализованных строк и пр.
+            </summary>
+        </member>
+        <member name="P:GameUserInterface.Properties.Resources.ResourceManager">
+            <summary>
+              Возврат кэшированного экземпляра ResourceManager, используемого этим классом.
+            </summary>
+        </member>
+        <member name="P:GameUserInterface.Properties.Resources.Culture">
+            <summary>
+              Переопределяет свойство CurrentUICulture текущего потока для всех
+              подстановки ресурсов с помощью этого класса ресурсов со строгим типом.
+            </summary>
+        </member>
+    </members>
+</doc>

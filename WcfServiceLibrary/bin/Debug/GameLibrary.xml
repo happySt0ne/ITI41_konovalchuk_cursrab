@@ -1,0 +1,936 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GameLibrary</name>
+    </assembly>
+    <members>
+        <member name="T:GameLibrary.Components.BaseRocket">
+            <summary>
+            Компонент, описывающий ракету со стандартными параметрами.
+            Ракета наносит 20 урона и имеет скорострельность 500 мс.
+            </summary>
+        </member>
+        <member name="P:GameLibrary.Components.BaseRocket.Damage">
+            <summary>
+            Урон ракеты.
+            </summary>
+        </member>
+        <member name="P:GameLibrary.Components.BaseRocket.Cooldown">
+            <summary>
+            Время до следующего выстрела ракетой.
+            </summary>
+        </member>
+        <member name="M:GameLibrary.Components.BaseRocket.#ctor">
+            <summary>
+            Создание новой ракеты.
+            </summary>
+        </member>
+        <member name="T:GameLibrary.Components.Health">
+            <summary>
+            Компонент, который отвечает за здоровье у объекта.
+            </summary>
+        </member>
+        <member name="P:GameLibrary.Components.Health.Value">
+            <summary>
+            Количество здоровья у объекта.
+            </summary>
+        </member>
+        <member name="M:GameLibrary.Components.Health.#ctor">
+            <summary>
+            Создание компонента здоровья.
+            </summary>
+        </member>
+        <member name="M:GameLibrary.Components.Health.#ctor(System.Int32)">
+            <summary>
+            Создание компонента здоровья.
+            </summary>
+            <param name="health">Начальное количество здоровья.</param>
+        </member>
+        <member name="M:GameLibrary.Components.Health.Damage(System.Int32)">
+            <summary>
+            Нанесение повреждения объекту.
+            </summary>
+            <param name="damage">Количество повреждений, нанесенных объекту.</param>
+        </member>
+        <member name="M:GameLibrary.Components.Health.Heal(System.Int32)">
+            <summary>
+            Увеличение здоровья объекта на заданное число.
+            </summary>
+            <param name="health">Количество исцеленного здоровья.</param>
+        </member>
+        <member name="M:GameLibrary.Components.Health.IsAlive">
+            <summary>
+            Проверка, жив ли объект.
+            </summary>
+            <returns>True, если объект ещё жив.</returns>
+        </member>
+        <member name="T:GameLibrary.Components.HealthDecorators.ProgressBarHealth">
+            <summary>
+            Декоратор, который привязывает ProgressBar к здоровью
+            </summary>
+        </member>
+        <member name="F:GameLibrary.Components.HealthDecorators.ProgressBarHealth.health">
+            <summary>
+            Декорируемый объект.
+            </summary>
+        </member>
+        <member name="F:GameLibrary.Components.HealthDecorators.ProgressBarHealth.bar">
+            <summary>
+            Привязанный ProgressBar.
+            </summary>
+        </member>
+        <member name="M:GameLibrary.Components.HealthDecorators.ProgressBarHealth.#ctor(GameLibrary.Components.Health,System.Windows.Controls.ProgressBar)">
+            <summary>
+            Создание декоратора, привязывающего здоровье к ProgressBar.
+            </summary>
+            <param name="health">Декорируемый объект.</param>
+            <param name="bar">ProgressBar для привязки.</param>
+        </member>
+        <member name="M:GameLibrary.Components.HealthDecorators.ProgressBarHealth.Damage(System.Int32)">
+            <summary>
+            Нанесение повреждения объекту.
+            </summary>
+            <param name="damage">Количество повреждений, нанесенных объекту.</param>
+        </member>
+        <member name="M:GameLibrary.Components.HealthDecorators.ProgressBarHealth.Heal(System.Int32)">
+            <summary>
+            Увеличение здоровья объекта на заданное число.
+            </summary>
+            <param name="health">Количество исцеленного здоровья.</param>
+        </member>
+        <member name="M:GameLibrary.Components.HealthDecorators.ProgressBarHealth.IsAlive">
+            <summary>
+            Проверка, жив ли объект.
+            </summary>
+            <returns>True, если объект ещё жив.</returns>
+        </member>
+        <member name="T:GameLibrary.Components.Inventory">
+            <summary>
+            Инвентарь, отвечающий за выдачу новых ракет,
+            а также за слежку за количеством оставшихся ракет.
+            </summary>
+        </member>
+        <member name="F:GameLibrary.Components.Inventory.rockets">
+            <summary>
+            Сборщики ракет, которые предназначены для создания новых ракет.
+            </summary>
+        </member>
+        <member name="F:GameLibrary.Components.Inventory.totalAmount">
+            <summary>
+            Общее количество ракет в инвентаре.
+            </summary>
+        </member>
+        <member name="F:GameLibrary.Components.Inventory.amounts">
+            <summary>
+            Количества рокет в инвентаре.
+            </summary>
+        </member>
+        <member name="F:GameLibrary.Components.Inventory.current">
+            <summary>
+            Текущий индекс ракеты для создания.
+            </summary>
+        </member>
+        <member name="P:GameLibrary.Components.Inventory.TotalAmount">
+            <summary>
+            Общее количество ракет в инвентаре.
+            </summary>
+        </member>
+        <member name="P:GameLibrary.Components.Inventory.Amounts">
+            <summary>
+            Количества рокет в инвентаре.
+            </summary>
+        </member>
+        <member name="P:GameLibrary.Components.Inventory.Current">
+            <summary>
+            Текущий индекс ракеты для создания.
+            </summary>
+        </member>
+        <member name="M:GameLibrary.Components.Inventory.#ctor(GameLibrary.Components.Inventory.RocketBuilder[])">
+            <summary>
+            Создание нового инвентаря.
+            </summary>
+            <param name="rockets">Сборщики ракет.</param>
+        </member>
+        <member name="M:GameLibrary.Components.Inventory.SelectNext">
+            <summary>
+            Выбрать следующую ракету.
+            </summary>
+        </member>
+        <member name="M:GameLibrary.Components.Inventory.SelectPrevious">
+            <summary>
+            Выбрать предыдущую ракету.
+            </summary>
+        </member>
+        <member name="M:GameLibrary.Components.Inventory.SetAmount(System.Int32)">
+            <summary>
+            Установить количество выбранных ракет.
+            </summary>
+            <param name="amount">Новое количество выбранных ракет.</param>
+        </member>
+        <member name="M:GameLibrary.Components.Inventory.GetAmount">
+            <summary>
+            Получение количества текущих ракет.
+            </summary>
+            <returns>Количество текущих ракет.</returns>
+        </member>
+        <member name="M:GameLibrary.Components.Inventory.GetRocket">
+            <summary>
+            Получить выбранную ракету.
+            </summary>
+            <returns>Ракета из инвентаря.</returns>
+        </member>
+        <member name="M:GameLibrary.Components.Inventory.GetTotalAmount">
+            <summary>
+            Получение общего количества ракет в инвентаре.
+            </summary>
+            <returns>Общее количество ракет в инвентаре.</returns>
+        </member>
+        <member name="T:GameLibrary.Components.Inventory.RocketBuilder">
+            <summary>
+            Сборщик ракет.
+            </summary>
+        </member>
+        <member name="F:GameLibrary.Components.Inventory.RocketBuilder.scene">
+            <summary>
+            Сцена, в которой будут создаваться ракеты.
+            </summary>
+        </member>
+        <member name="F:GameLibrary.Components.Inventory.RocketBuilder.rocket">
+            <summary>
+            Компонент создаваемой ракеты.
+            </summary>
+        </member>
+        <member name="F:GameLibrary.Components.Inventory.RocketBuilder.rocketTex">
+            <summary>
+            Текстура создаваемой ракеты.
+            </summary>
+        </member>
+        <member name="F:GameLibrary.Components.Inventory.RocketBuilder.explosionAnim">
+            <summary>
+            Анимация взрыва создаваемой ракеты.
+            </summary>
+        </member>
+        <member name="M:GameLibrary.Components.Inventory.RocketBuilder.#ctor(GameEngineLibrary.Scene,GameEngineLibrary.Texture2D,GameEngineLibrary.Animation2D,GameLibrary.Components.Rocket)">
+            <summary>
+            Создание объекта, отвечающего за сборку ракет по заданным правилам.
+            </summary>
+            <param name="scene">Сцена, в которой будут создаваться ракеты.</param>
+            <param name="rocketTex">Текстура создаваемой ракеты.</param>
+            <param name="explosionAnim">Анимация взрыва создаваемой ракеты.</param>
+            <param name="rocket">Компонент создаваемой ракеты.</param>
+        </member>
+        <member name="M:GameLibrary.Components.Inventory.RocketBuilder.Build">
+            <summary>
+            Создание ракеты.
+            </summary>
+            <returns>Созданная ракета.</returns>
+        </member>
+        <member name="T:GameLibrary.Components.RocketDecorator">
+            <summary>
+            Абстрактный класс, описывающий декораторы ракеты.
+            </summary>
+        </member>
+        <member name="F:GameLibrary.Components.RocketDecorator.rocket">
+            <summary>
+            Декорируемая ракета.
+            </summary>
+        </member>
+        <member name="P:GameLibrary.Components.RocketDecorator.Damage">
+            <summary>
+            Урон ракеты.
+            </summary>
+        </member>
+        <member name="P:GameLibrary.Components.RocketDecorator.Cooldown">
+            <summary>
+            Время до следующего выстрела ракетой.
+            </summary>
+        </member>
+        <member name="M:GameLibrary.Components.RocketDecorator.#ctor(GameLibrary.Components.Rocket)">
+            <summary>
+            Создание декоратора ракеты.
+            </summary>
+            <param name="rocket">Декорируемая ракеты.</param>
+        </member>
+        <member name="T:GameLibrary.Components.WpfInventory">
+            <summary>
+            Инвентарь, который способен отображать информацию о 
+            содержимом в специальном поле приложения WPF.
+            </summary>
+        </member>
+        <member name="F:GameLibrary.Components.WpfInventory.inventory">
+            <summary>
+            Поле, в котором будет отобрааться информация о содержимом инвентаря.
+            </summary>
+        </member>
+        <member name="M:GameLibrary.Components.WpfInventory.#ctor(System.Windows.Controls.StackPanel,GameLibrary.Components.Inventory.RocketBuilder[])">
+            <summary>
+            Создание нового WPF инвентаря.
+            </summary>
+            <param name="inventory">Поле, в котором будет отображаться содержимое.</param>
+            <param name="rockets">Ракеты в инвентаре.</param>
+        </member>
+        <member name="M:GameLibrary.Components.WpfInventory.SelectNext">
+            <summary>
+            Выбор следующего предмета в инвентаре.
+            </summary>
+        </member>
+        <member name="M:GameLibrary.Components.WpfInventory.SelectPrevious">
+            <summary>
+            Выбор предыдущего предмета в инвентаре.
+            </summary>
+        </member>
+        <member name="M:GameLibrary.Components.WpfInventory.SetAmount(System.Int32)">
+            <summary>
+            Установка количества предмета в инвентаре.
+            </summary>
+        </member>
+        <member name="M:GameLibrary.Components.WpfInventory.GetRocket">
+            <summary>
+            Получение предмета из инвентаря.
+            </summary>
+        </member>
+        <member name="T:GameLibrary.Components.Rocket">
+            <summary>
+            Абстрактный класс, описывающий ракеты в игре.
+            </summary>
+        </member>
+        <member name="P:GameLibrary.Components.Rocket.Damage">
+            <summary>
+            Урон ракеты.
+            </summary>
+        </member>
+        <member name="P:GameLibrary.Components.Rocket.Cooldown">
+            <summary>
+            Время до следующего выстрела ракетой.
+            </summary>
+        </member>
+        <member name="T:GameLibrary.Components.RocketDecorators.DoubleCooldownRocket">
+            <summary>
+            Декоратор компонента Rocket,
+            который увеличивает время перезарядки в 2 раза.
+            </summary>
+        </member>
+        <member name="P:GameLibrary.Components.RocketDecorators.DoubleCooldownRocket.Cooldown">
+            <summary>
+            Перезарядка, увеличенный в 2 раза.
+            </summary>
+        </member>
+        <member name="M:GameLibrary.Components.RocketDecorators.DoubleCooldownRocket.#ctor(GameLibrary.Components.Rocket)">
+            <summary>
+            Создание нового декоратора, который увеичивает время перезарядки в 2 раза.
+            </summary>
+            <param name="rocket">Декорируемый экземпляр.</param>
+        </member>
+        <member name="T:GameLibrary.Components.RocketDecorators.DoubleDamageRocket">
+            <summary>
+            Декоратор компонента Rocket,
+            который увеличивает урон от ракеты в 2 раза.
+            </summary>
+        </member>
+        <member name="P:GameLibrary.Components.RocketDecorators.DoubleDamageRocket.Damage">
+            <summary>
+            Урон, увеличенный в 2 раза.
+            </summary>
+        </member>
+        <member name="M:GameLibrary.Components.RocketDecorators.DoubleDamageRocket.#ctor(GameLibrary.Components.Rocket)">
+            <summary>
+            Создание нового декоратора, который увеичивает урон в 2 раза.
+            </summary>
+            <param name="rocket">Декорируемый экземпляр.</param>
+        </member>
+        <member name="T:GameLibrary.Components.RocketDecorators.HalfCooldownRocket">
+            <summary>
+            Декоратор компонента Rocket,
+            который уменьшает время перезарядки в 2 раза.
+            </summary>
+        </member>
+        <member name="P:GameLibrary.Components.RocketDecorators.HalfCooldownRocket.Cooldown">
+            <summary>
+            Перезарядка, уменьшенная в 2 раза.
+            </summary>
+        </member>
+        <member name="M:GameLibrary.Components.RocketDecorators.HalfCooldownRocket.#ctor(GameLibrary.Components.Rocket)">
+            <summary>
+            Создание нового декоратора, который уменьшает время перезарядки в 2 раза.
+            </summary>
+            <param name="rocket">Декорируемый экземпляр.</param>
+        </member>
+        <member name="T:GameLibrary.Components.RocketDecorators.HalfDamageRocket">
+            <summary>
+            Декоратор компонента Rocket,
+            который уменьшает урон от ракеты в 2 раза.
+            </summary>
+        </member>
+        <member name="P:GameLibrary.Components.RocketDecorators.HalfDamageRocket.Damage">
+            <summary>
+            Урон, уменьшенный в 2 раза.
+            </summary>
+        </member>
+        <member name="M:GameLibrary.Components.RocketDecorators.HalfDamageRocket.#ctor(GameLibrary.Components.Rocket)">
+            <summary>
+            Создание нового декоратора, который уменьшает урон в 2 раза.
+            </summary>
+            <param name="rocket">Декорируемый экземпляр.</param>
+        </member>
+        <member name="T:GameLibrary.BattleScene">
+            <summary>
+            Сцена танкового сражения в игре.
+            </summary>
+        </member>
+        <member name="M:GameLibrary.BattleScene.#ctor(System.Windows.Window,GameLibrary.Scenes.BattleSceneSettings)">
+            <summary>
+            Создание сцены.
+            </summary>
+            <param name="window">Окно, в котором будет отрисовываться сцена.</param>
+            <param name="settings">Настройки игровой сцены.</param>
+        </member>
+        <member name="M:GameLibrary.BattleScene.Init">
+            <summary>
+            Инициализация сцены.
+            </summary>
+        </member>
+        <member name="T:GameLibrary.Scenes.BattleSceneSettings">
+            <summary>
+            Настройки сцены.
+            </summary>
+        </member>
+        <member name="T:GameLibrary.Scenes.BattleSceneSettings.PanzerControlType">
+            <summary>
+            Перечисление типов управления танком.
+            </summary>
+        </member>
+        <member name="F:GameLibrary.Scenes.BattleSceneSettings.PanzerControlType.Keyboard">
+            <summary>
+            Управление с клавиатуры.
+            </summary>
+        </member>
+        <member name="F:GameLibrary.Scenes.BattleSceneSettings.PanzerControlType.Remote">
+            <summary>
+            Управление по сети
+            </summary>
+        </member>
+        <member name="P:GameLibrary.Scenes.BattleSceneSettings.FirstPanzerHealth">
+            <summary>
+            Здоровье первого танка.
+            </summary>
+        </member>
+        <member name="P:GameLibrary.Scenes.BattleSceneSettings.SecondPanzerHealth">
+            <summary>
+            Здоровье второго танка.
+            </summary>
+        </member>
+        <member name="P:GameLibrary.Scenes.BattleSceneSettings.FirstPanzerRemoteState">
+            <summary>
+            Состояние удаленной машины первого игрока.
+            </summary>
+        </member>
+        <member name="P:GameLibrary.Scenes.BattleSceneSettings.SecondPanzerRemoteState">
+            <summary>
+            Состояние удаленной машины второго игрока.
+            </summary>
+        </member>
+        <member name="P:GameLibrary.Scenes.BattleSceneSettings.FirstPanzerControlType">
+            <summary>
+            Тип управления первого танка.
+            </summary>
+        </member>
+        <member name="P:GameLibrary.Scenes.BattleSceneSettings.SecondPanzerControlType">
+            <summary>
+            Тип управления второго танка.
+            </summary>
+        </member>
+        <member name="M:GameLibrary.Scenes.BattleSceneSettings.#ctor">
+            <summary>
+            Создание настроек сцены.
+            </summary>
+        </member>
+        <member name="M:GameLibrary.Scenes.BattleSceneSettings.SetFirstPanzerAmounts(System.Int32[])">
+            <summary>
+            Задание инвентаря первому танку.
+            </summary>
+            <param name="amounts">Количество ракет.</param>
+        </member>
+        <member name="M:GameLibrary.Scenes.BattleSceneSettings.SetSecondPanzerAmounts(System.Int32[])">
+            <summary>
+            Задание инвентаря второму танку.
+            </summary>
+            <param name="amounts">Количество ракет.</param>
+        </member>
+        <member name="M:GameLibrary.Scenes.BattleSceneSettings.FillFirtsPanzerInventory(GameLibrary.Components.Inventory)">
+            <summary>
+            Заполнение инвентаря первого танка.
+            </summary>
+            <param name="inventory">Инвентарь танка.</param>
+        </member>
+        <member name="M:GameLibrary.Scenes.BattleSceneSettings.FillSecondPanzerInventory(GameLibrary.Components.Inventory)">
+            <summary>
+            Заполнение инвентаря второго танка.
+            </summary>
+            <param name="inventory">Инвентарь танка.</param>
+        </member>
+        <member name="M:GameLibrary.Scenes.BattleSceneSettings.FillInventory(GameLibrary.Components.Inventory,System.Int32[])">
+            <summary>
+            Заполнение инвенторя танка.
+            </summary>
+            <param name="inventory">Инвентарь для заполнения.</param>
+            <param name="amounts">Количества ракет.</param>
+        </member>
+        <member name="M:GameLibrary.Scenes.BattleSceneSettings.SetAmounts(System.Int32[],System.Int32[])">
+            <summary>
+            Установка количеств ракет у танка.
+            </summary>
+            <param name="panzerAmounts">Количество ракет танка.</param>
+            <param name="amounts">Новое количество ракет танка.</param>
+        </member>
+        <member name="T:GameLibrary.Scripts.AutoDestroyScript">
+            <summary>
+            Скрипт, который отвечает за автоматическое уничтожение объекта через определенный промежуток времени.
+            </summary>
+        </member>
+        <member name="F:GameLibrary.Scripts.AutoDestroyScript.scene">
+            <summary>
+            Сцена, из которой будет удален объект.
+            </summary>
+        </member>
+        <member name="F:GameLibrary.Scripts.AutoDestroyScript.currentTime">
+            <summary>
+            Время с создания объекта в миллисекундах.
+            </summary>
+        </member>
+        <member name="F:GameLibrary.Scripts.AutoDestroyScript.destroyTime">
+            <summary>
+            Время уничтожения объекта.
+            </summary>
+        </member>
+        <member name="M:GameLibrary.Scripts.AutoDestroyScript.#ctor(GameEngineLibrary.Scene,System.Int32)">
+            <summary>
+            Создание скрипта для автоудаления объекта через определенный промежуток времени.
+            </summary>
+            <param name="scene">Сцена из которой будет удален объект.</param>
+            <param name="milliseconds">Количество миллисекунд, через которое будет удален объект.</param>
+        </member>
+        <member name="M:GameLibrary.Scripts.AutoDestroyScript.Update(System.TimeSpan)">
+            <summary>
+            Обновление состояния скрипта.
+            </summary>
+            <param name="delta">Время, прошедшее с предыдущего кадра.</param>
+        </member>
+        <member name="T:GameLibrary.Scripts.RemoteKeyboardRocketSwitcherScript">
+            <summary>
+            Скрипт для управления переключением ракет при помощи клавиатуры.
+            </summary>
+        </member>
+        <member name="M:GameLibrary.Scripts.RemoteKeyboardRocketSwitcherScript.Update(System.TimeSpan)">
+            <summary>
+            Обновление состояния скрипта.
+            </summary>
+            <param name="delta">Время, прошедшее с предыдущего кадра.</param>
+        </member>
+        <member name="M:GameLibrary.Scripts.RemoteKeyboardRocketSwitcherScript.SetRemoteState(GameLibrary.Scripts.RemoteKeyboardControlScripts.RemoteState)">
+            <summary>
+            Установка состояния удаленной машины
+            </summary>
+            <param name="remoteState">Состояние удаленной машины</param>
+        </member>
+        <member name="T:GameLibrary.Scripts.RemoteShootKeyboardControlScript">
+            <summary>
+            Скрипт, отвечающий за стрельбу танка при помощи клавиатуры.
+            </summary>
+        </member>
+        <member name="F:GameLibrary.Scripts.RemoteShootKeyboardControlScript.isCooldown">
+            <summary>
+            Поле, указывающее, находится ли на перезарядке танк.
+            </summary>
+        </member>
+        <member name="P:GameLibrary.Scripts.RemoteShootKeyboardControlScript.Cooldown">
+            <summary>
+            Время перезарядки.
+            </summary>
+        </member>
+        <member name="P:GameLibrary.Scripts.RemoteShootKeyboardControlScript.LastShoot">
+            <summary>
+            Время, прошедшее с последнего выстрела.
+            </summary>
+        </member>
+        <member name="M:GameLibrary.Scripts.RemoteShootKeyboardControlScript.#ctor(GameEngineLibrary.Scene)">
+            <summary>
+            Создание контроллера для выстрелов танка.
+            </summary>
+            <param name="scene">Сцена, в котрой будут осуществляться выстрелы.</param>
+        </member>
+        <member name="M:GameLibrary.Scripts.RemoteShootKeyboardControlScript.Update(System.TimeSpan)">
+            <summary>
+            Обновление состояния скрипта.
+            </summary>
+            <param name="delta">Время, прошедшее с предыдущего кадра.</param>
+        </member>
+        <member name="M:GameLibrary.Scripts.RemoteShootKeyboardControlScript.UpdateCooldown(System.TimeSpan)">
+            <summary>
+            Обновление состояния перезарядки.
+            </summary>
+            <param name="delta">Время, прошедшее с предыдущего кадра.</param>
+        </member>
+        <member name="M:GameLibrary.Scripts.RemoteShootKeyboardControlScript.Shoot">
+            <summary>
+            Совершить выстрел ракетой.
+            </summary>
+        </member>
+        <member name="M:GameLibrary.Scripts.RemoteShootKeyboardControlScript.SetRemoteState(GameLibrary.Scripts.RemoteKeyboardControlScripts.RemoteState)">
+            <summary>
+            Установка состояния удаленной машины
+            </summary>
+            <param name="remoteState">Состояние удаленной машины</param>
+        </member>
+        <member name="T:GameLibrary.Scripts.RemoteKeyboardControlScripts.RemoteKeyboardState">
+            <summary>
+            Объект для передачи состояния клавиатуры по сети
+            </summary>
+        </member>
+        <member name="P:GameLibrary.Scripts.RemoteKeyboardControlScripts.RemoteKeyboardState.KeyQ">
+            <summary>
+            Кнопка Q
+            </summary>
+        </member>
+        <member name="P:GameLibrary.Scripts.RemoteKeyboardControlScripts.RemoteKeyboardState.KeyW">
+            <summary>
+            Кнопка W
+            </summary>
+        </member>
+        <member name="P:GameLibrary.Scripts.RemoteKeyboardControlScripts.RemoteKeyboardState.KeyE">
+            <summary>
+            Кнопка E
+            </summary>
+        </member>
+        <member name="P:GameLibrary.Scripts.RemoteKeyboardControlScripts.RemoteKeyboardState.KeyA">
+            <summary>
+            Кнопка A
+            </summary>
+        </member>
+        <member name="P:GameLibrary.Scripts.RemoteKeyboardControlScripts.RemoteKeyboardState.KeyS">
+            <summary>
+            Кнопка S
+            </summary>
+        </member>
+        <member name="P:GameLibrary.Scripts.RemoteKeyboardControlScripts.RemoteKeyboardState.KeyD">
+            <summary>
+            Кнопка D
+            </summary>
+        </member>
+        <member name="P:GameLibrary.Scripts.RemoteKeyboardControlScripts.RemoteKeyboardState.KeySpace">
+            <summary>
+            Кнопка Space
+            </summary>
+        </member>
+        <member name="T:GameLibrary.Scripts.RemoteKeyboardControlScripts.RemoteState">
+            <summary>
+            Состояние удаленного устройства
+            </summary>
+        </member>
+        <member name="P:GameLibrary.Scripts.RemoteKeyboardControlScripts.RemoteState.RemoteKeyboardState">
+            <summary>
+            Состояние удаленной клавиатуры
+            </summary>
+        </member>
+        <member name="T:GameLibrary.Scripts.RemoteTrackKeyboardControlScript">
+            <summary>
+            Скрипт, отвечающий за передвижение танка при помощи клавиатуры.
+            </summary>
+        </member>
+        <member name="M:GameLibrary.Scripts.RemoteTrackKeyboardControlScript.#ctor(GameEngineLibrary.Scene,System.Single)">
+            <summary>
+            Создание контроллера для танка.
+            </summary>
+            <param name="scene">Сцена, в которой происходит перемещение объекта.</param>
+            <param name="speed">Скорость движения.</param>
+        </member>
+        <member name="M:GameLibrary.Scripts.RemoteTrackKeyboardControlScript.Update(System.TimeSpan)">
+            <summary>
+            Обновление состояния скрипта.
+            </summary>
+            <param name="delta">Время, прошедшее с предыдущего кадра.</param>
+        </member>
+        <member name="M:GameLibrary.Scripts.RemoteTrackKeyboardControlScript.SetRemoteState(GameLibrary.Scripts.RemoteKeyboardControlScripts.RemoteState)">
+            <summary>
+            Установка состояния удаленной машины
+            </summary>
+            <param name="remoteState">Состояние удаленной машины</param>
+        </member>
+        <member name="T:GameLibrary.Scripts.RemoteTurretKeyboardControlScript">
+            <summary>
+            Скрипт, контролирующий управление башней танка.
+            </summary>
+        </member>
+        <member name="M:GameLibrary.Scripts.RemoteTurretKeyboardControlScript.#ctor(System.Double)">
+            <summary>
+            Создание контроллера для башни танка.
+            </summary>
+            <param name="speed">Скорость поворота башни.</param>
+        </member>
+        <member name="M:GameLibrary.Scripts.RemoteTurretKeyboardControlScript.Init">
+            <summary>
+            Инициализация скрипта.
+            </summary>
+        </member>
+        <member name="M:GameLibrary.Scripts.RemoteTurretKeyboardControlScript.Update(System.TimeSpan)">
+            <summary>
+            Обновление состояния скрипта.
+            </summary>
+            <param name="delta">Время, прошедшее с предыдущего кадра.</param>
+        </member>
+        <member name="M:GameLibrary.Scripts.RemoteTurretKeyboardControlScript.SetRemoteState(GameLibrary.Scripts.RemoteKeyboardControlScripts.RemoteState)">
+            <summary>
+            Установка состояния удаленной машины
+            </summary>
+            <param name="remoteState">Состояние удаленной машины</param>
+        </member>
+        <member name="T:GameLibrary.Scripts.PhysicScript">
+            <summary>
+            Класс, описывающий физику объекта,
+            на который действуют различные силы.
+            </summary>
+        </member>
+        <member name="F:GameLibrary.Scripts.PhysicScript.impulse">
+            <summary>
+            Импульс объекта.
+            </summary>
+        </member>
+        <member name="F:GameLibrary.Scripts.PhysicScript.forces">
+            <summary>
+            Силы, действующие на объект.
+            </summary>
+        </member>
+        <member name="M:GameLibrary.Scripts.PhysicScript.#ctor(OpenTK.Vector2,OpenTK.Vector2[])">
+            <summary>
+            Создание нового объекта, на которого действуют силы.
+            </summary>
+            <param name="impulse">Начальный импульс объекта.</param>
+            <param name="forces">Силы, действующие на объект.</param>
+        </member>
+        <member name="M:GameLibrary.Scripts.PhysicScript.Update(System.TimeSpan)">
+            <summary>
+            Обновление состояния скрипта.
+            </summary>
+            <param name="delta">Время, прошедшее с предыдущего кадра.</param>
+        </member>
+        <member name="T:GameLibrary.Scripts.RocketHitScript">
+            <summary>
+            Класс, отвечающий за проверку поведение 
+            при попадании ракеты по цели.
+            </summary>
+        </member>
+        <member name="F:GameLibrary.Scripts.RocketHitScript.scene">
+            <summary>
+            Сцена, на которой обрабатываются попадания.
+            </summary>
+        </member>
+        <member name="F:GameLibrary.Scripts.RocketHitScript.explosionAnim">
+            <summary>
+            Анимация взрыва ракеты.
+            </summary>
+        </member>
+        <member name="M:GameLibrary.Scripts.RocketHitScript.#ctor(GameEngineLibrary.Scene,GameEngineLibrary.Animation2D)">
+            <summary>
+            Создание скрипта, отвечающего за обрапотку попаданий ракеты.
+            </summary>
+            <param name="scene">Сцена, в которой будет проверяться столкновения.</param>
+            <param name="explosionAnim">Анимация взрыва.</param>
+        </member>
+        <member name="M:GameLibrary.Scripts.RocketHitScript.Update(System.TimeSpan)">
+            <summary>
+            Обновление состояния скрипта.
+            </summary>
+            <param name="delta">Время, прошедшее с предыдущего кадра.</param>
+        </member>
+        <member name="M:GameLibrary.Scripts.RocketHitScript.CheckBounds(GameEngineLibrary.Transform)">
+            <summary>
+            Проверка рокины на выход за границы экрана.
+            </summary>
+            <param name="transform">Проверяемая позиция.</param>
+            <returns>True, если ракета за границами экрана.</returns>
+        </member>
+        <member name="T:GameLibrary.Scripts.KeyboardRocketSwitcherScript">
+            <summary>
+            Скрипт для управления переключением ракет при помощи клавиатуры.
+            </summary>
+        </member>
+        <member name="M:GameLibrary.Scripts.KeyboardRocketSwitcherScript.Update(System.TimeSpan)">
+            <summary>
+            Обновление состояния скрипта.
+            </summary>
+            <param name="delta">Время, прошедшее с предыдущего кадра.</param>
+        </member>
+        <member name="M:GameLibrary.Scripts.KeyboardRocketSwitcherScript.SetKeyToSelectNext(OpenTK.Input.Key)">
+            <summary>
+            Установить кнопку для выбора следующей ракеты.
+            </summary>
+            <param name="key">Кнопка на клавиатуре.</param>
+        </member>
+        <member name="M:GameLibrary.Scripts.KeyboardRocketSwitcherScript.SetKeyToSelectPrevious(OpenTK.Input.Key)">
+            <summary>
+            Установить кнопку для выбора предыдущей ракеты.
+            </summary>
+            <param name="key">Кнопка на клавиатуре.</param>
+        </member>
+        <member name="T:GameLibrary.Scripts.ShootKeyboardControlScript">
+            <summary>
+            Скрипт, отвечающий за стрельбу танка при помощи клавиатуры.
+            </summary>
+        </member>
+        <member name="F:GameLibrary.Scripts.ShootKeyboardControlScript.isCooldown">
+            <summary>
+            Поле, указывающее, находится ли на перезарядке танк.
+            </summary>
+        </member>
+        <member name="P:GameLibrary.Scripts.ShootKeyboardControlScript.Cooldown">
+            <summary>
+            Время перезарядки.
+            </summary>
+        </member>
+        <member name="P:GameLibrary.Scripts.ShootKeyboardControlScript.LastShoot">
+            <summary>
+            Время, прошедшее с последнего выстрела.
+            </summary>
+        </member>
+        <member name="M:GameLibrary.Scripts.ShootKeyboardControlScript.#ctor(GameEngineLibrary.Scene)">
+            <summary>
+            Создание контроллера для выстрелов танка.
+            </summary>
+            <param name="scene">Сцена, в котрой будут осуществляться выстрелы.</param>
+        </member>
+        <member name="M:GameLibrary.Scripts.ShootKeyboardControlScript.Update(System.TimeSpan)">
+            <summary>
+            Обновление состояния скрипта.
+            </summary>
+            <param name="delta">Время, прошедшее с предыдущего кадра.</param>
+        </member>
+        <member name="M:GameLibrary.Scripts.ShootKeyboardControlScript.SetKey(OpenTK.Input.Key)">
+            <summary>
+            Установить кнопку выстрела.
+            </summary>
+            <param name="key">Кнопка на клавиатуре.</param>
+        </member>
+        <member name="M:GameLibrary.Scripts.ShootKeyboardControlScript.UpdateCooldown(System.TimeSpan)">
+            <summary>
+            Обновление состояния перезарядки.
+            </summary>
+            <param name="delta">Время, прошедшее с предыдущего кадра.</param>
+        </member>
+        <member name="M:GameLibrary.Scripts.ShootKeyboardControlScript.Shoot">
+            <summary>
+            Совершить выстрел ракетой.
+            </summary>
+        </member>
+        <member name="T:GameLibrary.Scripts.TrackKeyboardControlScript">
+            <summary>
+            Скрипт, отвечающий за передвижение танка при помощи клавиатуры.
+            </summary>
+        </member>
+        <member name="M:GameLibrary.Scripts.TrackKeyboardControlScript.#ctor(GameEngineLibrary.Scene,System.Single)">
+            <summary>
+            Создание контроллера для танка.
+            </summary>
+            <param name="scene">Сцена, в которой происходит перемещение объекта.</param>
+            <param name="speed">Скорость движения.</param>
+        </member>
+        <member name="M:GameLibrary.Scripts.TrackKeyboardControlScript.Update(System.TimeSpan)">
+            <summary>
+            Обновление состояния скрипта.
+            </summary>
+            <param name="delta">Время, прошедшее с предыдущего кадра.</param>
+        </member>
+        <member name="M:GameLibrary.Scripts.TrackKeyboardControlScript.SetKeyToMoveLeft(OpenTK.Input.Key)">
+            <summary>
+            Установить кнопку для движения влево.
+            </summary>
+            <param name="key">Кнопка на клавиатуре.</param>
+        </member>
+        <member name="M:GameLibrary.Scripts.TrackKeyboardControlScript.SetKeyToMoveRight(OpenTK.Input.Key)">
+            <summary>
+            Установить кнопку для движения вправо.
+            </summary>
+            <param name="key">Кнопка на клавиатуре.</param>
+        </member>
+        <member name="T:GameLibrary.Scripts.TurretKeyboardControlScript">
+            <summary>
+            Скрипт, контролирующий управление башней танка.
+            </summary>
+        </member>
+        <member name="M:GameLibrary.Scripts.TurretKeyboardControlScript.#ctor(System.Double)">
+            <summary>
+            Создание контроллера для башни танка.
+            </summary>
+            <param name="speed">Скорость поворота башни.</param>
+        </member>
+        <member name="M:GameLibrary.Scripts.TurretKeyboardControlScript.Init">
+            <summary>
+            Инициализация скрипта.
+            </summary>
+        </member>
+        <member name="M:GameLibrary.Scripts.TurretKeyboardControlScript.Update(System.TimeSpan)">
+            <summary>
+            Обновление состояния скрипта.
+            </summary>
+            <param name="delta">Время, прошедшее с предыдущего кадра.</param>
+        </member>
+        <member name="M:GameLibrary.Scripts.TurretKeyboardControlScript.SetKeyToTurnUp(OpenTK.Input.Key)">
+            <summary>
+            Установить кнопку для поворота вверх.
+            </summary>
+            <param name="key">Кнопка на клавиатуре.</param>
+        </member>
+        <member name="M:GameLibrary.Scripts.TurretKeyboardControlScript.SetKeyToTurnDown(OpenTK.Input.Key)">
+            <summary>
+            Установить кнопку для поворота вниз.
+            </summary>
+            <param name="key">Кнопка на клавиатуре.</param>
+        </member>
+        <member name="T:GameLibrary.Scripts.WinCheckerScript">
+            <summary>
+            Скрипт, проверяющий, победил ли кто-либо из игроков.
+            </summary>
+        </member>
+        <member name="M:GameLibrary.Scripts.WinCheckerScript.#ctor(GameEngineLibrary.GameObject,GameEngineLibrary.GameObject,System.Windows.Controls.StackPanel)">
+            <summary>
+            Создание скрипта для проверки побед.
+            </summary>
+            <param name="first">Первый танк.</param>
+            <param name="second">Второй танк.</param>
+            <param name="winMenu">Меню, которое будет отображено в случае победы.</param>
+        </member>
+        <member name="M:GameLibrary.Scripts.WinCheckerScript.Update(System.TimeSpan)">
+            <summary>
+            Обновление состояния скрипта.
+            </summary>
+            <param name="delta">Время, прошедшее с предыдущего кадра.</param>
+        </member>
+        <member name="T:GameLibrary.Scripts.WpfShootControlScript">
+            <summary>
+            Скрипт, отображающий состояние перезарядки.
+            </summary>
+        </member>
+        <member name="F:GameLibrary.Scripts.WpfShootControlScript.cooldown">
+            <summary>
+            Индикатор, отображающий состояние перезарядки.
+            </summary>
+        </member>
+        <member name="M:GameLibrary.Scripts.WpfShootControlScript.#ctor(GameEngineLibrary.Scene,System.Windows.Controls.ProgressBar,GameLibrary.Scripts.ShootKeyboardControlScript)">
+            <summary>
+            Создание нового скрипта, который отображает состояние перезарядки на окно WPF.
+            </summary>
+            <param name="scene">Сцена, в которой происходит стрельба.</param>
+            <param name="cooldown">Индикатор перезарядки.</param>
+            <param name="shootControlScript">Декорируемый экземпдяр.</param>
+        </member>
+        <member name="M:GameLibrary.Scripts.WpfShootControlScript.Init">
+            <summary>
+            Инициализация скрипта.
+            </summary>
+        </member>
+        <member name="M:GameLibrary.Scripts.WpfShootControlScript.Update(System.TimeSpan)">
+            <summary>
+            Обновление состояния скрипта.
+            </summary>
+            <param name="delta">Время, прошедшее с предыдущего кадра.</param>
+        </member>
+    </members>
+</doc>

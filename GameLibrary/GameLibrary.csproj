@@ -1,0 +1,124 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{CD7DAF1D-5161-46CA-BD98-D439C8AB270A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GameLibrary</RootNamespace>
+    <AssemblyName>GameLibrary</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\GameLibrary.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="OpenTK, Version=3.1.0.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL">
+      <HintPath>..\packages\OpenTK.3.1.0\lib\net20\OpenTK.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Components\BaseRocket.cs" />
+    <Compile Include="Components\Health.cs" />
+    <Compile Include="Components\HealthDecorators\ProgressBarHealth.cs" />
+    <Compile Include="Components\Inventory.cs" />
+    <Compile Include="Components\RocketDecorator.cs" />
+    <Compile Include="Components\WpfInventory.cs" />
+    <Compile Include="Components\Rocket.cs" />
+    <Compile Include="Components\RocketDecorators\DoubleCooldownRocket.cs" />
+    <Compile Include="Components\RocketDecorators\DoubleDamageRocket.cs" />
+    <Compile Include="Components\RocketDecorators\HalfCooldownRocket.cs" />
+    <Compile Include="Components\RocketDecorators\HalfDamageRocket.cs" />
+    <Compile Include="Scenes\BattleScene.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Scenes\BattleSceneSettings.cs" />
+    <Compile Include="Scripts\AutoDestroyScript.cs" />
+    <Compile Include="Scripts\RemoteKeyboardControlScripts\RemoteKeyboardRocketSwitcherScript.cs" />
+    <Compile Include="Scripts\RemoteKeyboardControlScripts\RemoteShootKeyboardControlScript.cs" />
+    <Compile Include="Scripts\RemoteKeyboardControlScripts\RemoteKeyboardState.cs" />
+    <Compile Include="Scripts\RemoteKeyboardControlScripts\RemoteState.cs" />
+    <Compile Include="Scripts\RemoteKeyboardControlScripts\RemoteTrackKeyboardControlScript.cs" />
+    <Compile Include="Scripts\RemoteKeyboardControlScripts\RemoteTurretKeyboardControlScript.cs" />
+    <Compile Include="Scripts\PhysicScript.cs" />
+    <Compile Include="Scripts\RocketHitScript.cs" />
+    <Compile Include="Scripts\KeyboardControlScripts\KeyboardRocketSwitcherScript.cs" />
+    <Compile Include="Scripts\KeyboardControlScripts\ShootKeyboardControlScript.cs" />
+    <Compile Include="Scripts\KeyboardControlScripts\TrackKeyboardControlScript.cs" />
+    <Compile Include="Scripts\KeyboardControlScripts\TurretKeyboardControlScript.cs" />
+    <Compile Include="Scripts\WinCheckerScript.cs" />
+    <Compile Include="Scripts\WpfShootControlScript.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GameEngineLibrary\GameEngineLibrary.csproj">
+      <Project>{373175fe-06f3-494e-9872-9b7555017366}</Project>
+      <Name>GameEngineLibrary</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
+    <None Include="DecoratorDiagram.cd" />
+    <None Include="OpenTK.dll.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Track.bmp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Turret.bmp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\BG.bmp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Explosion.bmp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\FastRocket.bmp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Mountain.bmp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\PowerfulRocket.bmp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Rocket.bmp" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

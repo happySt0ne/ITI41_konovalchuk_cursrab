@@ -1,0 +1,562 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GameEngineLibrary</name>
+    </assembly>
+    <members>
+        <member name="T:GameEngineLibrary.Animation2D">
+            <summary>
+            Класс, отвечающий за анимированные 2d изображения.
+            </summary>
+        </member>
+        <member name="F:GameEngineLibrary.Animation2D.animationId">
+            <summary>
+            Массив идентификаторов текстур анимации.
+            </summary>
+        </member>
+        <member name="F:GameEngineLibrary.Animation2D.index">
+            <summary>
+            Индекс текущей текстуры.
+            </summary>
+        </member>
+        <member name="F:GameEngineLibrary.Animation2D.currentTime">
+            <summary>
+            Время, прошедшее с начала анимации.
+            </summary>
+        </member>
+        <member name="P:GameEngineLibrary.Animation2D.ID">
+            <summary>
+            Уникальный идентификатор текстуры,
+            которая должна отображаться в текущий
+            момент анимации.
+            </summary>
+        </member>
+        <member name="P:GameEngineLibrary.Animation2D.Index">
+            <summary>
+            Индекс текущей текстуры.
+            </summary>
+        </member>
+        <member name="P:GameEngineLibrary.Animation2D.AnimationTime">
+            <summary>
+            Время анимации.
+            </summary>
+        </member>
+        <member name="M:GameEngineLibrary.Animation2D.#ctor(System.Int32[],System.Int32,System.Int32)">
+            <summary>
+            Создание анимации.
+            </summary>
+            <param name="animationId">Массив идентификаторов изображений в анимации.</param>
+            <param name="width">Размер одного изображения.</param>
+            <param name="height">Высота одного изображения.</param>
+        </member>
+        <member name="M:GameEngineLibrary.Animation2D.#ctor(GameEngineLibrary.Animation2D)">
+            <summary>
+            Конструктор копирования анимации.
+            Его стоит использовать для передачи анимаций объектам,
+            чтобы не захватывать лишние неуправляемые ресурсы.
+            </summary>
+            <param name="animation"></param>
+        </member>
+        <member name="M:GameEngineLibrary.Animation2D.Update(System.TimeSpan)">
+            <summary>
+            Обновить состояние анимации.
+            </summary>
+            <param name="delta">Время, прошедшее с предыдущего кадра.</param>
+        </member>
+        <member name="M:GameEngineLibrary.Animation2D.LoadAnimation(System.String,System.Int32,System.Int32)">
+            <summary>
+            Загрузить анимацию из файла.
+            </summary>
+            <param name="path">Путь к файлу.</param>
+            <param name="columns">Количество колонок со спрайтами.</param>
+            <param name="rows">Количество рядов со спрайтами.</param>
+            <returns>Новая анимация.</returns>
+        </member>
+        <member name="M:GameEngineLibrary.Animation2D.Dispose">
+            <summary>
+            Уничтожение анимации.
+            </summary>
+        </member>
+        <member name="T:GameEngineLibrary.Collider">
+            <summary>
+            Класс, описывающий выпуклую фигуру,
+            которая способна совершать проверки на
+            пересечение с другими выпуклыми фигурами.
+            </summary>
+        </member>
+        <member name="F:GameEngineLibrary.Collider.verteces">
+            <summary>
+            Массив вершин выпуклой фигры.
+            </summary>
+        </member>
+        <member name="M:GameEngineLibrary.Collider.#ctor(OpenTK.Vector2[])">
+            <summary>
+            Создание коллайдера.
+            </summary>
+            <param name="verteces">Вершины выпуклой фигуры, расположенные против часовой стрелки.</param>
+        </member>
+        <member name="M:GameEngineLibrary.Collider.CheckCollision(GameEngineLibrary.Collider)">
+            <summary>
+            Проверка пересечения между двумя коллайдерами.
+            </summary>
+            <param name="collider">Коллайдер, с которым будет осуществляться проверка.</param>
+            <returns>True, если есть пересечение, иначе false.</returns>
+        </member>
+        <member name="M:GameEngineLibrary.Collider.GetNormal(OpenTK.Vector2[],System.Int32)">
+            <summary>
+            Получение нормального вектора к заданной стороне фигуры.
+            </summary>
+            <param name="verteces">Вершины фигуры.</param>
+            <param name="num">Номер стороны.</param>
+            <returns></returns>
+        </member>
+        <member name="M:GameEngineLibrary.Collider.GetProjection(OpenTK.Vector2)">
+            <summary>
+            Получение вектора проекции фигуры на плоскость.
+            </summary>
+            <param name="vector">Вектор плоскости.</param>
+            <returns>Вектор проекции.</returns>
+        </member>
+        <member name="T:GameEngineLibrary.GameObject">
+            <summary>
+            Класс, который описывает объект на сцене.
+            </summary>
+        </member>
+        <member name="F:GameEngineLibrary.GameObject.scripts">
+            <summary>
+            Список добавленных скриптов.
+            </summary>
+        </member>
+        <member name="P:GameEngineLibrary.GameObject.InnerObjects">
+            <summary>
+            Список внутренних объектов.
+            </summary>
+        </member>
+        <member name="P:GameEngineLibrary.GameObject.Components">
+            <summary>
+            Список компонентов объекта
+            </summary>
+        </member>
+        <member name="M:GameEngineLibrary.GameObject.#ctor(GameEngineLibrary.Texture2D,OpenTK.Vector2,OpenTK.Vector2,OpenTK.Vector2,System.Double)">
+            <summary>
+            Создание нового игрового объекта.
+            </summary>
+            <param name="texture">Текстура объекта.</param>
+            <param name="position">Положение объекта на сцене.</param>
+            <param name="rotationPoint">Точка поворота объекта.</param>
+            <param name="scale">Масштаб объекта.</param>
+            <param name="rotation">Угол поворота объекта.</param>
+        </member>
+        <member name="M:GameEngineLibrary.GameObject.#ctor">
+            <summary>
+            Создание нового игрового объекта.
+            </summary>
+        </member>
+        <member name="M:GameEngineLibrary.GameObject.#ctor(GameEngineLibrary.Texture2D)">
+            <summary>
+            Создание нового игрового объекта с текстурой.
+            </summary>
+            <param name="texture">Текстура объекта.</param>
+        </member>
+        <member name="M:GameEngineLibrary.GameObject.AddInnerObject(GameEngineLibrary.GameObject)">
+            <summary>
+            Добавление объекта внутрь другого объекта.
+            Объекты внутри других объектов должны отрисовываться
+            относительно позиции родительского объекта.
+            </summary>
+            <param name="gameObject">Объект для вставки.</param>
+        </member>
+        <member name="M:GameEngineLibrary.GameObject.RemoveInnerObject(GameEngineLibrary.GameObject)">
+            <summary>
+            Удаление объекта из другого объекта.
+            Объекты внутри других объектов должны отрисовываться
+            относительно позиции родительского объекта.
+            </summary>
+            <param name="gameObject">Объект для удаления.</param>
+        </member>
+        <member name="M:GameEngineLibrary.GameObject.AddScript(GameEngineLibrary.Script)">
+            <summary>
+            Добавление скрипта для объекта.
+            Скрипт определяет основное поведение объекта.
+            </summary>
+            <param name="script">Скрипт для добавления.</param>
+        </member>
+        <member name="M:GameEngineLibrary.GameObject.RemoveScript(GameEngineLibrary.Script)">
+            <summary>
+            Удаление скрипта объекта.
+            Скрипт определяет основное поведение объекта.
+            </summary>
+            <param name="script">Скрипт для удаления.</param>
+        </member>
+        <member name="M:GameEngineLibrary.GameObject.SetCollider(GameEngineLibrary.Collider)">
+            <summary>
+            Установить коллайдер объекту.
+            </summary>
+            <param name="collider">Новый коллайдер.</param>
+        </member>
+        <member name="M:GameEngineLibrary.GameObject.UpdateColliderToTexture">
+            <summary>
+            Привязать коллайдер к текстуре.
+            </summary>
+        </member>
+        <member name="M:GameEngineLibrary.GameObject.Update(System.TimeSpan)">
+            <summary>
+            Обновить состояние объекта.
+            </summary>
+            <param name="delta">Время, прошедшее между кадрами.</param>
+        </member>
+        <member name="M:GameEngineLibrary.GameObject.GetComponent(System.String)">
+            <summary>
+            Получение компонентов объекта по названию.
+            </summary>
+            <param name="key">Название компонента.</param>
+            <returns></returns>
+        </member>
+        <member name="M:GameEngineLibrary.GameObject.AddComponent(System.String,GameEngineLibrary.IComponent)">
+            <summary>
+            Добавление компонента объекту.
+            </summary>
+            <param name="key">Название компонента.</param>
+            <param name="component">Компонент для добавления.</param>
+        </member>
+        <member name="M:GameEngineLibrary.GameObject.Dispose">
+            <summary>
+            Уничтожение игрового объекта.
+            </summary>
+        </member>
+        <member name="M:GameEngineLibrary.GameObject.Dispose(System.Boolean)">
+            <summary>
+            Уничтожение игрового объекта.
+            </summary>
+            <param name="disposing">Если уже уничтожен.</param>
+        </member>
+        <member name="M:GameEngineLibrary.GameObject.Finalize">
+            <summary>
+            Деструктор игрового объекта.
+            </summary>
+        </member>
+        <member name="T:GameEngineLibrary.IComponent">
+            <summary>
+            Маркерный интерфейс, который помечает все компоненты в GameObject.
+            </summary>
+        </member>
+        <member name="T:GameEngineLibrary.RandomManager">
+            <summary>
+            Класс, отвечающий за случайные числа в игре.
+            </summary>
+        </member>
+        <member name="M:GameEngineLibrary.RandomManager.Next">
+            <summary>
+            Возвращает неотрицательное случайное целое число.
+            </summary>
+            <returns>Неотрицательное случайное целое число</returns>
+        </member>
+        <member name="M:GameEngineLibrary.RandomManager.Next(System.Int32)">
+            <summary>
+            Возвращает неотрицательное случайное целое число, 
+            которое меньше определенного максимального значения.
+            </summary>
+            <param name="maxValue">Максимальное значение.</param>
+            <returns>Неотрицательное случайное целое число</returns>
+        </member>
+        <member name="M:GameEngineLibrary.RandomManager.Next(System.Int32,System.Int32)">
+            <summary>
+            Возвращает неотрицательное случайное целое число 
+            в указанном диапазоне.
+            </summary>
+            <param name="minValue">Минимальное значение.</param>
+            <param name="maxValue">Максимальное значение.</param>
+            <returns>Неотрицательное случайное целое число</returns>
+        </member>
+        <member name="M:GameEngineLibrary.RandomManager.NextDouble">
+            <summary>
+            Возвращает случайное число с плавающей точкой, 
+            которое больше или равно 0,0 и меньше 1,0.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:GameEngineLibrary.Scene">
+            <summary>
+            Интерфейс, описывающий пользовательскую сцену.
+            </summary>
+        </member>
+        <member name="P:GameEngineLibrary.Scene.IsDiposed">
+            <summary>
+            Флаг, говорящий о том, удалена ли сцена
+            </summary>
+        </member>
+        <member name="P:GameEngineLibrary.Scene.GameWindow">
+            <summary>
+            Окно, в котором отрисовывается сцена.
+            </summary>
+        </member>
+        <member name="F:GameEngineLibrary.Scene.textures">
+            <summary>
+            Список созданных текстур.
+            </summary>
+        </member>
+        <member name="F:GameEngineLibrary.Scene.namedTextures">
+            <summary>
+            Словарь созданных текстур.
+            </summary>
+        </member>
+        <member name="F:GameEngineLibrary.Scene.objects">
+            <summary>
+            Список объектов на сцене.
+            </summary>
+        </member>
+        <member name="F:GameEngineLibrary.Scene.objectsToAdd">
+            <summary>
+            Временный массив с объектами, который нужен
+            для возможности добавления объектов на сцену
+            во время выполнения скриптов.
+            </summary>
+        </member>
+        <member name="F:GameEngineLibrary.Scene.objectsToRemove">
+            <summary>
+            Временный массив с объектами, который нужен
+            для возможности удаления объектов со сцены
+            во время выполнения скриптов.
+            </summary>
+        </member>
+        <member name="P:GameEngineLibrary.Scene.GameObjects">
+            <summary>
+            Список объектов на сцене.
+            </summary>
+        </member>
+        <member name="M:GameEngineLibrary.Scene.#ctor(System.Windows.Window)">
+            <summary>
+            Создание сцены.
+            </summary>
+            <param name="window">Окно, в котором отрисовывается сцена.</param>
+        </member>
+        <member name="M:GameEngineLibrary.Scene.Init">
+            <summary>
+            Метод, который вызывается 1 раз для инициализации сцены.
+            </summary>
+        </member>
+        <member name="M:GameEngineLibrary.Scene.Update(System.TimeSpan)">
+            <summary>
+            Метод, который вызывается перед отрисовкой кадра.
+            В этом методе параметры сцены должны обновляться.
+            </summary>
+            <param name="delta">Время, прошедшее между кадрами.</param>
+        </member>
+        <member name="M:GameEngineLibrary.Scene.UpdateObjectsArray">
+            <summary>
+            Метод, позволяющий обновлять количество объектов для обработки динамически.
+            </summary>
+        </member>
+        <member name="M:GameEngineLibrary.Scene.GetGameObjects">
+            <summary>
+            Получение списка с объектами на сцене.
+            </summary>
+            <returns>Список объектов на сцене.</returns>
+        </member>
+        <member name="M:GameEngineLibrary.Scene.AddGameObject(GameEngineLibrary.GameObject)">
+            <summary>
+            Метод добавления объекта на сцену.
+            </summary>
+            <param name="gameObject">Объект для добавления.</param>
+        </member>
+        <member name="M:GameEngineLibrary.Scene.RemoveGameObject(GameEngineLibrary.GameObject)">
+            <summary>
+            Метод удаления объекта со сцены.
+            </summary>
+            <param name="gameObject">Объект для удаления.</param>
+        </member>
+        <member name="M:GameEngineLibrary.Scene.AddTexture(GameEngineLibrary.Texture2D)">
+            <summary>
+            Метод добавления текстур на сцену.
+            </summary>
+            <param name="texture">Текстура для добавления.</param>
+        </member>
+        <member name="M:GameEngineLibrary.Scene.GetTexture(System.String)">
+            <summary>
+            Получение текстуры по имени
+            </summary>
+            <param name="name">Имя текстуры</param>
+            <returns>Текстура</returns>
+        </member>
+        <member name="M:GameEngineLibrary.Scene.Dispose">
+            <summary>
+            Уничтожение сцены.
+            </summary>
+        </member>
+        <member name="T:GameEngineLibrary.Script">
+            <summary>
+            Интерфейс, описывающий скрипт, который определяет поведение игрового объекта.
+            </summary>
+        </member>
+        <member name="F:GameEngineLibrary.Script.controlledObject">
+            <summary>
+            Объект, которым управляет скрипт.
+            </summary>
+        </member>
+        <member name="M:GameEngineLibrary.Script.Init">
+            <summary>
+            Метод, инициализирующий данные скрипта.
+            </summary>
+        </member>
+        <member name="M:GameEngineLibrary.Script.Update(System.TimeSpan)">
+            <summary>
+            Метод, который содержит основную логику программы.
+            Данный метод вызывается в каждом кадре игры.
+            </summary>
+            <param name="delta">Время, прошедшее между кадрами.</param>
+        </member>
+        <member name="M:GameEngineLibrary.Script.SetControlledObject(GameEngineLibrary.GameObject)">
+            <summary>
+            Устанавливает объект, который будет контролировать скрипт.
+            </summary>
+            <param name="controlledObject">Объект, контролируемый скриптом.</param>
+        </member>
+        <member name="T:GameEngineLibrary.Renderer">
+            <summary>
+            Класс, отвечающий за отрисовку объектов на сцене.
+            </summary>
+        </member>
+        <member name="F:GameEngineLibrary.Renderer.scene">
+            <summary>
+            Сцена для отрисовки.
+            </summary>
+        </member>
+        <member name="M:GameEngineLibrary.Renderer.#ctor(GameEngineLibrary.Scene)">
+            <summary>
+            Создание нового объекта для отрисовки объектов на сцене.
+            </summary>
+            <param name="scene">Сцена, которую будет рендерить объект.</param>
+        </member>
+        <member name="M:GameEngineLibrary.Renderer.Render">
+            <summary>
+            Отрисовать объекты на сцене.
+            </summary>
+        </member>
+        <member name="M:GameEngineLibrary.Renderer.Render(System.Collections.Generic.List{GameEngineLibrary.GameObject})">
+            <summary>
+            Отрисовать объекты из переданного массива.
+            </summary>
+            <param name="objectsToRender">Массив объектов для отрисовки.</param>
+        </member>
+        <member name="M:GameEngineLibrary.Renderer.RenderObject(GameEngineLibrary.GameObject)">
+            <summary>
+            Отрисовать объект на сцене.
+            </summary>
+            <param name="gameObject">Объект для отрисовки.</param>
+        </member>
+        <member name="M:GameEngineLibrary.Renderer.SetSceneToRender(GameEngineLibrary.Scene)">
+            <summary>
+            Устанавливает сцену для отрисовки.
+            </summary>
+            <param name="scene">Новая сцена для отрисовки.</param>
+        </member>
+        <member name="T:GameEngineLibrary.Texture2D">
+            <summary>
+            Класс, который описывает двухмерную текстуру.
+            </summary>
+        </member>
+        <member name="F:GameEngineLibrary.Texture2D.disposed">
+            <summary>
+            Переменная, отвечающая за состояние объекта.
+            </summary>
+        </member>
+        <member name="P:GameEngineLibrary.Texture2D.ID">
+            <summary>
+            Идентификатор текстуры.
+            </summary>
+        </member>
+        <member name="P:GameEngineLibrary.Texture2D.Name">
+            <summary>
+            Название текстуры.
+            </summary>
+        </member>
+        <member name="P:GameEngineLibrary.Texture2D.Width">
+            <summary>
+            Ширина текстуры.
+            </summary>
+        </member>
+        <member name="P:GameEngineLibrary.Texture2D.Height">
+            <summary>
+            Высота текстуры.
+            </summary>
+        </member>
+        <member name="P:GameEngineLibrary.Texture2D.Color">
+            <summary>
+            Цвет, который будет наложен на текстуру.
+            </summary>
+        </member>
+        <member name="M:GameEngineLibrary.Texture2D.#ctor(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Создание новой текстуры.
+            </summary>
+            <param name="id">Идентификатор текстуры.</param>
+            <param name="width">Ширина текстуры.</param>
+            <param name="height">Высота текстуры.</param>
+        </member>
+        <member name="M:GameEngineLibrary.Texture2D.LoadTexture(System.String)">
+            <summary>
+            Загрузка текстуры из файла.
+            </summary>
+            <param name="path">Путь к файлу.</param>
+            <returns>Загруженная текстура.</returns>
+        </member>
+        <member name="M:GameEngineLibrary.Texture2D.Equals(System.Object)">
+            <summary>
+            Сравнение двух объектов.
+            </summary>
+            <param name="obj">Объект для сравнения.</param>
+            <returns>True, если объекты равны и false в противном случае.</returns>
+        </member>
+        <member name="M:GameEngineLibrary.Texture2D.GetHashCode">
+            <summary>
+            Получение hash-кода объекта.
+            </summary>
+            <returns>Целое число.</returns>
+        </member>
+        <member name="M:GameEngineLibrary.Texture2D.Dispose">
+            <summary>
+            Уничтожение текстуры.
+            </summary>
+        </member>
+        <member name="T:GameEngineLibrary.Transform">
+            <summary>
+            Объект, отвечающий за расположение объекта на экране.
+            </summary>
+        </member>
+        <member name="P:GameEngineLibrary.Transform.Parent">
+            <summary>
+            Объект-родитель для объекта, которому принадлежит данный экземпляр Transform.
+            </summary>
+        </member>
+        <member name="P:GameEngineLibrary.Transform.RotationPoint">
+            <summary>
+            Точка, вокруг которой будет поворачиваться объект.
+            </summary>
+        </member>
+        <member name="F:GameEngineLibrary.Transform.localPosition">
+            <summary>
+            Локальные координаты объекта относительно родительского объекта.
+            </summary>
+        </member>
+        <member name="P:GameEngineLibrary.Transform.LocalPosition">
+            <summary>
+            Локальные координаты объекта относительно родительского объекта.
+            </summary>
+        </member>
+        <member name="P:GameEngineLibrary.Transform.Position">
+            <summary>
+            Позиция объекта.
+            </summary>
+        </member>
+        <member name="P:GameEngineLibrary.Transform.Scale">
+            <summary>
+            Масштабирование объект.
+            </summary>
+        </member>
+        <member name="P:GameEngineLibrary.Transform.Rotation">
+            <summary>
+            Угол поворота объекта.
+            </summary>
+        </member>
+    </members>
+</doc>
